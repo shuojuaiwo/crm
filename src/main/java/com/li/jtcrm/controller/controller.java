@@ -10,16 +10,6 @@ import java.util.Map;
 
 @Controller
 public class controller {
-
-    @RequestMapping("/login")
-    @ResponseBody
-    public Map login(User user){
-        Map map=new HashMap();
-        System.out.println(user);
-        map.put("success",1);
-        return map;
-    }
-
     @RequestMapping("/toindex")
     public String toindex(){
         return "system/index";
