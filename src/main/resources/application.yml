@@ -5,12 +5,6 @@ spring:
     url: jdbc:mysql://198.168.56.101/tb_crm?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     password: 123456
     username: root
-    #MQ消息队列的配置
-  rabbitmq:
-      host: localhost
-      port: 5672
-      username: guest
-      password: guest
       #发邮件配置
   mail:
     default-encoding: UTF-8
@@ -23,17 +17,11 @@ spring:
         smtp:
           auth: true
           timeout: 25000
-  redis:
-    port: 6379
-    host: 127.0.0.1
-
-
-
 #控制台打印sql
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  typeAliasesPackage: com.chen.removeguanc.chen.entity
+  typeAliasesPackage: com.li.jtcrm.entity
   mapperLocations: classpath*:/mapper/**/*.xml
   global-config:
     db-config:
