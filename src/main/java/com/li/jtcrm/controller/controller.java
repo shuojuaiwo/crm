@@ -9,5 +9,4 @@ public class controller {
     public String toindex(){
         return "system/index";
     }
-
 }

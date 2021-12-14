@@ -1,4 +1,7 @@
 package com.li.jtcrm.dao;
 
-public interface UserMapper {
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.li.jtcrm.entity.User;
+
+public interface UserMapper extends BaseMapper<User> {
 }
