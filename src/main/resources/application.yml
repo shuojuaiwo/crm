@@ -3,8 +3,15 @@ spring:
     #    驱动
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://198.168.56.101/tb_crm?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-    password: 123456
     username: root
+    password: 123456
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+  mvc:
+    static-path-pattern: /static/**
       #发邮件配置
   mail:
     default-encoding: UTF-8
