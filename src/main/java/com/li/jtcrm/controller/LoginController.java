@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
@@ -17,9 +18,9 @@ public class LoginController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public Map login(String username, String password){
+    public Map login(String username, String password, HttpSession session){
         Map map1=null;
-        map1 = userService.selectByname(username, password);
+        map1 = userService.selectByname(username, password,session);
         return map1;
     }
 
