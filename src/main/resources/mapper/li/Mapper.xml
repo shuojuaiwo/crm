@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.li.jtcrm.dao.UserMapper">
+<!--    <delete id="delById">-->
+<!--        delete from yong where id=#{id}-->
+<!--    </delete>-->
+
+
+<!--    <select id="selectAllPage" resultType="user">-->
+<!--    select * from yong where state =0-->
+<!--</select>-->
+
+
+    <select id="selectAllByname" resultType="user">
+        select * from tb_system_user where username =#{username}
+    </select>
+
+<!--    <select id="selectByname" resultType="user">-->
+<!--        select * from t_user where name=#{name}-->
+<!--    </select>-->
+</mapper>

@@ -4,11 +4,12 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.ibatis.type.Alias;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Date;
-
+@Alias("user")
 @Component
 @Data
 @NoArgsConstructor
