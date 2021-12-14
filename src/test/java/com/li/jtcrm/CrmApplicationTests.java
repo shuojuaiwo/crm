@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @SpringBootTest
 class CrmApplicationTests {
@@ -15,4 +17,8 @@ class CrmApplicationTests {
     @Test
     void contextLoads() {
     }
+    @Test
+    private void aa(){
+    }
+
 }

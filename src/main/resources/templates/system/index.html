@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>首页</title>
 
     <meta charset="utf-8">
     <title>京唐CRM系统</title>
     <!--<%@include file="script.html" %>-->
+    <link th:insert="~{script :: #copy}">
 
     <style type="text/css">
         .layout-panel-west {
@@ -43,14 +44,14 @@
                     <div>清除消息提示</div>
                 </div>
                 <a href="#" class="easyui-menubutton theme-navigate-user-button"
-                   data-options="menu:'.theme-navigate-user-panel'">${sessionScope.user.username }</a>
+                 data-options="menu:'.theme-navigate-user-panel'"><span th:text="${session.user.getUsername()}"></span></a>
 
                 <div class="theme-navigate-user-panel">
                     <dl>
                         <dd>
                             <img src="/static/easyui/themes/insdep/images/portrait86x86.png" width="86" height="86">
-                            <b class="badge-prompt">${sessionScope.user.username }</b>
-                            <span>${sessionScope.user.email}</span>
+                            <b class="badge-prompt" th:text="${session.user.getUsername()}"></b>
+                            <span th:text="${session.user.getEmail()}"></span>
 
                             <p>
                                 安全等级：<i class="text-success">高</i>
@@ -89,15 +90,15 @@
                 </div>
                 <div class="center">
                     <h1>
-                        ${sessionScope.user.username }<span class="badge color-success">已认证</span>
+                        <span th:text="${session.user.getUsername()}"></span><span class="badge color-success">已认证</span>
                     </h1>
 
                     <h2>
                         角色名
                     </h2>
                     <ul>
-                        <li><i class="iconfont">&#xe61c;</i> ${sessionScope.user.email}</li>
-                        <li><i class="iconfont">&#xe65d;</i> ${sessionScope.user.phone}</li>
+                        <li><i class="iconfont">&#xe61c;</i> <span th:text="${session.user.getEmail()}"></span></li>
+                        <li><i class="iconfont">&#xe65d;</i> <span th:text="${session.user.getPhone()}"></span></li>
                     </ul>
                 </div>
             </div>
