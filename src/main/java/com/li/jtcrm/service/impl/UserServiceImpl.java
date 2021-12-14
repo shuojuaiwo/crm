@@ -14,7 +14,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
     public Map selectByname(String username,String password){
         User user= null;
         Map map=new HashMap();
-        user = baseMapper.selectAllByname(username);
+        user = baseMapper.selectByname(username);
         if (user==null){
             map.put("success",0);
             map.put("msg","账号或密码错误");

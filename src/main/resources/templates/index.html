@@ -57,9 +57,8 @@
   				"password" : password 
   			},
   			function(data){
-  				alert(data);
-  				if(data && data.success){
-  				    alert(data.msg)
+              alert(data.msg)
+              if(data && data.success){
   					window.location.href="toindex";
   					return;
   				}

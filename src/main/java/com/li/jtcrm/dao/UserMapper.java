@@ -6,5 +6,5 @@ import com.li.jtcrm.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper extends BaseMapper<User> {
-    User selectAllByname(@Param("username") String username);
+    User selectByname(@Param("username") String username);
 }

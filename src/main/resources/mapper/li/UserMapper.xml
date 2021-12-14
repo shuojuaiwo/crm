@@ -11,7 +11,7 @@
 <!--</select>-->
 
 
-    <select id="selectAllByname" resultType="user">
+    <select id="selectByname" resultType="user">
         select * from tb_system_user where username =#{username}
     </select>
 
