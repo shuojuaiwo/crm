@@ -12,7 +12,7 @@
     <div class="login">
       <h1>登录CRM系统</h1>
       <span id="info"></span>
-      <form id="loginForm" method="post" action="index.html">
+      <form id="loginForm" method="post">
         <p><input type="text" name="username" value="" placeholder="用户名"></p>
         <p><input type="password" name="password" value="" placeholder="密码"></p>
         <p class="remember_me">
@@ -51,7 +51,7 @@
   			}
 
   			//发送ajax请求给服务器
-  			$.post("system/userLogin.do",
+  			$.post("login",
   			{
   				"username" : username,
   				"password" : password 
@@ -59,7 +59,7 @@
   			function(data){
   				alert(data);
   				if(data && data.success){
-  					window.location.href="system/index.do";
+  					window.location.href="toindex";
   					return;
   				}
   				if(data && !data.success){
