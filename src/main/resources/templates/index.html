@@ -59,13 +59,13 @@
   			function(data){
               alert(data.msg)
               if(data && data.success){
-  					window.location.href="toindex";
-  					return;
-  				}
-  				if(data && !data.success){
-  					$("#info").text(data.message).css({"color":"#f00"});
-  					return;
-  				}
+                  window.location.href="toindex";
+                  return;
+              }
+              if(data && !data.success){
+                  $("#info").text(data.message).css({"color":"#f00"});
+                  return;
+              }
   			},"json");
   			
   		});
