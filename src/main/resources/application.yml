@@ -21,7 +21,7 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  typeAliasesPackage: com.chen.removeguanc.chen.entity
+  typeAliasesPackage: com.li.jtcrm.entity
   mapperLocations: classpath*:/mapper/**/*.xml
   global-config:
     db-config:
