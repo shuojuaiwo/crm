@@ -30,6 +30,6 @@ public class LoginController {
 
     @RequestMapping("/toindex")
     public String toindex(){
-        return "system/index";
+        return "views/index";
     }
 }
