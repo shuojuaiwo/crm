@@ -32,4 +32,9 @@ public class LoginController {
     public String toIndex(){
         return "views/index";
     }
+
+    @RequestMapping("/toed")
+    public String tocustomer(){
+        return "views/manage/product/edit_product";
+    }
 }
