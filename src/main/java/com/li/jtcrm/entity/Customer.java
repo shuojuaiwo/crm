@@ -11,13 +11,13 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @TableName("tb_crm_customer")
-public class customer {
+public class Customer {
     @TableId(value = "id")
     private String id;
 
-    private String owner_user_id;
+    private String ownerUserId;
 
-    private String creator_user_id;
+    private String creatorUserId;
 
     private String name;
 
@@ -25,25 +25,25 @@ public class customer {
 
     private String address;
 
-    private String zip_code;
+    private String zipCode;
 
     private String industry;
 
-    private String annual_revenue;
+    private String annualRevenue;
 
     private String ownership;
 
     private String rating;
 
-    private Date create_time;
+    private Date createTime;
 
-    private Date update_time;
+    private Date updateTime;
 
-    private Integer delete_status;
+    private Integer deleteStatus;
 
-    private Integer is_locked;
+    private Integer isLocked;
 
-    private String delete_user_id;
+    private String deleteUserId;
 
-    private Date delete_time;
+    private Date deleteTime;
 }
