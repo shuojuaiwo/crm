@@ -30,4 +30,9 @@ public class CustomerController {
     public String toCustomer(){
         return "views/manage/customer/customer";
     }
+
+    @RequestMapping("/toList")
+    public String toList(){
+        return "views/manage/customer/list";
+    }
 }

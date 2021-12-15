@@ -80,7 +80,8 @@
             idField:"customerId",
             pagination:true,
             sortName:"customerId",
-            columns:[[
+            columns:[
+                [
                 {field:"选择",checkbox:true},
                 {field:"id",hidden:true},
                 {field:"follow",title:"关注",
@@ -131,7 +132,8 @@
                             " <a href='javascript:void(0);' onclick=\"return modify(\'manage/customer/CustomerAction_showAdd.action\',\'"+rowData.id+"\')\">编辑</a>"
                     }}
 
-            ]],
+            ]
+            ],
             loadFilter:function(data){
                 return {total : data.data.totalRows,rows:data.data.result}
             }
