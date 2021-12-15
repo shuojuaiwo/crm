@@ -1,23 +1,31 @@
 package com.li.jtcrm.entity;
 
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
+import java.util.Date;
+@Component
+@Data
+@NoArgsConstructor
+@TableName("tb_system_role")
 public class Role {
     private String id;
 
-    private Date createtime;
+    private Date createTime;
 
-    private String rolename;
+    private String roleName;
 
-    private String rolenote;
+    private String roleNote;
 
-    private Integer sortnum;
+    private Integer sortNum;
 
     private Integer status;
 
-    private Date updatetime;
+    private Date updateTime;
 
-    private String createby;
+    private String createBy;
 
-    private String updateby;
+    private String updateBy;
 }
