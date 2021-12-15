@@ -18,9 +18,9 @@ public class LoginController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public Map login(String username, String password, HttpSession session){
+    public Map login(String username, String password,String remember_me, HttpSession session){
         Map map1=null;
-        map1 = userService.selectByname(username, password,session);
+        map1 = userService.selectByname(username, password,remember_me,session);
         return map1;
     }
 
