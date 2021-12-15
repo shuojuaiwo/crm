@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CustomerController {
-    @RequestMapping("/tologin")
-    public String tologin(){
-        return "index";
+    @RequestMapping("/toAddCustomer")
+    public String toAddCustomer(){
+        return "views/manage/customer/add";
     }
 }
