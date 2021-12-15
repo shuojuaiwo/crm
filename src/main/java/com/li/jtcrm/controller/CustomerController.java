@@ -31,8 +31,8 @@ public class CustomerController {
         return "views/manage/customer/customer";
     }
 
-    @RequestMapping("/toList")
-    public String toList(){
+    @RequestMapping("/toListCustomer")
+    public String toListCustomer(){
         return "views/manage/customer/list";
     }
 }
