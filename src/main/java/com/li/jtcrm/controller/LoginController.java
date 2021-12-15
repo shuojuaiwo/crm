@@ -15,6 +15,10 @@ public class LoginController {
     @Resource
     private UserServiceImpl userService;
 
+    @RequestMapping("/tologin")
+    public String tologin(){
+        return "index";
+    }
 
     @RequestMapping("/login")
     @ResponseBody
