@@ -1,6 +1,5 @@
 package com.li.jtcrm.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Role {
@@ -12,9 +11,9 @@ public class Role {
 
     private String rolenote;
 
-    private Long sortnum;
+    private Integer sortnum;
 
-    private BigDecimal status;
+    private Integer status;
 
     private Date updatetime;
 

@@ -28,9 +28,9 @@ public class User implements Serializable {
 
     private String salt;
 
-    private Long sortNum;
+    private Integer sortNum;
 
-    private Long status;
+    private Integer status;
 
     private Date updateTime;
 
