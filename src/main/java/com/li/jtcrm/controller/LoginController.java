@@ -15,8 +15,8 @@ public class LoginController {
     @Resource
     private UserServiceImpl userService;
 
-    @RequestMapping("/tologin")
-    public String tologin(){
+    @RequestMapping("/toLogin")
+    public String toLogin(){
         return "index";
     }
 
@@ -28,8 +28,8 @@ public class LoginController {
         return map1;
     }
 
-    @RequestMapping("/toindex")
-    public String toindex(){
+    @RequestMapping("/toIndex")
+    public String toIndex(){
         return "views/index";
     }
 }
