@@ -22,7 +22,7 @@
         <input type="reset"  id="setBtn" class="easyui-linkbutton" data-options="iconCls:'icon-reload' ">
 
         <a href="javascript:void(0);" onclick="return mysearch('manage/announcement/AnnouncementAction_mysearch.do')" id="searchBtn" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
-        <a href="javascript:void(0);" onclick="return add('toLogin')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
+        <a href="javascript:void(0);" onclick="return add('toadd')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
         <a href="javascript:void(0);" onclick="return edit('manage/announcement/Announcement_add.do');" id="editBtn" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
         <a href="javascript:void(0);" onclick="return del('manage/announcement/Announcement_remove.do')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
 
@@ -100,7 +100,7 @@
     //加载用户数据
     $(function(){
         $("#annouceList").datagrid({
-            url : "manage/announcement/Announcement_findByPage.do",
+            url : "list",
             pagination : true,
             toolbar : "#toolbar",
             fitColumns : true,
@@ -109,12 +109,12 @@
             //singleSelect:true,
             columns : [
                 [
-                {field:"announcementid",title:"文章编号",checkbox:true},
-                {field:"department",title:"通知部门",sortable:true,width:5},
-                {field:"user",title:"发表人",width:5},
+                {field:"id",title:"文章编号",checkbox:true},
+                {field:"name",title:"通知部门",sortable:true,width:5},
+                {field:"username",title:"发表人",width:5},
                 {field:"title",title:"标题",width:10},
                 {field:"content",title:"内容",width:20},
-                {field:"updatetime",title:"更新时间",width:10},
+                {field:"update_time",title:"更新时间",width:10},
                 {field:"status",title:"登录状态",width:3},
                 {field:"operation",title:"操作",formatter:function(value,rowData,index){
                 	return "<a href='javascript:void(0)' onclick='myedit("+index+")'>修改</a>"+"&nbsp;&nbsp;"+
@@ -124,10 +124,10 @@
                 }},
             ]
             ],
-            loadFilter:function(data){
-                //data是服务器返回的数据,将服务器端返回的数据转换为datagrid需要的格式
-                return {"total":data.data.totalRows,"rows":data.data.result};
-            }
+            // loadFilter:function(data){
+            //     //data是服务器返回的数据,将服务器端返回的数据转换为datagrid需要的格式
+            //     return {"total":data.data.totalRows,"rows":data.data.result};
+            // }
 
         });
     });

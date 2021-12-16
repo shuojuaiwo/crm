@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.li.jtcrm.dao.AnnouncementMapper">
+
+    <select id="selectfindall" resultType="announcement">
+        SELECT a.id,d.`name`,u.username,a.title,a.content,a.update_time,a.status FROM tb_crm_announcement a,tb_crm_department d,tb_system_user u WHERE a.user_id=u.id AND a.department=d.id limit #{page},#{rows}
+    </select>
+</mapper>
