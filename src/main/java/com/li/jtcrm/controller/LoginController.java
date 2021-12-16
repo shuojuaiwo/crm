@@ -33,8 +33,5 @@ public class LoginController {
         return "views/index";
     }
 
-    @RequestMapping("/toed")
-    public String tocustomer(){
-        return "views/manage/product/list_product";
-    }
+
 }

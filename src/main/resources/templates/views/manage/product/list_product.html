@@ -4,7 +4,7 @@
 <!--    <base href="<%=basePath%>">-->
 
     <title>用户列表</title>
-
+    <meta charset="utf-8">
     <meta name="pragma" content="no-cache">
     <meta name="cache-control" content="no-cache">
     <meta name="expires" content="0">
@@ -36,7 +36,7 @@
         <input type="reset"  id="setBtn1" class="easyui-linkbutton" data-options="iconCls:'icon-reload' ">
 
         <a href="javascript:void(0);" onclick="return mysearch()" id="searchBtn" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
-        <a href="javascript:void(0);" onclick="return add('manage/product/ProductAction_edit.action')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加产品</a>
+        <a href="javascript:void(0);" onclick="return add('toLogin');" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加产品</a>
         <a href="javascript:void(0);" onclick="return edit('manage/product/ProductAction_edit.action');" id="editBtn" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
         <a href="javascript:void(0);" onclick="return del('manage/product/ProductAction_remove.action')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
         <a href="javascript:void(0);" onclick="return assign('manage/user/UserAction_assign.action')" id="setBtn" class="easyui-linkbutton" data-options="iconCls:'icon-tip',plain:true">产品工具</a>
@@ -75,16 +75,8 @@
     }
     //添加按钮事件处理函数
     function add(url){
-        parent.openTopWindow({
-            width:700,
-            height:500,
-            title:"添加产品信息",
-            "url": url,
-            close:function(){
-                $("#productList").datagrid("reload");
-            }
-
-        });
+       var win=null;
+       win=window.parent.open(url,"添加页面","width=700,height=500,location=no,menubar=no,toolbar=no")
     }
     //删除按钮事件处理函数
     function del(url){
@@ -122,7 +114,7 @@
     //加载用户数据
     $(function(){
         $("#productList").datagrid({
-            url : "manage/product/ProductAction_findByPage.action",
+            url : "ProduceAll",
             pagination : true,
             toolbar : "#toolbar",
             fitColumns : true,
@@ -134,23 +126,23 @@
                 {field:"productid",title:"选择",checkbox:true},
                 {field:"name",title:"产品名称",sortable:true,width:10},
                 {field:"link",title:"详情链接",width:10},
-                {field:"user",title:"创建人",width:10},
-                {field:"createtime",title:"修改时间",width:10},
-                {field:"updatetime",title:"更新时间",width:10},
-                {field:"costprice",title:"成本价格",width:7},
-                {field:"suggestedprice",title:"建议价格",width:7},
-                //{field:"operation",title:"操作",formatter:function(value,rowData,index){
-                //return "<a href='javascript:void(0)' onclick='see("+rowData.id+")'>查看</a>"+
-                //" <a href='javascript:void(0)' onclick='editproduct("+rowData.id+")'>编辑</a>"
+                {field:"username",title:"创建人",width:10},
+                {field:"create_time",title:"修改时间",width:10},
+                {field:"update_time",title:"更新时间",width:10},
+                {field:"cost_price",title:"成本价格",width:7},
+                {field:"suggested_price",title:"建议价格",width:7},
+                {field:"operation",title:"操作",formatter:function(value,rowData,index){
+                return "<a href='javascript:void(0)' onclick='see("+rowData.id+")'>查看</a>"+
+                " <a href='javascript:void(0)' onclick='editproduct("+rowData.id+")'>编辑</a>"
 
 
-                //}},
+                }},
             ]
             ],
-            loadFilter:function(data){
-                //data是服务器返回的数据,将服务器端返回的数据转换为datagrid需要的格式
-                return {"total":data.data.totalRows,"rows":data.data.result};
-            }
+            // loadFilter:function(data){
+            //     //data是服务器返回的数据,将服务器端返回的数据转换为datagrid需要的格式
+            //     return {"total":data.data.totalRows,"rows":data.data.result};
+            // }
 
         });
     });
