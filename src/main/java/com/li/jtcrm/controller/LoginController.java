@@ -35,6 +35,6 @@ public class LoginController {
 
     @RequestMapping("/toed")
     public String tocustomer(){
-        return "views/manage/product/edit_product";
+        return "views/manage/product/list_product";
     }
 }
