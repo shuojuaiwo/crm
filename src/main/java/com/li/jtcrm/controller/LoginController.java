@@ -25,6 +25,7 @@ public class LoginController {
     public Map login(String username, String password,String remember_me, HttpSession session){
         Map map1=null;
         map1 = userService.selectByname(username, password,remember_me,session);
+//        map1.put("url","system/dict/DictAction_list.action");
         return map1;
     }
 
