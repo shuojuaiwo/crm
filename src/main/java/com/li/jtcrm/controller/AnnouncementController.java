@@ -15,25 +15,38 @@ import java.util.Map;
 public class AnnouncementController {
     @Resource
     private AnnouncementServiceImpl ament;
+    //去公告表
     @RequestMapping("/toament")
     public String toament(){
         return "views/manage/announcement/list_announcement";
     }
 
-    @RequestMapping("/toadd")
-    public String toadd(){
-        return "views/manage/announcement/add_announcement";
-    }
-
+    //分页展示功能
     @RequestMapping("/list")
     @ResponseBody
     public Map list(int page, int rows){
         Map<String,Object> map = new HashMap<>();
-        List<Announcement>  list = ament.selectfindpage(page-page, rows);
+        List<Announcement>  list = ament.SelectFindPage((page-1)*rows, rows);
         int c= ament.count();
         map.put("rows",list);
         map.put("total",c);
         return map;
     }
 
-}
+    //去添加功能实现
+    @RequestMapping("/toadd")
+    public String toadd(){
+        return "views/manage/announcement/add_announcement";
+    }
+
+   //添加功能实现
+    @RequestMapping("/add")
+    public String add(Announcement announcement){
+        ament.save(announcement);
+        return "views/manage/announcement/list_announcement";
+
+    }
+
+    }
+
+
