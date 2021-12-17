@@ -16,7 +16,7 @@ import java.util.Date;
 @TableName("tb_system_user")
 public class User implements Serializable {
     @TableId(value = "id")
-    private String id;
+    private Integer id;
 
     private Date createTime;
 

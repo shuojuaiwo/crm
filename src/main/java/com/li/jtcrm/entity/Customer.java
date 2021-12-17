@@ -6,14 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 @Component
 @Data
 @NoArgsConstructor
 @TableName("tb_crm_customer")
-public class Customer {
+public class Customer implements Serializable {
     @TableId(value = "id")
-    private String id;
+    private Integer id;
 
     private String ownerUserId;
 
@@ -35,9 +37,9 @@ public class Customer {
 
     private String rating;
 
-    private Date createTime;
+    private LocalDate create_time;
 
-    private Date updateTime;
+    private LocalDate update_time;
 
     private Integer deleteStatus;
 

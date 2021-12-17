@@ -13,7 +13,7 @@ import java.util.Date;
 @TableName("tb_system_role")
 public class Role {
     @TableId(value = "id")
-    private String id;
+    private Integer id;
 
     private Date createTime;
 

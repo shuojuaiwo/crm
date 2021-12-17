@@ -2,8 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <meta charset="UTF-8">
     <title>添加客户</title>
 
     <meta name="pragma" content="no-cache">
@@ -45,6 +43,7 @@
             <td class="tip">负责人：</td>
             <td><select id="owner" name="customer.ownerId" style="width:146px;height:32px" data-options="required:true">
                 <option>--请选择--</option>
+                <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}" (${session.user.id}== ${user.id})?"selected":""></option>
             </select>&nbsp;<a href="javascript:void(0);" class="easyui-linkbutton button-white">放入客户池</a></span></td>
             <td class="tip">客户名称：</td>
             <td><input name="customer.name" value="${customer.name }"class="easyui-textbox easyui-validatebox" data-options="validType:['chinese'],required:true"/></td>
