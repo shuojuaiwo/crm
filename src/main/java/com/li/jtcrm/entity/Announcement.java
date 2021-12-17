@@ -1,6 +1,7 @@
 package com.li.jtcrm.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
@@ -25,38 +26,9 @@ public class Announcement {
     private String username;
     private String title;
     private String content;
-    private LocalDate update_time;
+    @TableField(value = "update_time" )
+    private LocalDate updatetime;
     private int status;
     private int isshow;
-//
-//    public Announcement(String name, String username, String title, String content, Date update_time, int status) {
-//        this.name = name;
-//        this.username = username;
-//        this.title = title;
-//        this.content = content;
-//        this.update_time = update_time;
-//        this.status = status;
-//    }
-//
-//    public Announcement(int id, String name, String username, String title, String content, Date update_time, int status) {
-//        this.id = id;
-//        this.name = name;
-//        this.username = username;
-//        this.title = title;
-//        this.content = content;
-//        this.update_time = update_time;
-//        this.status = status;
-//    }
-//
-//    public Announcement(int id, String name, int user_id, String username, String title, String content, Date update_time, int status, int isshow) {
-//        this.id = id;
-//        this.name = name;
-//        this.user_id = user_id;
-//        this.username = username;
-//        this.title = title;
-//        this.content = content;
-//        this.update_time = update_time;
-//        this.status = status;
-//        this.isshow = isshow;
-//    }
+
 }

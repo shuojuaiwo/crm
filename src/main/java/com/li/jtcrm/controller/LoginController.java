@@ -40,7 +40,6 @@ public class LoginController {
     public Map Muen(HttpSession session){
         User user = (User) session.getAttribute("user");
         Map muen = userService.Muen(user.getUsername());
-
         return muen;
     }
 

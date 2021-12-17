@@ -46,18 +46,7 @@
             $.messager.alert("警告","请选择要修改的数据");
             return false;
         }
-        var announcementid = rows[0].announcementid;
-        parent.openTopWindow({
-            width:700,
-            height:500,
-            title:"修改产品信息",
-            "url":url+"?announcementid="+announcementid,
 
-            close:function(){
-                $("#annouceList").datagrid("reload");
-            }
-
-        });
     }
     //添加按钮事件处理函数
     function add(url){
@@ -114,7 +103,7 @@
                 {field:"username",title:"发表人",width:5},
                 {field:"title",title:"标题",width:10},
                 {field:"content",title:"内容",width:20},
-                {field:"update_time",title:"更新时间",width:10},
+                {field:"updatetime",title:"更新时间",width:10},
                 {field:"status",title:"登录状态",width:3},
                 {field:"operation",title:"操作",formatter:function(value,rowData,index){
                 	return "<a href='javascript:void(0)' onclick='myedit("+index+")'>修改</a>"+"&nbsp;&nbsp;"+
@@ -132,22 +121,9 @@
         });
     });
 
-    //function modify(index){
-    //$("#annouceList").datagrid("selectRow",index)
-    //var row=$("#annouceList").datagrid("getSelected")
-    //var id=row.taskid;
-    //	parent.openTopWindow(
-    //{
-    //	width:500,
-    //	height:700,
-    //	title:"修改",
-    //	url:"manage/task/TaskAction_modify.action"+"?taskVo.taskid="+id,
-    //	close:function(){
-    //		$("#taskList").datagrid("reload")
-    //	}
-    //}
-    //)
-    //}
+    function modify(){
+    var win=window.parent.open("toadd","修改页面","width=700,height=500")
+    }
 
 </script>
 </body>

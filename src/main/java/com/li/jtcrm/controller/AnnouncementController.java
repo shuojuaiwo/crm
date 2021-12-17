@@ -3,6 +3,7 @@ package com.li.jtcrm.controller;
 import com.li.jtcrm.entity.Announcement;
 import com.li.jtcrm.service.impl.AnnouncementServiceImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -44,6 +45,14 @@ public class AnnouncementController {
     public String add(Announcement announcement){
         ament.save(announcement);
         return "views/manage/announcement/list_announcement";
+    }
+
+    //去修改
+    @RequestMapping("/toupdate")
+    public String toupdate(int id, Model model){
+        Announcement announcement = ament.selectById(id);
+        model.addAttribute("",announcement);
+        return "views/manage/announcement/add_announcement";
 
     }
 

@@ -18,9 +18,9 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper, Ann
     }
 
     //修改功能实现
-//    public Announcement selectById(int id){
-//        return baseMapper.selectById(id);
-//    }
+    public Announcement selectById(int id){
+        return baseMapper.selectById(id);
+    }
 
 }
 
