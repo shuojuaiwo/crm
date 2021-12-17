@@ -33,4 +33,10 @@ class CrmApplicationTests {
             System.out.println(customer);
         }
     }
+    @Test
+    public void test2(){
+//       int a= userService.Muenqx("admin");
+        System.out.println(userService.Muendz(1));
+
+    }
 }

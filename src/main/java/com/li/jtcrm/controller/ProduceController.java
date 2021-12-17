@@ -39,16 +39,21 @@ public class ProduceController {
     }
 
     @RequestMapping("/ProduceAdd")
-    public String ProduceAdd(String name, String creator_user_id, String link, float cost_price, float suggested_price ,String create_time,String update_time){
-//        Map map=new HashMap();
-        String a= String.valueOf(UUID.randomUUID());
-         Produce.Produceadd(a,name,creator_user_id,link,cost_price,suggested_price,create_time,update_time);
-//        if (a==1){
-//            map.put("success",true);
-//        }else {
-//            map.put("success",false);
-//        }
-
+    public Map ProduceAdd(Produce produce){
+        Map map=new HashMap();
+        boolean save = Produce.save(produce);
+        if (save){
+            map.put("success",true);
+            map.put("message","添加成功");
+        }else {
+            map.put("success",false);
+            map.put("message","添加失败");
+        }
+        return map;
+    }
+    @RequestMapping("/ProduceUpdate")
+    public String ProduceUpdate(int id){
+        System.out.println(id);
         return "views/manage/product/list_product";
     }
 

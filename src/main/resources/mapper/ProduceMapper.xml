@@ -6,7 +6,7 @@
     SELECT b.id,c.`name`,c.link,b.username,c.create_time,c.update_time,c.cost_price,c.suggested_price from tb_crm_product c LEFT JOIN tb_system_user b  on c.creator_user_id=b.id limit #{page},#{rows}
 </select>
 
-    <insert id="ProduceAdd">
-        insert into tb_crm_product(id,name,creator_user_id,link,cost_price,suggested_price,create_time,update_time) values(#{id},#{name},#{creator_user_id},#{link},#{cost_price},#{suggested_price},#{create_time},#{update_time})
-    </insert>
+<!--    <insert id="ProduceAdd">-->
+<!--        insert into tb_crm_product(id,name,creator_user_id,link,cost_price,suggested_price,create_time,update_time) values(#{id},#{name},#{creator_user_id},#{link},#{cost_price},#{suggested_price},#{create_time},#{update_time})-->
+<!--    </insert>-->
 </mapper>

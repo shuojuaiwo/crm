@@ -145,7 +145,7 @@
 
     $(function() {
         //当前页面加载完毕之后，发送一个ajax请求，获取当前用户的功能权限
-        $.get("system/index_menu.do", function(data) {
+        $.get("Muen", function(data) {
             if (data && data.success) {
                 //初始化权限菜单树
                 $.fn.zTree.init($("#menu"), setting, data.data);

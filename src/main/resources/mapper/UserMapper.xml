@@ -15,6 +15,14 @@
         select * from tb_system_user where username =#{username}
     </select>
 
+    <select id="Muenqx" resultType="map">
+        select ur.roleId from tb_system_user u left join tb_system_user_role ur on u.id=ur.userId left join tb_system_role r on r.id=ur.roleId where u.username=#{username}
+    </select>
+
+    <select id="Muendz" resultType="map">
+        select f.name,f.url from tb_system_role r left join tb_system_role_function rf on r.id=rf.roleId left join tb_system_function f on f.id=rf.funcId where r.id=#{id}
+    </select>
+
 <!--    <select id="selectByname" resultType="user">-->
 <!--        select * from t_user where name=#{name}-->
 <!--    </select>-->

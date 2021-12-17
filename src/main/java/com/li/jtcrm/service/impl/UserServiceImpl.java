@@ -5,9 +5,11 @@ import com.li.jtcrm.dao.UserMapper;
 import com.li.jtcrm.entity.User;
 import com.li.jtcrm.service.IUserService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -37,6 +39,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
                 map.put("msg","账号或密码错误");
             }
         }
+        return map;
+    }
+
+    public Map Muen(String username){
+        Map map=new HashMap();
+//        User user = (User) session.getAttribute("user");
+        Map<String, Object> muenqx = baseMapper.Muenqx(username);
+        int roleId =(int) muenqx.get("roleId");
+        List<Object> muendz = baseMapper.Muendz(roleId);
+        map.put("data",muendz);
+        map.put("success",true);
         return map;
     }
 }
