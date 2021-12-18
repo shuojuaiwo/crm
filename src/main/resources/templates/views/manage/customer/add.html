@@ -27,14 +27,14 @@
 </head>
 <body>
 <form id="newCustomer" method="post">
-    <input type="hidden" name="customer.id" value="${customer.id }">
-    <input type="hidden" name="customer.isDeleted" value="${false}">
-    <input type="hidden" name="customer.isLocked" value="${false }">
-    <input type="hidden" name="customer.contactId" value="${customer.contactId }">
-    <input type="hidden" name="customer.contactCreateUserId" value="${customer.contactCreateUserId }">
-    <input type="hidden" name="customer.contactCreateTime" value="${customer.contactCreateTime }">
-    <input type="hidden" name="customer.createUserId" value="${customer.createUserId }">
-    <input type="hidden" name="customer.createTime" value="${customer.createTime}">
+    <input type="hidden" name="customer.id" th:value="${customer?.id}">
+    <input type="hidden" name="customer.isDeleted" th:value="${false}">
+    <input type="hidden" name="customer.isLocked" th:value="${false }">
+    <input type="hidden" name="customer.contactId" th:value="${customer?.contactId}">
+    <input type="hidden" name="customer.contactCreateUserId" th:value="${customer?.contactCreateUserId}">
+    <input type="hidden" name="customer.contactCreateTime" th:value="${customer?.contactCreateTime}">
+    <input type="hidden" name="customer.createUserId" th:value="${customer?.createUserId}">
+    <input type="hidden" name="customer.createTime" th:value="${customer?.createTime}">
     <table>
         <tr>
             <td colspan="4">主要信息</td>
@@ -43,37 +43,37 @@
             <td class="tip">负责人：</td>
             <td><select id="owner" name="customer.ownerId" style="width:146px;height:32px" data-options="required:true">
                 <option>--请选择--</option>
-                <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}" (${session.user.id}== ${user.id})?"selected":""></option>
+                <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}" th:selected="${session.user1.id==user.id}" ></option>
             </select>&nbsp;<a href="javascript:void(0);" class="easyui-linkbutton button-white">放入客户池</a></span></td>
             <td class="tip">客户名称：</td>
-            <td><input name="customer.name" value="${customer.name }"class="easyui-textbox easyui-validatebox" data-options="validType:['chinese'],required:true"/></td>
+            <td><input name="customer.name" th:value="${customer?.name}"class="easyui-textbox easyui-validatebox" data-options="validType:['chinese'],required:true"/></td>
         </tr>
         <tr>
             <td class="tip">客户行业：</td>
-            <td><input name="customer.industry" value="${customer.industry }" class="easyui-textbox easyui-validatebox" data-options="required:true"/></td>
+            <td><input name="customer.industry" th:value="${customer?.industry}" class="easyui-textbox easyui-validatebox" data-options="required:true"/></td>
             <td class="tip">客户信息来源：</td>
-            <td><input name="customer.orgin" value="${customer.orgin }" class="easyui-textbox easyui-validatebox" data-options="required:true"/></td>
+            <td><input name="customer.orgin" th:value="${customer?.orgin}" class="easyui-textbox easyui-validatebox" data-options="required:true"/></td>
         </tr>
         <tr>
             <td class="tip">公司性质：</td>
-            <td><input type="radio" value="合资" ${customer.ownerShip=='合资'?'checked':'' } name="customer.ownerShip">合资&nbsp;
-                <input type="radio" value="国企" ${customer.ownerShip=='国企'?'checked':'' } name="customer.ownerShip">国企&nbsp;
-                <input type="radio" value="民营" ${customer.ownerShip=='民营'?'checked':'' } name="customer.ownerShip">民营</td>
+            <td><input type="radio" th:value="合资" ${customer.ownerShip=='合资'?'checked':'' } name="customer.ownerShip">合资&nbsp;
+                <input type="radio" th:value="国企" ${customer.ownerShip=='国企'?'checked':'' } name="customer.ownerShip">国企&nbsp;
+                <input type="radio" th:value="民营" ${customer.ownerShip=='民营'?'checked':'' } name="customer.ownerShip">民营</td>
             <td class="tip">邮编：</td>
-            <td><input name="customer.zipCode" value="${customer.zipCode }" class="easyui-textbox easyui-validatebox" data-options="validType:['zipCode'],required:true"/></td>
+            <td><input name="customer.zipCode" th:value="${customer?.zipCode}" class="easyui-textbox easyui-validatebox" data-options="validType:['zipCode'],required:true"/></td>
         </tr>
         <tr>
             <td class="tip">年营业额：</td>
-            <td><select class="easyui-combobox" name="customerVO.annualRevenue" style= "width:146px">
+            <td><select class="easyui-combobox" name="customer.annualRevenue" style= "width:146px">
                 <option value="-1">-请选择-</option>
                 <option ${customer.annualRevenue=='1000万-3000万'?'selected':'' }>1000万-3000万</option>
                 <option ${customer.annualRevenue=='3000万-6000万'?'selected':'' }>3000万-6000万</option>
                 <option ${customer.annualRevenue=='6000万-9000万'?'selected':'' }>6000万-9000万</option>
             </select></td>
             <td class="tip">评分：</td>
-            <td><input type="radio" name="customerVO.rating" value="一星" ${customer.rating=='一星'?'checked':'' }>一星&nbsp;
-                <input type="radio" value="两星" ${customer.rating=='两星'?'checked':'' } name="customer.rating">二星&nbsp;
-                <input value="三星" ${customer.rating=='三星'?'checked':'' } type="radio" name="customer.rating">三星</td>
+            <td><input type="radio" name="customer.rating" th:value="一星" ${customer.rating=='一星'?'checked':'' }>一星&nbsp;
+                <input type="radio" name="customer.rating" th:value="两星" ${customer.rating=='两星'?'checked':'' }>二星&nbsp;
+                <input type="radio" name="customer.rating" th:value="三星" ${customer.rating=='三星'?'checked':'' }>三星</td>
         </tr>
         <tr>
             <td class="tip">客户联系地址：</td>
@@ -82,32 +82,32 @@
                 <input id="addr2" class="easyui-textbox easyui-validatebox" style="width:100px" data-options="prompt:'市',required:true">
                 <input id="addr3" class="easyui-textbox easyui-validatebox" style="width:100px" data-options="prompt:'区',required:true">
                 <input id="addr4" class="easyui-textbox easyui-validatebox" data-options="prompt:'具体街道信息',required:true">
-                <input id="address" name="customer.address" value="${customer.address }" type="hidden">
+                <input id="address" name="customer.address" th:value="${customer?.address}" type="hidden">
             </td>
         </tr>
         <tr><td colspan="4">首要联系人信息</td></tr>
         <tr>
             <td class="tip">姓名：</td>
-            <td><input name="customer.contacts" value="${customer.contacts }" class="easyui-textbox easyui-validatebox" data-options="required:true"></td>
+            <td><input name="customer.contacts" th:value="${customer?.contacts}" class="easyui-textbox easyui-validatebox" data-options="required:true"></td>
             <td class="tip">称呼：</td>
-            <td><input name="customer.saltName" value="${customer.saltName }"class="easyui-textbox easyui-validatebox" data-options="required:true"></td>
+            <td><input name="customer.saltName" th:value="${customer?.saltName}"class="easyui-textbox easyui-validatebox" data-options="required:true"></td>
         </tr>
         <tr>
             <td class="tip">邮箱：</td>
-            <td><input name="customer.email" value="${customer.email }" class="easyui-textbox easyui-validatebox" data-options="required:true,validType:'email'"></td>
+            <td><input name="customer.email" th:value="${customer?.email}" class="easyui-textbox easyui-validatebox" data-options="required:true,validType:'email'"></td>
             <td class="tip">职位：</td>
-            <td><input name="customer.post" value="${customer.post }" class="easyui-textbox easyui-validatebox" data-options="required:true"></td>
+            <td><input name="customer.post" th:value="${customer?.post}" class="easyui-textbox easyui-validatebox" data-options="required:true"></td>
         </tr>
         <tr>
             <td class="tip">QQ：</td>
-            <td><input name="customer.qq" value="${customer.qq }" class="easyui-textbox easyui-validatebox" data-options="required:true,validType:['integer']"></td>
+            <td><input name="customer.qq" th:value="${customer?.qq}" class="easyui-textbox easyui-validatebox" data-options="required:true,validType:['integer']"></td>
             <td class="tip">手机：</td>
-            <td><input name="customer.mobile" value="${customer.mobile }" class="easyui-textbox easyui-validatebox" data-options="required:true,validType:['mobile']"></td>
+            <td><input name="customer.mobile" th:value="${customer?.mobile}" class="easyui-textbox easyui-validatebox" data-options="required:true,validType:['mobile']"></td>
         </tr>
         <tr>
             <td class="tip">备注：</td>
             <td colspan="3">
-                <textarea name="customer.descriptionContact" value="${customer.descriptionContact }" class="easyui-textbox" data-options="multiline:true" style="width:579px;height:60px;"></textarea>
+                <textarea name="customer.descriptionContact" th:value="${customer?.descriptionContact}" class="easyui-textbox" data-options="multiline:true" style="width:579px;height:60px;"></textarea>
             </td>
         </tr>
         <tr>
@@ -135,7 +135,7 @@
 </body>
 <script type="text/javascript">
     $(function(){
-        $.post("system/user/UserAction_findAll.action",function(data){
+        /*$.post("system/user/UserAction_findAll.action",function(data){
             if(data&&data.success){
                 var ownerId = "${customer.ownerId}";
                 $.each(data.data,function(index,obj){
@@ -147,7 +147,7 @@
                     $("#owner").append(option);
                 })
             }
-        },"json")
+        },"json")*/
         //修改回显地址
         var address = "${customer.address}";
         address = address.split("-");

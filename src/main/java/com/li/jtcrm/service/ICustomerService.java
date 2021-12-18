@@ -12,4 +12,6 @@ public interface ICustomerService extends IService<Customer> {
     Map listCustomer(Integer pagenum, Integer size);
 
     void toAddCustomer(Model model);
+
+    void getCustomerInfo(Integer id, Model model);
 }

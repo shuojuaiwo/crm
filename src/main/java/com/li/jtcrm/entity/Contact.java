@@ -8,34 +8,40 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
+
 @Component
 @Data
 @NoArgsConstructor
-@TableName("tb_crm_customer")
-public class Customer implements Serializable {
+@TableName("tb_crm_contact")
+public class Contact implements Serializable {
     @TableId(value = "id")
     private Integer id;
 
-    private String ownerUserId;
-
-    private String creatorUserId;
+    private Integer creatorUserId;
 
     private String name;
 
-    private String origin;
+    private String post;
+
+    private String department;
+
+    private Integer sex;
+
+    private String saltname;
+
+    private String telephone;
+
+    private String email;
+
+    private String qqNo;
 
     private String address;
 
     private String zipCode;
 
-    private String industry;
+    private String description;
 
-    private String annualRevenue;
-
-    private String ownership;
-
-    private String rating;
+    private Integer customerId;
 
     private LocalDate createTime;
 
@@ -43,9 +49,7 @@ public class Customer implements Serializable {
 
     private Integer deleteStatus;
 
-    private Integer isLocked;
+    private Integer deleteUserId;
 
-    private String deleteUserId;
-
-    private Date deleteTime;
+    private LocalDate deleteTime;
 }

@@ -3,8 +3,10 @@ package com.li.jtcrm.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.li.jtcrm.dao.ContactMapper;
 import com.li.jtcrm.dao.CustomerMapper;
 import com.li.jtcrm.dao.UserMapper;
+import com.li.jtcrm.entity.Contact;
 import com.li.jtcrm.entity.Customer;
 import com.li.jtcrm.entity.User;
 import com.li.jtcrm.service.ICustomerService;
@@ -20,6 +22,9 @@ import java.util.Map;
 public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> implements ICustomerService {
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private ContactMapper contactMapper;
 
     @Override
     public Map listCustomer(Integer pagenum, Integer size) {
@@ -58,5 +63,18 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
             map.put("success",0);
         }
         return map;
+    }
+
+    @Override
+    public void getCustomerInfo(Integer id, Model model) {
+        Customer customer = baseMapper.selectById(id);
+        System.out.println(customer);
+        model.addAttribute("customer",customer);
+        String owner = userMapper.selectById(customer.getOwnerUserId()).getUsername();
+        model.addAttribute("owner",owner);
+        Contact contact = contactMapper.selectContact(customer.getId());
+        model.addAttribute("contact",contact);
+        User createUser = userMapper.selectById(customer.getCreatorUserId());
+        model.addAttribute("createUser",createUser);
     }
 }

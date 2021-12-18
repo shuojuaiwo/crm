@@ -10,4 +10,5 @@ import java.util.Map;
 public interface CustomerMapper extends BaseMapper<Customer> {
 
     List<Map<String, Object>> selectByPage(Page<?> page);
+
 }

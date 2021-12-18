@@ -45,4 +45,10 @@ public class CustomerController {
         Map map=customerService.addCustomer(customer);
         return map;
     }
+
+    @RequestMapping("/getCustomerInfo")
+    public String getCustomerInfo(Integer id,Model model){
+        customerService.getCustomerInfo(id,model);
+        return "views/manage/customer/show";
+    }
 }
