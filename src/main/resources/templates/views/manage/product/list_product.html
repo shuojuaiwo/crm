@@ -47,37 +47,38 @@
     function mysearch(){
 
         $("#productList").datagrid("load",{
-            "productVO.name":$("input[name=name]").val(),
-            "productVO.suggestedprice":$("input[name=suggestedprice]").val()
+            "name":$("input[name=name]").val(),
+            "suggestedprice":$("input[name=suggestedprice]").val()
         });
 
     }
     //修改按钮事件处理函数
-    function edit(url){
-        var rows = $("#productList").datagrid("getChecked");
-
-        if(!rows.length){
-            $.messager.alert("警告","请选择要修改的数据");
-            return false;
-        }
-        var productId = rows[0].productid;
-        parent.openTopWindow({
-            width:700,
-            height:500,
-            title:"修改产品信息",
-            "url":url+"?productVO.productid="+productId,
-
-            close:function(){
-                $("#productList").datagrid("reload");
-            }
-
-        });
-    }
+    // function edit(url){
+    //     var rows = $("#productList").datagrid("getChecked");
+    //
+    //     if(!rows.length){
+    //         $.messager.alert("警告","请选择要修改的数据");
+    //         return false;
+    //     }
+    //     var id = rows[0].id;
+    //     parent.openTopWindow({
+    //         width:700,
+    //         height:500,
+    //         title:"修改产品信息",
+    //         "url":url+"?productVO.productid="+productId,
+    //
+    //         close:function(){
+    //             $("#productList").datagrid("reload");
+    //         }
+    //
+    //     });
+    // }
     //添加按钮事件处理函数
     function add(url){
        var win=null;
        win=window.parent.open(url,"添加页面","width=700,height=500,location=no,menubar=no,toolbar=no")
     }
+
     //删除按钮事件处理函数
     function del(url){
         //获取到选中的一行数据
@@ -146,6 +147,16 @@
 
         });
     });
+    //处理查看
+    function see(id) {
+        var win=null;
+        win=window.parent.open("toProduceshow"+"?id="+id,"详情页面","width=700,height=500");
+    }
+    //处理编辑
+    function editproduct(id) {
+        var win=window.parent.open("toProduceUpdate"+"?id="+id,"更新页面","width=700,height=500");
+    }
+
 </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <!--    <base href="<%=basePath%>">-->
     <meta charset="UTF-8">
-    <title>添加角色</title>
+    <title>详情页面</title>
     <meta charset="utf-8">
     <meta name="pragma" content="no-cache">
     <meta name="cache-control" content="no-cache">
@@ -21,58 +21,53 @@
                 <td class="text-title">产品名称：</td>
                 <td class="text-content">
                     <input type="hidden" name="creator_user_id" th:value="${session.user.getId()}">
-                    <input type="text" name="name" class="easyui-textbox theme-textbox-radius" data-options="required:true,validType:'length[3,10]'">
+                    <input type="text" name="name" class="easyui-textbox theme-textbox-radius" data-options="required:true,validType:'length[3,10]'" readOnly="true" th:value="${show.getName()}">
                 </td>
             </tr>
             <tr>
                 <td class="text-title">详情链接：</td>
                 <td class="text-content">
-                    <input type="text" name="link" class="easyui-textbox theme-textbox-radius" data-options="required:true">
+                    <input type="text" name="link" class="easyui-textbox theme-textbox-radius" data-options="required:true" readOnly="true" th:value="${show.getLink()}">
 <!--                    <input type="hidden" name="productVO.user" value="">-->
                 </td>
             </tr>
-            <!--  <tr>
+
+            <tr>
                 <td class="text-title">创建人：</td>
                 <td class="text-content">
-                    <input type="hidden" name="productVO.user" value="${productVO.user }"
-                        class="easyui-textbox theme-textbox-radius" data-options="required:true">
+                    <input type="text" name="productVO.user" class="easyui-textbox theme-textbox-radius" data-options="required:true" readOnly="true" th:value="${show.getUsername()}">
                 </td>
 
             </tr>
-            -->
+
             <tr>
-
+                <td class="text-title">创建时间：</td>
                 <td class="text-content">
-                    <input type="hidden" name="create_time"  value="" >
-                    <input type="hidden" name="update_time"  value="" >
+                    <input type="text" name="productVO.updatetime" class="easyui-textbox theme-textbox-radius"data-options="required:true" readOnly="true" th:value="${show.getCreatetime()}" >
                 </td>
             </tr>
-            <!-- <tr>
+
+            <tr>
                 <td class="text-title">更新时间：</td>
                 <td class="text-content">
-                    <input type="text" name="productVO.updatetime" value="${productVO.updatetime }" class="easyui-textbox theme-textbox-radius"data-options="required:true">
+                    <input type="text" name="productVO.updatetime" value="" class="easyui-textbox theme-textbox-radius"data-options="required:true" readOnly="true" th:value="${show.getUpdatetime()}?${show.getUpdatetime()}:'暂无更新'">
                 </td>
             </tr>
-             -->
+
+
             <tr>
                 <td class="text-title">成本价格：</td>
                 <td class="text-content">
-                    <input type="text" name="costprice" class="easyui-textbox theme-textbox-radius" data-options="required:true">
+                    <input type="text" name="costprice" class="easyui-textbox theme-textbox-radius" data-options="required:true" readOnly="true" th:value="${show.getCostprice()}">
                 </td>
             </tr>
             <tr>
                 <td class="text-title">建议价格：</td>
                 <td class="text-content">
-                    <input type="text" name="suggestedprice" class="easyui-textbox theme-textbox-radius" data-options="required:true">
+                    <input type="text" name="suggestedprice" class="easyui-textbox theme-textbox-radius" data-options="required:true" readOnly="true" th:value="${show.getSuggestedprice()}">
                 </td>
             </tr>
 
-            <tr>
-                <td colspan="2" style="text-align: center;margin-top: 10px;">
-                    <a href="javascript:void(0);" id="saveBtn" class="easyui-linkbutton button-primary">保存</a>
-                    <a href="javascript:void(0);" id="resetBtn" class="easyui-linkbutton button-danger">重置</a>
-                </td>
-            </tr>
         </table>
     </form>
 </section>

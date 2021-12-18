@@ -3,7 +3,7 @@ package com.li.jtcrm.controller;
 import com.li.jtcrm.entity.Produce;
 import com.li.jtcrm.service.impl.ProduceServiceImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,7 +23,31 @@ public class ProduceController {
         return "views/manage/product/edit_product";
     }
 
+    //去更新
+    @RequestMapping("/toProduceUpdate")
+    public String toupdate(Model model,int id){
+        Produce update = Produce.show(id);
+        model.addAttribute("toupdate",update);
+        return "views/manage/product/update_product";
+    }
 
+    //更新
+    @RequestMapping("/ProduceUpdate")
+    @ResponseBody
+    public Map ProduceUpdate(Produce produce){
+        Map map=new HashMap();
+        boolean b = Produce.updateById(produce);
+        if (b){
+            map.put("success",true);
+            map.put("message","更新成功");
+        }else {
+            map.put("success",false);
+            map.put("message","更新失败");
+        }
+        return map;
+    }
+
+    //分页展示
     @RequestMapping("/ProduceAll")
     @ResponseBody
     public Map ProduceAllPage(int page,int rows){
@@ -34,7 +58,7 @@ public class ProduceController {
         map.put("total",ProduceTotal);
         return map;
     }
-
+    //添加
     @RequestMapping("/ProduceAdd")
     @ResponseBody
     public Map ProduceAdd(Produce produce){
@@ -49,15 +73,28 @@ public class ProduceController {
         }
         return map;
     }
-    @RequestMapping("/ProduceUpdate")
-    public String ProduceUpdate(int id){
-        System.out.println(id);
-        return "views/manage/product/list_product";
+    //详情
+    @RequestMapping("/toProduceshow")
+    public String toupdate(int id, Model model){
+        Produce show = Produce.show(id);
+        model.addAttribute("show",show);
+        return "views/manage/product/show_product";
     }
+
+
+
+    //逻辑删除
     @RequestMapping("/ProduceDelete")
     @ResponseBody
     public Map ProduceDelete(int[] ids){
       Map  map=  Produce.Delete(ids);
+        return map;
+    }
+    @RequestMapping("/mohu")
+    public Map mohu(String name,float suggested_price){
+        Map map=new HashMap();
+       List<Produce> list= Produce.mohu(name, suggested_price);
+        map.put("rows",list);
         return map;
     }
 

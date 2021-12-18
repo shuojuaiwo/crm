@@ -3,7 +3,7 @@
 <head>
 <!--    <base href="<%=basePath%>">-->
     <meta charset="UTF-8">
-    <title>添加角色</title>
+    <title>更新信息</title>
     <meta charset="utf-8">
     <meta name="pragma" content="no-cache">
     <meta name="cache-control" content="no-cache">
@@ -20,14 +20,14 @@
             <tr>
                 <td class="text-title">产品名称：</td>
                 <td class="text-content">
-                    <input type="hidden" name="creator_user_id" th:value="${session.user.getId()}">
-                    <input type="text" name="name" class="easyui-textbox theme-textbox-radius" data-options="required:true,validType:'length[3,10]'">
+                    <input type="hidden" name="id" th:value="${toupdate.getId()}">
+                    <input type="text" name="name" class="easyui-textbox theme-textbox-radius" data-options="required:true,validType:'length[3,10]'" th:value="${toupdate.getName()}">
                 </td>
             </tr>
             <tr>
                 <td class="text-title">详情链接：</td>
                 <td class="text-content">
-                    <input type="text" name="link" class="easyui-textbox theme-textbox-radius" data-options="required:true">
+                    <input type="text" name="link" class="easyui-textbox theme-textbox-radius" data-options="required:true" th:value="${toupdate.getLink()}">
 <!--                    <input type="hidden" name="productVO.user" value="">-->
                 </td>
             </tr>
@@ -43,8 +43,7 @@
             <tr>
 
                 <td class="text-content">
-                    <input type="hidden" name="create_time"  value="" >
-                    <input type="hidden" name="update_time"  value="" >
+                    <input type="hidden" name="updatetime"  value="" >
                 </td>
             </tr>
             <!-- <tr>
@@ -57,13 +56,13 @@
             <tr>
                 <td class="text-title">成本价格：</td>
                 <td class="text-content">
-                    <input type="text" name="costprice" class="easyui-textbox theme-textbox-radius" data-options="required:true">
+                    <input type="text" name="costprice" class="easyui-textbox theme-textbox-radius" data-options="required:true" th:value="${toupdate.getCostprice()}">
                 </td>
             </tr>
             <tr>
                 <td class="text-title">建议价格：</td>
                 <td class="text-content">
-                    <input type="text" name="suggestedprice" class="easyui-textbox theme-textbox-radius" data-options="required:true">
+                    <input type="text" name="suggestedprice" class="easyui-textbox theme-textbox-radius" data-options="required:true" th:value="${toupdate.getSuggestedprice()}">
                 </td>
             </tr>
 
@@ -85,7 +84,7 @@
         //为保存按钮添加事件
         $("#saveBtn").on("click",function(event){
             $("#form").form("submit",{
-                url:"ProduceAdd",
+                url:"ProduceUpdate",
                 onSumbit : function(){
                     //调用easyui中form对象的validate方法对表单中数据进行校验，该方法返回boolean值，如果为false会阻止表单提交
                     return $("#form").form("validate");
