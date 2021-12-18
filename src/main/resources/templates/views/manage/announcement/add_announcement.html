@@ -89,7 +89,6 @@
                 <td colspan="2" style="text-align: center;margin-top: 10px;">
                     <a href="javascript:void(0);" id="saveBtn" class="easyui-linkbutton button-primary">保存</a>
                     <a href="javascript:void(0);" id="resetBtn" class="easyui-linkbutton button-danger">重置</a>
-                    <input type="submit" value="提交">
                 </td>
             </tr>
 
@@ -98,33 +97,33 @@
 </form>
 
 <script type="text/javascript">
-    // $(function() {
-    //     //重置按钮
-    //     $("#resetBtn").on("click",function(event){
-    //         $("#form").form("reset");
-    //     });
-    //
-    //     //为保存按钮添加事件
-    //     $("#saveBtn").on("click",function(event){
-    //         $("#form").form("submit",{
-    //             url:"manage/announcement/Announcement_saveOrUpdate.do",
-    //             onSumbit : function(){
-    //                 //调用easyui中form对象的validate方法对表单中数据进行校验，该方法返回boolean值，如果为false会阻止表单提交
-    //                 return $("#form").form("validate");
-    //             },
-    //             success : function(data){
-    //                 var obj = eval("("+data+")");
-    //                 if(obj.success){
-    //                     $.messager.alert("提示",obj.message);
-    //                     parent.closeTopWindow();
-    //                 }else{
-    //                     $.messager.alert("警告",obj.message);
-    //                 }
-    //             }
-    //         });
-    //     });
-    //
-    // });
+    $(function() {
+        //重置按钮
+        $("#resetBtn").on("click",function(event){
+            $("#form").form("reset");
+        });
+
+        //为保存按钮添加事件
+        $("#saveBtn").on("click",function(event){
+            $("#form").form("submit",{
+                url:"add",
+                onSumbit : function(){
+                    //调用easyui中form对象的validate方法对表单中数据进行校验，该方法返回boolean值，如果为false会阻止表单提交
+                    return $("#form").form("validate");
+                },
+                success : function(data){
+                    var obj = eval("("+data+")");
+                    if(obj.success){
+                        $.messager.alert("提示",obj.message);
+                        // parent.closeTopWindow();
+                    }else{
+                        $.messager.alert("警告",obj.message);
+                    }
+                }
+            });
+        });
+
+    });
     // //给部门添加下拉框选项
     // $(function() {
     //     $.post(

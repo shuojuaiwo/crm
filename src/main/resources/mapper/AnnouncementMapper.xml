@@ -4,7 +4,7 @@
 
 <!--   查找所有 -->
     <select id="SelectFindAll" resultType="announcement">
-        SELECT a.id,d.`name`,u.username,a.title,a.content,a.update_time,a.status FROM tb_crm_announcement a,tb_crm_department d,tb_system_user u WHERE a.user_id=u.id AND a.department=d.id limit #{page},#{rows}
+        SELECT a.id,d.`name`,u.username,a.title,a.content,a.update_time,a.status FROM tb_crm_announcement a,tb_crm_department d,tb_system_user u WHERE a.user_id=u.id AND state = 0 AND a.department=d.id limit #{page},#{rows}
     </select>
 
 

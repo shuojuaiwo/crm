@@ -1,9 +1,6 @@
 package com.li.jtcrm.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
@@ -31,4 +28,7 @@ public class Announcement {
     private int status;
     private int isshow;
 
+    //假删注解
+    @TableLogic
+    private int state;
 }

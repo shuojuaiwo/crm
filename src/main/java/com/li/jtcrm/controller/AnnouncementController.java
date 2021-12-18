@@ -42,9 +42,19 @@ public class AnnouncementController {
 
    //添加功能实现
     @RequestMapping("/add")
-    public String add(Announcement announcement){
-        ament.save(announcement);
-        return "views/manage/announcement/list_announcement";
+    @ResponseBody
+    public Map add(Announcement announcement){
+        Map map = new HashMap();
+       boolean b =  ament.save(announcement);
+       if (b){
+           map.put("success",true);
+           map.put("message","添加成功");
+       }else{
+           map.put("success",false);
+           map.put("message","添加失败");
+       }
+
+        return map ;
     }
 
     //去修改
@@ -54,6 +64,13 @@ public class AnnouncementController {
         model.addAttribute("",announcement);
         return "views/manage/announcement/add_announcement";
 
+    }
+
+    @RequestMapping("/todelete")
+    @ResponseBody
+    public Map delete(int[] ids){
+      Map map =   ament.delete(ids);
+      return  map;
     }
 
     }

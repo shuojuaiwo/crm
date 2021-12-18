@@ -5,7 +5,10 @@ import com.li.jtcrm.dao.AnnouncementMapper;
 import com.li.jtcrm.entity.Announcement;
 import com.li.jtcrm.service.IAnnouncementService;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //服务层写
 @Service
@@ -22,5 +25,15 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper, Ann
         return baseMapper.selectById(id);
     }
 
+    //删除功能实现
+    public Map delete(int[] ids){
+        Map map = new HashMap();
+        for(int id:ids){
+          baseMapper.deleteById(id);
+        }
+        map.put("success",1);
+        map.put("message","删除成功");
+        return map;
+    }
 }
 

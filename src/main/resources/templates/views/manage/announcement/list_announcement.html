@@ -24,7 +24,7 @@
         <a href="javascript:void(0);" onclick="return mysearch('manage/announcement/AnnouncementAction_mysearch.do')" id="searchBtn" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
         <a href="javascript:void(0);" onclick="return add('toadd')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
         <a href="javascript:void(0);" onclick="return edit('manage/announcement/Announcement_add.do');" id="editBtn" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
-        <a href="javascript:void(0);" onclick="return del('manage/announcement/Announcement_remove.do')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+        <a href="javascript:void(0);" onclick="return del('todelete')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
 
     </div>
 </form>
@@ -67,7 +67,7 @@
             if(b){
                 var ids = new Array();
                 $.each(rows,function(index,obj){
-                    ids.push(obj.announcementid);
+                    ids.push(obj.id);
                 });
                 //将数组中元素使用,分割拼接为一个字符串
                 ids = ids.join(",");
@@ -93,12 +93,12 @@
             pagination : true,
             toolbar : "#toolbar",
             fitColumns : true,
-            idField : "announcementid",
+            idField : "id",
             rownumbers : true,
             //singleSelect:true,
             columns : [
                 [
-                {field:"id",title:"文章编号",checkbox:true},
+                {field:"id",title:"选择",checkbox:true},
                 {field:"name",title:"通知部门",sortable:true,width:5},
                 {field:"username",title:"发表人",width:5},
                 {field:"title",title:"标题",width:10},
@@ -107,7 +107,7 @@
                 {field:"status",title:"登录状态",width:3},
                 {field:"operation",title:"操作",formatter:function(value,rowData,index){
                 	return "<a href='javascript:void(0)' onclick='myedit("+index+")'>修改</a>"+"&nbsp;&nbsp;"+
-                	" <a href='javascript:void(0)' onclick='editproduct("+index+")'>删除</a>"
+                	" <a href='javascript:void(0)' onclick='editproduct("+index+")'>查看详情</a>"
 
 
                 }},
