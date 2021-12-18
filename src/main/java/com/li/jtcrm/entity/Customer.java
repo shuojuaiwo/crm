@@ -17,11 +17,11 @@ public class Customer implements Serializable {
     @TableId(value = "id")
     private Integer id;
 
-    private String ownerUserId;
+    private Integer ownerUserId;
 
-    private String creatorUserId;
+    private Integer creatorUserId;
 
-    private String name;
+    private String customerName;
 
     private String origin;
 
@@ -45,7 +45,7 @@ public class Customer implements Serializable {
 
     private Integer isLocked;
 
-    private String deleteUserId;
+    private Integer deleteUserId;
 
     private Date deleteTime;
 }

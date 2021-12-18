@@ -24,7 +24,7 @@
     &nbsp;&nbsp;&nbsp;
     <span id="recycleBin" class="easyui-linkbutton" data-options="iconCls:'icon-recover_deleted',plain:true">回收站</span>
     &nbsp;
-    <span id="advancedSearch" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">高级搜索</span>
+    <span id="advancedSearch" class="easyui-linkbutton" data-optins="iconCls:'icon-search',plain:true">高级搜索</span>
 </div>
 
 <div id="tool" style="margin-bottom: 20px">
@@ -34,11 +34,12 @@
                 <i class="iconfont"></i>
                 <select name="batchOperate" style="width:100px;height:25px;">
                     <option value="-1">批量操作</option>
-                    <option value="0">批量放入客户池</option>
-                    <option value="1">批量关注</option>
-                    <option value="2">批量共享</option>
-                    <option value="3">取消关注</option>
-                    <option value="4">取消共享</option>
+                    <option value="0">批量删除</option>
+                    <option value="1">批量放入客户池</option>
+                    <option value="2">批量关注</option>
+                    <option value="3">批量共享</option>
+                    <option value="4">取消关注</option>
+                    <option value="5">取消共享</option>
                 </select>
             </td>
             <td>
@@ -109,7 +110,7 @@
                             return "<img onclick='javascript:unfollow(" +'"' + row.id +'"' +","+index+")' src='static/easyui/themes/icons/star.png'/>";
                         }
                     }},
-                {field:"name",title:"客户名称"},
+                {field:"customerName",title:"客户名称"},
                 {field:"industry",title:"客户行业"},
                 {field:"rating",title:"评分"},
                 {field:"address",title:"客户联系地址",formatter:function(value){
@@ -117,10 +118,10 @@
                     }},
                 {field:"ownerUser",title:"负责人"},
                 {field:"createUser",title:"创建人"},
-                {field:"create_time",title:"创建时间",width:100/*,formatter:function(value){
+                {field:"createTime",title:"创建时间",width:100/*,formatter:function(value){
                         return "<span title='"+value+"'>"+value+"</span>"
                     }*/},
-                {field:"update_time",title:"更新时间",width:100/*,formatter:function(value){
+                {field:"updateTime",title:"更新时间",width:100/*,formatter:function(value){
                         if(value){
                             return "<span title='"+value+"'>"+value+"</span>";
                         }
