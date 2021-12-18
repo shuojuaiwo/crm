@@ -38,7 +38,7 @@
         <a href="javascript:void(0);" onclick="return mysearch()" id="searchBtn" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
         <a href="javascript:void(0);" onclick="return add('toaddd');" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加产品</a>
         <a href="javascript:void(0);" onclick="return edit('manage/product/ProductAction_edit.action');" id="editBtn" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
-        <a href="javascript:void(0);" onclick="return del('manage/product/ProductAction_remove.action')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+        <a href="javascript:void(0);" onclick="return del('ProduceDelete')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
         <a href="javascript:void(0);" onclick="return assign('manage/user/UserAction_assign.action')" id="setBtn" class="easyui-linkbutton" data-options="iconCls:'icon-tip',plain:true">产品工具</a>
     </div>
 </form>
@@ -92,7 +92,7 @@
             if(b){
                 var ids = new Array();
                 $.each(rows,function(index,obj){
-                    ids.push(obj.productid);
+                    ids.push(obj.id);
                 });
                 //将数组中元素使用,分割拼接为一个字符串
                 ids = ids.join(",");
@@ -118,12 +118,12 @@
             pagination : true,
             toolbar : "#toolbar",
             fitColumns : true,
-            idField : "productid",
+            idField : "id",
             rownumbers : true,
             //singleSelect:true,
             columns : [
                 [
-                {field:"productid",title:"选择",checkbox:true},
+                {field:"id",title:"选择",checkbox:true},
                 {field:"name",title:"产品名称",sortable:true,width:10},
                 {field:"link",title:"详情链接",width:10},
                 {field:"username",title:"创建人",width:10},

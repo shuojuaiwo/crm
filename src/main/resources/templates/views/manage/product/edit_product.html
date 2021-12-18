@@ -94,8 +94,11 @@
                 success : function(data){
                     var obj = eval("("+data+")");
                     if(obj.success){
-                        $.messager.alert("提示",obj.message);
-                        parent.closeTopWindow();
+                        $.messager.alert("提示",obj.message,function () {
+                            window.parent.close();
+                        });
+
+                        // parent.closeTopWindow();
                     }else{
                         $.messager.alert("警告",obj.message);
                     }

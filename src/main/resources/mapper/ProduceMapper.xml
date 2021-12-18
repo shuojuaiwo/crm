@@ -3,7 +3,7 @@
 <mapper namespace="com.li.jtcrm.dao.ProduceMapper">
 
 <select id="ProduceAll" resultType="produce">
-    SELECT b.id,c.`name`,c.link,b.username,c.create_time,c.update_time,c.cost_price,c.suggested_price from tb_crm_product c LEFT JOIN tb_system_user b  on c.creator_user_id=b.id limit #{page},#{rows}
+    SELECT c.id,b.id,c.`name`,c.link,b.username,c.create_time,c.update_time,c.cost_price,c.suggested_price from tb_crm_product c LEFT JOIN tb_system_user b  on c.creator_user_id=b.id where state =0 limit #{page},#{rows}
 </select>
 
 <!--    <insert id="ProduceAdd">-->

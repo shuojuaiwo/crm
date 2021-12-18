@@ -30,4 +30,7 @@ public class Produce implements Serializable {
     private float costprice;
     @TableField(value = "suggested_price")
     private float suggestedprice;
+
+    @TableLogic
+    private int state;
 }

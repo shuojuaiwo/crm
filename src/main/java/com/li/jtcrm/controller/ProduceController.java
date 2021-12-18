@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class ProduceController {
@@ -39,6 +36,7 @@ public class ProduceController {
     }
 
     @RequestMapping("/ProduceAdd")
+    @ResponseBody
     public Map ProduceAdd(Produce produce){
         Map map=new HashMap();
         boolean save = Produce.save(produce);
@@ -55,6 +53,12 @@ public class ProduceController {
     public String ProduceUpdate(int id){
         System.out.println(id);
         return "views/manage/product/list_product";
+    }
+    @RequestMapping("/ProduceDelete")
+    @ResponseBody
+    public Map ProduceDelete(int[] ids){
+      Map  map=  Produce.Delete(ids);
+        return map;
     }
 
 }
