@@ -17,14 +17,15 @@ public class Announcement {
     private int id;
     private String name;
     private int user_id;
-    private int order_id;
+    @TableField(value = "order_id")
+    private int orderid;
     private  int department;
     private String color;
     private String username;
     private String title;
     private String content;
-    @TableField(value = "update_time" )
-    private LocalDate updatetime;
+    @TableField(value = "update_time",fill = FieldFill.UPDATE)
+    private LocalDateTime updatetime;
     private int status;
     private int isshow;
 

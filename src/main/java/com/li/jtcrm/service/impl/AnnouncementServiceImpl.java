@@ -14,15 +14,15 @@ import java.util.Map;
 @Service
 public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper, Announcement> implements IAnnouncementService {
     //分页功能
-    public List<Announcement> SelectFindPage(int page, int rows) {
+    public List<Announcement> SelectFindPage(int page, int rows,String title,String name) {
         //查到的数据放入到对象中
-        List<Announcement> SelectFindAll = baseMapper.SelectFindAll(page, rows);
+        List<Announcement> SelectFindAll = baseMapper.SelectFindAll(page, rows,title, name);
         return SelectFindAll;
     }
 
     //修改功能实现
     public Announcement selectById(int id){
-        return baseMapper.selectById(id);
+        return baseMapper.SelectAll(id);
     }
 
     //删除功能实现
@@ -35,5 +35,14 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper, Ann
         map.put("message","删除成功");
         return map;
     }
+
+    //查看详情功能实现
+    public Announcement selectinfo(int id){
+        Announcement announcement = baseMapper.SelectInfo(id);
+
+        return announcement;
+
+    }
+
 }
 

@@ -2,6 +2,7 @@ package com.li.jtcrm;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.li.jtcrm.dao.AnnouncementMapper;
 import com.li.jtcrm.dao.CustomerMapper;
 import com.li.jtcrm.dao.UserMapper;
 import com.li.jtcrm.entity.Customer;
@@ -14,6 +15,8 @@ import javax.annotation.Resource;
 class CrmApplicationTests {
     @Resource
     private UserMapper userService;
+    @Resource
+    private AnnouncementMapper announcementMapper;
 
     @Resource
     private CustomerMapper customerMapper;
@@ -38,5 +41,9 @@ class CrmApplicationTests {
 //       int a= userService.Muenqx("admin");
         System.out.println(userService.Muendz(1));
 
+    }
+    @Test
+    public void text3(){
+        System.out.println(announcementMapper.SelectInfo(2));
     }
 }

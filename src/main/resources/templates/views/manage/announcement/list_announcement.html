@@ -23,7 +23,7 @@
 
         <a href="javascript:void(0);" onclick="return mysearch('manage/announcement/AnnouncementAction_mysearch.do')" id="searchBtn" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
         <a href="javascript:void(0);" onclick="return add('toadd')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加</a>
-        <a href="javascript:void(0);" onclick="return edit('manage/announcement/Announcement_add.do');" id="editBtn" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
+        <a href="javascript:void(0);" onclick="return edit('toupdate');" id="editBtn" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
         <a href="javascript:void(0);" onclick="return del('todelete')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
 
     </div>
@@ -33,8 +33,8 @@
     function mysearch(){
 
         $("#annouceList").datagrid("load",{
-            "announcementVO.title":$("input[name=title]").val(),
-            "announcementVO.departmentid":$("input[name=departmentid]").val()
+            "title":$("input[name=title]").val(),
+            "name":$("input[name=departmentid]").val()
         });
 
     }
@@ -106,8 +106,8 @@
                 {field:"updatetime",title:"更新时间",width:10},
                 {field:"status",title:"登录状态",width:3},
                 {field:"operation",title:"操作",formatter:function(value,rowData,index){
-                	return "<a href='javascript:void(0)' onclick='myedit("+index+")'>修改</a>"+"&nbsp;&nbsp;"+
-                	" <a href='javascript:void(0)' onclick='editproduct("+index+")'>查看详情</a>"
+                	return "<a href='javascript:void(0)' onclick='myedit("+rowData.id+")'>修改</a>"+"&nbsp;&nbsp;"+
+                	" <a href='javascript:void(0)' onclick='editproduct("+rowData.id+")'>查看详情</a>"
 
 
                 }},
@@ -121,10 +121,12 @@
         });
     });
 
-    function modify(){
-    var win=window.parent.open("toadd","修改页面","width=700,height=500")
+    function myedit(id){
+    var win=window.parent.open("toupdate"+"?id="+id,"修改页面","width=700,height=500");
     }
-
+    function editproduct(id){
+    var win = window.parent.open("toinfo"+"?id="+id,"查看详情","width=700,height=500");
+    }
 </script>
 </body>
 </html>

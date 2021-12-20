@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>修改公告</title>
+
+    <!--    避免出现乱码  -->
+    <meta charset="UTF-8">
+    <meta name="pragma" content="no-cache">
+    <meta name="cache-control" content="no-cache">
+    <meta name="content-type" content="text/html;charset=UTF-8">
+    <meta name="expires" content="0">
+    <link th:insert="~{script :: #copy}">
+</head>
+
+<style type="text/css">
+    .myselect{
+        height:30px;
+        width:80%;
+
+    }
+</style>
+
+<body style="width:100%;max-width:600px;padding:10px 30px;">
+<form id="form" method="post" action="add">
+    <strong>基本信息</strong>
+
+    <section class="info-section">
+
+        <table id="tb">
+             <tr>
+                <td><input type="hidden" name="id" th:value="${aa.getId()}"></td>
+                <td><input type="hidden" name="user_id" th:value="${session.user.getId()}"></td>
+                 <td><input type="hidden" name="updatetime" value=""></td>
+            </tr>
+            <tr>
+                <td class="text-title"> 标题：</td>
+                <td>
+                    <input type="text" style="width:80%;" name="title" th:value="${aa.getTitle()}" class="easyui-textbox theme-textbox-radius" >
+
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title"> 颜色：</td>
+                <td>
+                    <input type="text" style="width:80%;" name="color" th:value="${aa.getColor()}" class="easyui-textbox theme-textbox-radius" >
+
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title"> 排序编号：</td>
+                <td>
+
+                    <input type="text" style="width:80%;" name="order_id" th:value="${aa.getId()}" class="easyui-textbox theme-textbox-radius" >
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title"> 是否显示：</td>
+                <td>
+                    <input type="radio" name="isshow" checked th:value="${aa.getIsshow()}" />是
+                    <input type="radio" name="isshow"  th:value="${aa.getIsshow()}" />否
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">  是否发布：</td>
+                <td>
+                    <input type="radio" name="status" checked th:value="${aa.getStatus()}" />是
+                    <input type="radio" name="status" th:value="${aa.getStatus()}" />否
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">通知部门：</td>
+                <td class="text-content">
+                    <select  class="myselect" name="department">
+                        <option >请选择部门</option>
+                        <option value="1">人事部门</option>
+                        <option value="2">行政部门</option>
+                        <option value="3">管理部门</option>
+
+                    </select>
+                </td>
+
+            </tr>
+            <tr>
+                <td class="text-title">内容</td>
+                <td class="text-content">
+                    <textarea name="content" rows="10" style="width:80%;" th:value="${aa.getContent()}"></textarea>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td colspan="2" style="text-align: center;margin-top: 10px;">
+                    <a href="javascript:void(0);" id="saveBtn" class="easyui-linkbutton button-primary">保存</a>
+                    <a href="javascript:void(0);" id="resetBtn" class="easyui-linkbutton button-danger">重置</a>
+                </td>
+            </tr>
+
+        </table>
+    </section>
+</form>
+
+<script type="text/javascript">
+    $(function() {
+        //重置按钮
+        $("#resetBtn").on("click",function(event){
+            $("#form").form("reset");
+        });
+
+        //为保存按钮修改事件
+        $("#saveBtn").on("click",function(event){
+            $("#form").form("submit",{
+                url:"update",
+                onSumbit : function(){
+                    //调用easyui中form对象的validate方法对表单中数据进行校验，该方法返回boolean值，如果为false会阻止表单提交
+                    return $("#form").form("validate");
+                },
+                success : function(data){
+                    var obj = eval("("+data+")");
+                    if(obj.success){
+                        $.messager.alert("提示",obj.message);
+                        // parent.closeTopWindow();
+                    }else{
+                        $.messager.alert("警告",obj.message);
+                    }
+                }
+            });
+        });
+
+    });
+    // //给部门添加下拉框选项
+    // $(function() {
+    //     $.post(
+    //         "manage/position/Department_findAll.do",
+    //         function(data){
+    //             if(data){
+    //                 var departmentId = "${announcementVO.departmentid}";
+    //                 $.each(data.data,function(index,obj){
+    //                     var option = $("<option"+" "+ "value="+obj.departmentid+">"+obj.name+"</option>");
+    //                     if(departmentId && departmentId == obj.departmentid){
+    //                         option.attr("selected",true);
+    //                     }
+    //                     $("select[name='departmentid']").append(option);
+    //                 })
+    //             }
+    //         },"json"
+    //     )
+    // });
+</script>
+</body>
+</html>

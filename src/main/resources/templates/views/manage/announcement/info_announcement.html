@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>查看详情</title>
+
+    <!--    避免出现乱码  -->
+    <meta charset="UTF-8">
+    <meta name="pragma" content="no-cache">
+    <meta name="cache-control" content="no-cache">
+    <meta name="content-type" content="text/html;charset=UTF-8">
+    <meta name="expires" content="0">
+    <link th:insert="~{script :: #copy}">
+</head>
+
+<style type="text/css">
+    .myselect{
+        height:30px;
+        width:80%;
+
+    }
+</style>
+
+<body style="width:100%;max-width:600px;padding:10px 30px;">
+<form id="form" method="post" action="add">
+    <strong>基本信息</strong>
+
+    <section class="info-section">
+
+        <table id="tb">
+            <tr>
+<!--                <td><input type="hidden" name="user_id" th:value="${session.user.getId}"></td>-->
+            </tr>
+            <tr>
+                <td class="text-title"> 标题：</td>
+                <td>
+                    <input type="text" style="width:80%;" name="title" th:value="${info.getTitle()}" readonly="true" class="easyui-textbox theme-textbox-radius" >
+
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title"> 颜色：</td>
+                <td>
+                    <input type="text" style="width:80%;" name="color" th:value="${info.getColor()}" readonly="true" class="easyui-textbox theme-textbox-radius" >
+
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title"> 排序编号：</td>
+                <td>
+
+                    <input type="text" style="width:80%;" name="order_id"  th:value="${info.getOrderid()}" readonly="true" class="easyui-textbox theme-textbox-radius" >
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title"> 是否显示：</td>
+                <td>
+                    <input type="radio" readonly="true" name="isshow" checked th:value="${info.getIsshow()}" />是
+                    <input type="radio" readonly="true" name="isshow"  th:value="${info.getIsshow()}" />否
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">  是否发布：</td>
+                <td>
+                    <input type="radio" readonly="true" name="status" checked th:value="${info.getStatus()}" />是
+                    <input type="radio" readonly="true" name="status" th:value="${info.getStatus()}" />否
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">通知部门：</td>
+                <td class="text-content">
+                    <input type="text" th:value="${info.getName()}" readonly="true">
+                </td>
+
+            </tr>
+            <tr>
+                <td class="text-title">内容</td>
+                <td class="text-content">
+                    <textarea name="content" th:value="${info.getContent()}" readonly="true" rows="10" style="width:80%;"></textarea>
+                </td>
+            </tr>
+        </table>
+    </section>
+</form>
+</body>
+</html>

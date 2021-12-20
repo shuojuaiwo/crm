@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @Controller
 public class AnnouncementController {
     @Resource
@@ -25,14 +26,15 @@ public class AnnouncementController {
     //分页展示功能
     @RequestMapping("/list")
     @ResponseBody
-    public Map list(int page, int rows){
+    public Map list(int page, int rows,String title,String name){
         Map<String,Object> map = new HashMap<>();
-        List<Announcement>  list = ament.SelectFindPage((page-1)*rows, rows);
+        List<Announcement>  list = ament.SelectFindPage((page-1)*rows, rows,title,name);
         int c= ament.count();
         map.put("rows",list);
         map.put("total",c);
         return map;
     }
+
 
     //去添加功能实现
     @RequestMapping("/toadd")
@@ -61,17 +63,49 @@ public class AnnouncementController {
     @RequestMapping("/toupdate")
     public String toupdate(int id, Model model){
         Announcement announcement = ament.selectById(id);
-        model.addAttribute("",announcement);
-        return "views/manage/announcement/add_announcement";
+        model.addAttribute("aa",announcement);
+        return "views/manage/announcement/update_announcement";
 
     }
 
+    //修改
+    @RequestMapping("/update")
+    @ResponseBody
+    public Map update(Announcement announcement){
+        Map map = new HashMap();
+        boolean c = ament.updateById(announcement);
+        if(c){
+            map.put("success",true);
+            map.put("message","修改成功");
+        }else{
+            map.put("success",false);
+            map.put("message","修改失败");
+        }
+        return map;
+
+    }
+
+    //删除功能实现
     @RequestMapping("/todelete")
     @ResponseBody
     public Map delete(int[] ids){
-      Map map =   ament.delete(ids);
+      Map map = ament.delete(ids);
       return  map;
     }
+
+    //查看详情功能实现
+    @RequestMapping("/toinfo")
+    public String selectinfo(int id,Model model){
+        Announcement selectinfo = ament.selectinfo(id);
+        model.addAttribute("info",selectinfo);
+        return "views/manage/announcement/info_announcement";
+    }
+
+
+//    //模糊查询
+//    @RequestMapping("/tolike")
+//    public String
+
 
     }
 
