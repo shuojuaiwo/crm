@@ -1,14 +1,19 @@
 package com.li.jtcrm.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.li.jtcrm.dao.BusinessMapper;
+import com.li.jtcrm.dao.ContactMapper;
 import com.li.jtcrm.dao.CustomerMapper;
 import com.li.jtcrm.dao.UserMapper;
 import com.li.jtcrm.entity.Business;
+import com.li.jtcrm.entity.Customer;
+import com.li.jtcrm.entity.User;
 import com.li.jtcrm.entity.vo.BusinessVO;
 import com.li.jtcrm.service.IBusinessService;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -22,6 +27,9 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
 
     @Resource
     private CustomerMapper customerMapper;
+
+    @Resource
+    private ContactMapper contactMapper;
 
     @Override
     public Map listBusiness(Integer pagenum, Integer size) {
@@ -41,12 +49,19 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
         return map;
     }
 
-    /*@Override
-    public void toAddCustomer(Model model) {
+    @Override
+    public void toAddBusiness(Model model) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         List<User> users = userMapper.selectList(queryWrapper);
         model.addAttribute("users",users);
-    }*/
+        QueryWrapper<Customer> queryWrapper1 = new QueryWrapper<Customer>();
+        List<Customer> customers = customerMapper.selectList(queryWrapper1);
+        model.addAttribute("customers",customers);
+
+        /*QueryWrapper<Contact> queryWrapper2 = new QueryWrapper<>().eq("customerId",);
+        List<Contact> contacts = contactMapper.selectList(queryWrapper2);
+        model.addAttribute("contacts",contacts);*/
+    }
 
     /*@Override
     public Map addCustomer(Customer customer) {

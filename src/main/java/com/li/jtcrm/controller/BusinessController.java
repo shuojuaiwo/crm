@@ -2,6 +2,7 @@ package com.li.jtcrm.controller;
 
 import com.li.jtcrm.service.impl.BusinessServiceImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,13 +32,13 @@ public class BusinessController {
         return map;
     }
 
-    /*@RequestMapping("/toAddBusiness")
+    @RequestMapping("/toAddBusiness")
     public String toAddBusiness(Model model){
         businessService.toAddBusiness(model);
-        return "views/manage/customer/add";
+        return "views/manage/business/add";
     }
 
-    @RequestMapping("/addCustomer")
+    /*@RequestMapping("/addCustomer")
     @ResponseBody
     public Map addCustomer(Customer customer){
         Map map=businessService.addCustomer(customer);

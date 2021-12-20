@@ -11,12 +11,11 @@
 </head>
 <body>
 <div>
-    <span>商机视图：</span><span onclick="return whole('system/customer/CustomerAction_pagination.action')" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">全部</span>|
+    <span>视图：</span><span onclick="return whole('system/customer/CustomerAction_pagination.action')" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">全部</span>|
     <span onclick="return myCustomer('system/customer/CustomerAction_myCustomer.action')" class="easyui-linkbutton" data-options="plain:true">我负责的</span>|
     <span onclick="return myCreate('system/customer/CustomerAction_myCustomer.action')" class="easyui-linkbutton" data-options="plain:true">我创建的</span>|
     <span onclick="return subCustomer('system/customer/CustomerAction_subCustomer.action')" class="easyui-linkbutton" data-options="plain:true">下属负责</span>|
     <span onclick="return subCreate('system/customer/CustomerAction_subCustomer.action')" class="easyui-linkbutton" data-options="plain:true">下属创建的</span>
-    &nbsp;&nbsp;&nbsp;
     <span onclick="return todayCreate('system/customer/CustomerAction_todayCreate.action')" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">今日需联系</span>|
     <span onclick="return weekCreate('system/customer/CustomerAction_weekCreate.action')" class="easyui-linkbutton" data-options="plain:true">本周需联系</span>|
     <span onclick="return monthCreate('system/customer/CustomerAction_monthCreate.action')" class="easyui-linkbutton" data-options="plain:true">本月需联系</span>|
@@ -25,7 +24,6 @@
     <span onclick="return monthCreate('system/customer/CustomerAction_monthCreate.action')" class="easyui-linkbutton" data-options="plain:true">30日未联系</span>|
     <span onclick="return monthCreate('system/customer/CustomerAction_monthCreate.action')" class="easyui-linkbutton" data-options="plain:true">最近创建</span>|
     <span onclick="return monthCreate('system/customer/CustomerAction_monthCreate.action')" class="easyui-linkbutton" data-options="plain:true">最近更新</span>
-    &nbsp;&nbsp;
     <span id="recycleBin" class="easyui-linkbutton" data-options="iconCls:'icon-recover_deleted',plain:true">回收站</span>
 </div>
 
@@ -54,7 +52,7 @@
                 <span id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</span>
             </td>
             <td>
-                <span id="addBtn" onclick="return add('manage/business/BusinessAction_edit.action')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加商机</span>
+                <span id="addBtn" onclick="return add('toAddBusiness')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加商机</span>
                 <span id="tool" class="easyui-linkbutton" data-options="iconCls:'icon-cog',plain:true">商机工具</span>
             </td>
         </tr>
@@ -77,7 +75,7 @@
     })
 
     function add(url){
-        parent.parent.openTopWindow({
+        /*parent.parent.openTopWindow({
             width:900,
             height:600,
             title:"添加商机",
@@ -85,7 +83,8 @@
             close:function(){
                 $("#businessList").datagrid("reload");
             }
-        });
+        });*/
+        var win=window.parent.open(url,"添加商机" , "width=900 , height=600,location=no,menuban=no ,toolban=no")
     }
 
     $(function(){
