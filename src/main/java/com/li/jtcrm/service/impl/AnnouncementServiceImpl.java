@@ -39,7 +39,6 @@ public class AnnouncementServiceImpl extends ServiceImpl<AnnouncementMapper, Ann
     //查看详情功能实现
     public Announcement selectinfo(int id){
         Announcement announcement = baseMapper.SelectInfo(id);
-
         return announcement;
 
     }

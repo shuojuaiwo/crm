@@ -102,6 +102,8 @@
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
+<!--  发邮件  -->
+<!--  1.加入依赖      -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>

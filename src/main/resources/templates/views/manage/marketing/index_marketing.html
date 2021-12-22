@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>营销模块主页</title>
+    <!--    避免出现乱码  -->
+    <meta charset="utf-8">
+    <meta name="pragma" content="no-cache">
+    <meta name="cache-control" content="no-cache">
+    <meta name="expires" content="0">
+    <link th:insert="~{script :: #copy}">
+
+</head>
+
+<body>
+<div id="tt" class="easyui-tabs" style="width:1500px">
+    <div title="发送邮件" style="padding:20px;display:none;" data-options="iconCls:'icon-man',plain:true">
+        <iframe src="tosendemail" width="100%" height="500px" frameBorder="0"></iframe>
+    </div>
+    <div title="发送短信" data-options="iconCls:'icon-man',plain:true" style="overflow:auto;padding:20px;display:none;">
+        <iframe src="tosendmsg" width="100%" height="500px" frameBorder="0"></iframe>
+    </div>
+    <!-- 	    <div title="联系人" data-options="iconCls:'icon-man',plain:true" style="padding:20px;display:none;"> -->
+
+    <!-- 	    </div> -->
+    <!-- 	    <div title="客户关怀" data-options="iconCls:'icon-man',plain:true" style="padding:20px;display:none;"> -->
+
+    <!-- 	    </div> -->
+    <!-- 	    <div title="客户统计" data-options="iconCls:'icon-man',plain:true" style="padding:20px;display:none;"> -->
+
+    <!-- 	    </div> -->
+    <div title="帮助" data-options="iconCls:'icon-help',plain:true" style="padding:20px;display:none;">
+    <p style="color: deeppink">还想要帮助？想啥呢</p>
+    </div>
+</div>
+</body>
+</html>

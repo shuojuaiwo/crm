@@ -93,6 +93,7 @@ public class AnnouncementController {
       return  map;
     }
 
+
     //查看详情功能实现
     @RequestMapping("/toinfo")
     public String selectinfo(int id,Model model){
@@ -102,9 +103,8 @@ public class AnnouncementController {
     }
 
 
-//    //模糊查询
-//    @RequestMapping("/tolike")
-//    public String
+
+
 
 
     }

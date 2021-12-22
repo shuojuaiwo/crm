@@ -14,12 +14,13 @@ spring:
   mvc:
     static-path-pattern: /static/**
       #发邮件配置
+#   ( 2.配置yml,生成授权码)
   mail:
     default-encoding: UTF-8
     host: smtp.qq.com
     port: 587
-    username: 1919906937@qq.com
-    password: fiaubzledmwhbgjb
+    username: 2663710645@qq.com
+    password: otmgxlwdkoyeebhb
     properties:
       mail:
         smtp:
