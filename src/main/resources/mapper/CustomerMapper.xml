@@ -3,6 +3,6 @@
 <mapper namespace="com.li.jtcrm.dao.CustomerMapper">
 
     <select id="selectByPage" resultType="customerVO">
-        select * from tb_crm_customer
+        select * from tb_crm_customer where delete_status=0
     </select>
 </mapper>

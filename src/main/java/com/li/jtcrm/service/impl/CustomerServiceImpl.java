@@ -9,6 +9,7 @@ import com.li.jtcrm.dao.UserMapper;
 import com.li.jtcrm.entity.Contact;
 import com.li.jtcrm.entity.Customer;
 import com.li.jtcrm.entity.User;
+import com.li.jtcrm.entity.vo.CustomerContactVO;
 import com.li.jtcrm.entity.vo.CustomerVO;
 import com.li.jtcrm.service.ICustomerService;
 import org.springframework.stereotype.Service;
@@ -28,32 +29,73 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
     private ContactMapper contactMapper;
 
     @Override
-    public Map listCustomer(Integer pagenum, Integer size) {
+    public Map listCustomer(Integer page, Integer rows) {
         Map map=new HashMap();
-        Page<Object> page = new Page<>(pagenum, size);
-        List<CustomerVO> vos = baseMapper.selectByPage(page);
+        Page<Object> page1 = new Page<>(page, rows);
+        List<CustomerVO> vos = baseMapper.selectByPage(page1);
         for (CustomerVO vo : vos) {
             String ownerUser = userMapper.selectById(vo.getOwnerUserId()).getUsername();
             String createUser = userMapper.selectById(vo.getCreatorUserId()).getUsername();
             vo.setOwnerUser(ownerUser);
             vo.setCreateUser(createUser);
         }
-        map.put("total", page.getTotal());
+        map.put("total", page1.getTotal());
         map.put("rows", vos);
         return map;
     }
 
     @Override
-    public void toAddCustomer(Model model) {
+    public void toAddAndUpdateCustomer(Integer id, Model model) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         List<User> users = userMapper.selectList(queryWrapper);
         model.addAttribute("users",users);
-    }
+        if (id!=null){
+            Customer customer = baseMapper.selectById(id);
+            model.addAttribute("customer",customer);
+            Contact contact = contactMapper.selectContact(customer.getId());
+            model.addAttribute("contact",contact);
+        }
+    }                                                    
 
     @Override
-    public Map addCustomer(Customer customer) {
+    public Map addAndUpdateCustomer(CustomerContactVO customerContactVO) {
         Map map=new HashMap();
-        boolean b = save(customer);
+        Customer customer=new Customer();
+        customer.setId(customerContactVO.getCustomerId());
+        customer.setDeleteStatus(customerContactVO.getDeleteStatus());
+        customer.setIsLocked(customerContactVO.getIsLocked());
+        if (customer.getId()==null){
+            customer.setCreatorUserId(customerContactVO.getCustomerOwnerUserId());
+        }else {
+            customer.setCreatorUserId(customerContactVO.getCustomerCreatorUserId());
+        }
+        customer.setOwnerUserId(customerContactVO.getCustomerOwnerUserId());
+        customer.setCustomerName(customerContactVO.getCustomerName());
+        customer.setIndustry(customerContactVO.getIndustry());
+        customer.setOrigin(customerContactVO.getOrigin());
+        customer.setOwnership(customerContactVO.getOwnership());
+        customer.setZipCode(customerContactVO.getZipCode());
+        customer.setAnnualRevenue(customerContactVO.getAnnualRevenue());
+        customer.setRating(customerContactVO.getRating());
+        customer.setAddress(customerContactVO.getAddress());
+
+        Contact contact=new Contact();
+        contact.setId(customerContactVO.getContactId());
+        contact.setCreatorUserId(customerContactVO.getContactCreatorUserId());
+        contact.setName(customerContactVO.getContactName());
+        contact.setSaltname(customerContactVO.getSaltname());
+        contact.setEmail(customerContactVO.getEmail());
+        contact.setPost(customerContactVO.getPost());
+        contact.setQqNo(customerContactVO.getQqNo());
+        contact.setTelephone(customerContactVO.getTelephone());
+        contact.setDescription(customerContactVO.getDescription());
+
+        boolean b = this.saveOrUpdate(customer);
+        if (contact.getId()==null){
+            contact.setCustomerId(customer.getId());
+            contact.setCreatorUserId(customerContactVO.getCustomerOwnerUserId());
+            contactMapper.insert(contact);
+        }
         if (b){
             map.put("msg","添加成功！");
             map.put("success",1);
@@ -75,5 +117,24 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         model.addAttribute("contact",contact);
         User createUser = userMapper.selectById(customer.getCreatorUserId());
         model.addAttribute("createUser",createUser);
+    }
+
+    @Override
+    public void deleteCustomer(int[] ids) {
+        Map map=new HashMap();
+        int c=0;
+        for (int id : ids) {
+            int i = baseMapper.deleteById(id);
+            if (i==0){
+                c++;
+            }
+        }
+        if (c==0){
+            map.put("msg","添加成功！");
+            map.put("success",1);
+        }else{
+            map.put("msg","添加失败！");
+            map.put("success",0);
+        }
     }
 }

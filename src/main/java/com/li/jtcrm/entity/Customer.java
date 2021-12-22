@@ -1,20 +1,19 @@
 package com.li.jtcrm.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 @Component
 @Data
 @NoArgsConstructor
 @TableName("tb_crm_customer")
 public class Customer implements Serializable {
-    @TableId(value = "id")
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
 
     private Integer ownerUserId;
@@ -37,9 +36,11 @@ public class Customer implements Serializable {
 
     private String rating;
 
-    private LocalDate createTime;
+    @TableField(value = "create_time",fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
 
-    private LocalDate updateTime;
+    @TableField(value = "update_time",fill = FieldFill.UPDATE)
+    private LocalDateTime updateTime;
 
     private Integer deleteStatus;
 
@@ -48,4 +49,5 @@ public class Customer implements Serializable {
     private Integer deleteUserId;
 
     private Date deleteTime;
+
 }

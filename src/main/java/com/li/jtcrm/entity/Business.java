@@ -1,5 +1,7 @@
 package com.li.jtcrm.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -29,7 +31,9 @@ public class Business implements Serializable {
     private Float discountPrice;
     private Float salesPrice;
     private LocalDate dueDate;
+    @TableField(fill = FieldFill.INSERT)
     private LocalDate createTime;
+    @TableField(fill = FieldFill.UPDATE)
     private LocalDate updateTime;
     private Integer updateUserId;
     private Integer statusId;
