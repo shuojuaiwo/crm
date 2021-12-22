@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.li.jtcrm.dao.AnnouncementMapper;
 import com.li.jtcrm.dao.CustomerMapper;
+import com.li.jtcrm.dao.TaskMapper;
 import com.li.jtcrm.dao.UserMapper;
 import com.li.jtcrm.entity.Customer;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,8 @@ class CrmApplicationTests {
     private UserMapper userService;
     @Resource
     private AnnouncementMapper announcementMapper;
-
+@Resource
+    private TaskMapper taskMapper;
     @Resource
     private CustomerMapper customerMapper;
 
@@ -44,6 +46,6 @@ class CrmApplicationTests {
     }
     @Test
     public void text3(){
-        System.out.println(announcementMapper.SelectInfo(2));
+        System.out.println(taskMapper.TaskFindAll(1, 10, "t.subject", "大扫除"));
     }
 }

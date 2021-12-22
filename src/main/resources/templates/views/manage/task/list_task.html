@@ -17,23 +17,23 @@
 
 <body>
 <div>
-    <select  name="taskVo" class="easyui-combobox theme-textbox-radius" style="width:120px">
+    <select  name="taskVo" id="taskVo" class="easyui-combobox theme-textbox-radius" style="width:120px">
         <option value="1">任意字段</option>
-        <option value="taskVo.subject" }>主题</option>
-        <option value="taskVo.creatorUsername" }>创建者</option>
-        <option value="taskVo.ownerUsername">负责人</option>
-        <option value="taskVo.status">任务状态</option>
-        <option value="taskVo.priority">优先级</option>
-        <option value="taskVo.description">描述</option>
-        <option value="taskVo.duedate">截止日期</option>
-        <option value="taskVo.createdate">创建日期</option>
-        <option value="taskVo.updtadate">更行日期</option>
+        <option value="t.subject">主题</option>
+        <option value="t.creator_user_id">创建者</option>
+        <option value="t.owner_user_id">负责人</option>
+        <option value="t.status">任务状态</option>
+        <option value="t.priority">优先级</option>
+        <option value="t.description">描述</option>
+        <option value="t.duedate">截止日期</option>
+        <option value="t.createdate">创建日期</option>
+        <option value="t.updtadate">更行日期</option>
     </select>
-    <select name="taskVo.creatorUsername" class="easyui-combobox theme-textbox-radius" style="width:100px" >
+    <select name="taskVo.creatorUsername" id="username" class="easyui-combobox theme-textbox-radius" style="width:100px" >
         <option value="1">包含</option>
         <option value="2">人名</option>
     </select>
-    <input name="subject" type="text" value="${taskVo.subject}" class="easyui-textbox theme-textbox-radius">
+    <input name="subject" type="text" value="" class="easyui-textbox theme-textbox-radius">
     <a href="javascript:void(0);" onclick="return searchs()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
 </div>
 
@@ -42,7 +42,7 @@
 </table>
 
 <div id="toolbar">
-    <a href="javascript:void(0);" onclick="return add('manage/task/TaskAction_edit.action')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新建</a>
+    <a href="javascript:void(0);" onclick="return add('toTaskAdd')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新建</a>
     <a href="javascript:void(0);" onclick="return del('manage/task/TaskAction_del.action')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
     <a href="javascript:void(0);" onclick="return edit('manage/task/TaskAction_edit.action');" id="editBtn" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
 
@@ -55,7 +55,7 @@
             {
                 width :500,
                 height:700,
-                "title":"修改任务",
+                "title":"添加任务",
                 "url":url,
                 close:function(){
                     $("#taskList").datagrid("reload")
@@ -66,7 +66,9 @@
     }
     function searchs(){
         $("#taskList").datagrid("load",{
-            "taskVo.subject" : $("input[name=subject]").val()
+            "subject" : $("input[name=subject]").val(),
+            "taskVo" :$("#taskVo").val(),
+            "username" :$("#username").val()
         })
     }
     function del(url){
@@ -118,7 +120,7 @@
     }
     $(function(){
         $("#taskList").datagrid({
-            url:"manage/task/TaskAction_findByPage.action",
+            url:"TaskAll",
             pagination:true,
             toolbar:"#toolbar",
             fitColumns:true,
@@ -127,13 +129,13 @@
             columns :[
                 [
                 {field:"taskid",title:"选择",width: 10,checkbox:true},
-                {field:"subject" ,title:"主题",width:10},
-                {field:"aboutUserId",title:"相关信息",width:10},
-                {field:"ownerUsername",title:"负责人",width:15},
+                {field:"subject" ,title:"主题",width:7},
+                {field:"aboutusers",title:"相关信息",width:10},
+                {field:"name",title:"负责人",width:0},
                 {field:"status",title:"状态",width:10},
-                {field:"priority",title:"优先级",width:15},
-                {field:"creatorUsername",title:"创建者",width:15},
-                {field:"duedate" ,title:"截止日期",width:15},
+                {field:"priority",title:"优先级",width:10},
+                {field:"username",title:"创建者",width:10},
+                {field:"duedate" ,title:"截止日期",width:10},
                 {field:"operation",title:"操作",formatter:function(value,rowData,index){
                         return "<a href='javascript:void(0);' onclick='see("+index+")'>查看</a>"+
                             "<a href='javascript:void(0);' onclick='modify("+index+")'>修改</a>"
@@ -142,10 +144,6 @@
 
             ]
             ],
-
-            loadFilter:function(data){
-                return {"total":data.data.totalRows,"rows":data.data.result}
-            }
 
         })
     })

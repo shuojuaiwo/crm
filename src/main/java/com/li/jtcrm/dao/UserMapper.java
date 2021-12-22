@@ -13,4 +13,6 @@ public interface UserMapper extends BaseMapper<User> {
     Map<String,Object> Muenqx(@Param("username") String username);
 
     List<Object> Muendz(@Param("id") int id);
+
+    List<User> selectFindAll();
 }

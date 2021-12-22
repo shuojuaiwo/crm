@@ -18,6 +18,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
         Map map=new HashMap();
         User user=null;
         user = baseMapper.selectByname(username);
+        List<User> users = baseMapper.selectFindAll();
         if (user==null){
             map.put("success",0);
             map.put("msg","账号或密码错误");
@@ -29,6 +30,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUs
                 if (user.getStatus()==1){
                     map.put("success",1);
                     map.put("msg","登入成功");
+                    session.setAttribute("users",users);
                     session.setAttribute("user",user);
                 }else {
                     map.put("success",0);

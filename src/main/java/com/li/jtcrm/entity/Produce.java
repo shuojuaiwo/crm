@@ -12,11 +12,10 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
 @TableName(value = "tb_crm_product")
 public class Produce implements Serializable {
     @TableId(value = "id",type = IdType.AUTO)
-    private int id;
+    private Integer id;
     private String name;
     private String link;
     private String username;

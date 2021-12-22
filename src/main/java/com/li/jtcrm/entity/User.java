@@ -1,5 +1,6 @@
 package com.li.jtcrm.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -29,7 +30,6 @@ public class User implements Serializable {
     private String salt;
 
     private Integer sortNum;
-
     private Integer status;
 
     private Date updateTime;

@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface ProduceMapper extends BaseMapper<Produce> {
-    List<Produce> ProduceAll(@Param("page") int page,@Param("rows") int rows);
+    List<Produce> ProduceAll(@Param("page") int page,@Param("rows") int rows,@Param("name") String name,@Param("suggested_price") Float suggested_price);
     Produce ProduceShow(@Param("id") int id);
 
     List<Produce> mohucha(@Param("name") String name,@Param("suggested_price") float suggested_price);

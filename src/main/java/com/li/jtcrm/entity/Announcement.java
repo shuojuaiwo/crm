@@ -14,7 +14,7 @@ import java.util.Date;
 @TableName("tb_crm_announcement")
 public class Announcement {
     @TableId(value = "id",type = IdType.AUTO)
-    private int id;
+    private Integer id;
     private String name;
     private int user_id;
     @TableField(value = "order_id")

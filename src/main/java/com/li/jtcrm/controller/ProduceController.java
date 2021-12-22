@@ -50,9 +50,10 @@ public class ProduceController {
     //分页展示
     @RequestMapping("/ProduceAll")
     @ResponseBody
-    public Map ProduceAllPage(int page,int rows){
+    public Map ProduceAllPage(int page,int rows,String name,Float suggestedprice){
+
         Map map = new HashMap();
-        List<Produce> produces = Produce.ProduceAllPage((page-1)*rows, rows);
+        List<Produce> produces = Produce.ProduceAllPage((page-1)*rows, rows,name,suggestedprice);
         int ProduceTotal=Produce.count();
         map.put("rows",produces);
         map.put("total",ProduceTotal);

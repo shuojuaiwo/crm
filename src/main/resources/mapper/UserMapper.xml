@@ -23,7 +23,7 @@
         select f.name,f.url from tb_system_role r left join tb_system_role_function rf on r.id=rf.roleId left join tb_system_function f on f.id=rf.funcId where r.id=#{id}
     </select>
 
-<!--    <select id="selectByname" resultType="user">-->
-<!--        select * from t_user where name=#{name}-->
-<!--    </select>-->
+    <select id="selectFindAll" resultType="user">
+        select id,username from tb_system_user
+    </select>
 </mapper>

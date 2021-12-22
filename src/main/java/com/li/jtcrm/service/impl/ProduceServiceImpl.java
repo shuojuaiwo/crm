@@ -16,8 +16,8 @@ import java.util.Map;
 public class ProduceServiceImpl extends ServiceImpl<ProduceMapper, Produce> implements IProduceService {
 
 
-    public List<Produce> ProduceAllPage(int page, int rows) {
-        List<Produce> Producefindall = baseMapper.ProduceAll(page,rows);
+    public List<Produce> ProduceAllPage(int page, int rows,String name,Float suggested_price) {
+        List<Produce> Producefindall = baseMapper.ProduceAll(page,rows,name,suggested_price);
         return Producefindall;
     }
 
