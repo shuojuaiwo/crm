@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,6 +31,7 @@ public class Task{
     private String aboutusers;
     private String subject;
     @TableField(value = "due_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date duedate;
     private String status;
     private String priority;
