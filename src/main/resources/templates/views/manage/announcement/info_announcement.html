@@ -75,7 +75,7 @@
             <tr>
                 <td class="text-title">内容</td>
                 <td class="text-content">
-                    <textarea name="content" th:value="${info.getContent()}" readonly="true" rows="10" style="width:80%;"></textarea>
+                    <textarea name="content" th:text="${info.getContent()}" readonly="true" rows="10" style="width:80%;"></textarea>
                 </td>
             </tr>
         </table>

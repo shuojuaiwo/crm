@@ -38,12 +38,16 @@ public class MarketingController {
     @ResponseBody
     public Map toemail(String qq,String subject,String content){
         Map map = new HashMap();
-        boolean q =   mailService.sendHtmlMail(qq,subject,content);
-        if(q){
-          map.put("success",1);
-        }else{
-          map.put("success",0);
-      }
+        mailService.sendHtmlMail(qq,subject,content);
+        String s=qq;
+
+       int a= s.indexOf("@");
+       int b=s.indexOf(".com");
+        if (a ==-1||b==-1||a>b){
+            map.put("success",0);
+        }else {
+            map.put("success",1);
+        }
         return map;
     }
 
