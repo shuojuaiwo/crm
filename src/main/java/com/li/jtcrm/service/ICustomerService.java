@@ -11,7 +11,7 @@ public interface ICustomerService extends IService<Customer> {
 
     void toAddAndUpdateCustomer(Integer id, Model model);
 
-    Map listCustomer(Integer page, Integer rows);
+    Map listCustomer(Integer page, Integer rows,String filterSearch,String search);
 
     Map addAndUpdateCustomer(CustomerContactVO customerContactVO);
 

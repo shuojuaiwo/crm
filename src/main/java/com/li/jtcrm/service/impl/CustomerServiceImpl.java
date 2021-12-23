@@ -29,10 +29,12 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
     private ContactMapper contactMapper;
 
     @Override
-    public Map listCustomer(Integer page, Integer rows) {
+    public Map listCustomer(Integer page, Integer rows,String filterSearch,String search) {
         Map map=new HashMap();
         Page<Object> page1 = new Page<>(page, rows);
-        List<CustomerVO> vos = baseMapper.selectByPage(page1);
+        System.out.println(filterSearch);
+        System.out.println(search);
+        List<CustomerVO> vos = baseMapper.selectByPage(page1,filterSearch,search);
         for (CustomerVO vo : vos) {
             String ownerUser = userMapper.selectById(vo.getOwnerUserId()).getUsername();
             String createUser = userMapper.selectById(vo.getCreatorUserId()).getUsername();

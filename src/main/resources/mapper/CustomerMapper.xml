@@ -3,6 +3,25 @@
 <mapper namespace="com.li.jtcrm.dao.CustomerMapper">
 
     <select id="selectByPage" resultType="customerVO">
-        select * from tb_crm_customer where delete_status=0
+        select owner_user_id,creator_user_id,customer_name,address,industry,rating,create_time,update_time,delete_status from tb_crm_customer
+        <where>
+            <if test="filterSearch == 'customer_name'">
+                <bind name="s" value="'%'+_parameter.search+'%'"/>
+                and customer_name like #{s}
+            </if>
+            <if test="filterSearch=='address'">
+                <bind name="s" value="'%'+_parameter.search+'%'"/>
+                and address like #{s}
+            </if>
+            <if test="filterSearch=='create_time'">
+                <bind name="s" value="'%'+_parameter.search+'%'"/>
+                and create_time like #{s}
+            </if>
+            <if test="filterSearch=='industry'">
+                <bind name="s" value="'%'+_parameter.search+'%'"/>
+                and industry like #{s}
+            </if>
+            and delete_status=0
+        </where>
     </select>
 </mapper>

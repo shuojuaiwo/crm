@@ -19,5 +19,4 @@ public class CustomerVO {
     private String createUser;
     private LocalDate createTime;
     private LocalDate updateTime;
-    private Integer batchOperate;
 }

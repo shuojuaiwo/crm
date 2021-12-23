@@ -27,8 +27,8 @@ public class CustomerController {
 
     @RequestMapping("/listCustomer")
     @ResponseBody
-    public Map listCustomer(Integer page,Integer rows){
-        Map map=customerService.listCustomer(page,rows);
+    public Map listCustomer(Integer page,Integer rows,String filterSearch,String search){
+        Map map=customerService.listCustomer(page,rows,filterSearch,search);
         return map;
     }
 

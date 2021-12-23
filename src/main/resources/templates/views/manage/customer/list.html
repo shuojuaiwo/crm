@@ -45,10 +45,10 @@
             <td>
                 <select name="filterSearch" style="width:100px;height:25px;">
                     <option value="-1">--请选择筛选条件--</option>
-                    <option value="0">按客户名查询</option>
-                    <option value="1">按地址查询</option>
-                    <option value="2">按创建时间起查询</option>
-                    <option value="3">按行业查询</option>
+                    <option value="customer_name">按客户名查询</option>
+                    <option value="address">按地址查询</option>
+                    <option value="create_time">按创建时间起查询</option>
+                    <option value="industry">按行业查询</option>
                 </select>
                 <select name="contain" style="width:60px;height:25px;">
                     <option value="-1">--包含--</option>
@@ -56,7 +56,7 @@
             </td>
             <td  class="text-content">
                 <input name="search" type="text" placeholder="请输入查询关键字">
-                <span id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</span>
+                <span id="search" onclick="searchs()" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</span>
             </td>
             <td>
                 <span id="chat" class="easyui-linkbutton" data-options="iconCls:'icon-cut',plain:true">发送短信</span>
@@ -104,7 +104,6 @@
                             }
                         });
 
-
                         if(!isfollowed){
                             return "<img onclick='javascript:follow(" +'"' + row.id +'"' +","+index+")' src='static/easyui/themes/icons/stark.png'/>";
                         }else{
@@ -133,13 +132,11 @@
                         return "<a href='javascript:void(0);' onclick=\"return see(\'getCustomerInfo\',\'"+rowData.id+"\')\">查看</a>"+
                             " <a href='javascript:void(0);' onclick=\"return modify(\'toAddAndUpdateCustomer\',\'"+rowData.id+"\')\">编辑</a>"
                     }}
-
             ]
             ],
             /*loadFilter:function(data){
                 return {total : data.data.totalRows,rows:data.data.result}
             }*/
-
         })
     })
 
@@ -157,7 +154,6 @@
                 })
             }
         },"json")
-
     }
     //取消关注客户
     function unfollow(id,index){
@@ -258,6 +254,13 @@
         window.parent.open(url+"?id="+id,"客户信息" , "width=800 , height=700,location=no,menuban=no ,toolban=no")
     }
 
+    function searchs(){
+        $("#customerLs").datagrid("load",{
+            "filterSearch":$("select[name=filterSearch]").val(),
+            "search":$("input[name=search]").val()
+        })
+    }
+
     function del(url){
         var rows=$("#customerLs").datagrid("getChecked");
         if(!rows.length){
@@ -286,7 +289,6 @@
                 )
             }
         })
-
     }
 </script>
 <script type="text/javascript">
