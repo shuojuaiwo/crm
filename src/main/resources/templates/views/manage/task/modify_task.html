@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查看详情</title>
+    <meta charset="utf-8">
+    <meta name="pragma" content="no-cache">
+    <meta name="cache-control" content="no-cache">
+    <meta name="content-type" content="text/html;charset=UTF-8">
+    <meta name="expires" content="0">
+    <link th:insert="~{script :: #copy}">
+</head>
+
+
+<body style="width:100%;max-width:600px;padding:30px 60px;">
+<section class="info-section">
+    <form id="form" method="post">
+        <table>
+            <tr>
+                <td class="text-title">创建者名：</td>
+                <td class="text-content">
+                    <input type="hidden" name="id" th:value="${taskinfo.getId()}">
+                    <input type="text" th:value="${taskinfo.getName()}"
+                           class="easyui-textbox theme-textbox-radius">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="text-title">负责人：</td>
+                <td class="text-content">
+<!--                    <input type="text"  th:value="${taskinfo.getUsername()}"-->
+<!--                           class="easyui-textbox theme-textbox-radius">-->
+                    <select name="ownerUserId"  class="easyui-combobox theme-textbox-radius">
+                        <option th:each="a : ${session.users}" th:value="${a.id}" th:text="${taskinfo.getUsername()==a.username}?${a.username}:${a.username}"></option>
+                    </select>
+                </td>
+            </tr>
+
+            <!--            <tr>-->
+            <!--                <td class="text-title">删除人：</td>-->
+            <!--                <td class="text-content">-->
+            <!--                    <input type="text" name="taskVo.DeleteUsername" value="${taskVo.deleteUsername }"-->
+            <!--                           class="easyui-textbox theme-textbox-radius" data-options="required:true,validType:'length[2,10]'">-->
+            <!--                </td>-->
+            <!--            </tr>-->
+
+            <tr>
+                <td class="text-title">相关人：</td>
+                <td class="text-content">
+                    <input type="text"  th:value="${taskinfo.getAboutusers()}"
+                           class="easyui-textbox theme-textbox-radius" data-options="required:true">
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">主题：</td>
+                <td class="text-content">
+                    <input type="text"  th:value="${taskinfo.getSubject()}"
+                           class="easyui-textbox theme-textbox-radius" data-options="required:true"></td>
+            </tr>
+
+            <tr>
+                <td class="text-title">优先级：</td>
+                <td class="text-content">
+                    <select name="priority" class="easyui-combobox theme-textbox-radius">
+                        <option th:value="${taskinfo.getPriority()}" th:text="${taskinfo.getPriority()}"></option>
+                        <option value="低">低</option>
+                        <option value="普通" >普通</option>
+                        <option value="高">高</option>
+                    </select></td>
+            </tr>
+
+            <tr>
+                <td class="text-title">邮件通知：</td>
+                <td class="text-content">
+                    <input type="text"  th:value="${taskinfo.getSendEmail()}?${taskinfo.getSendEmail()}:'暂无邮件'"
+                           class="easyui-textbox theme-textbox-radius"></td>
+            </tr>
+
+            <tr>
+                <td class="text-title">截止日期：</td>
+                <td class="text-content">
+                    <input type="text"  th:value="${taskinfo.getDuedate()}"
+                           class="easyui-textbox theme-textbox-radius" data-options="required:true">
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">更新日期：</td>
+                <td class="text-content">
+                    <input type="text"  th:value="${taskinfo.getUpdateTime()}?${taskinfo.getUpdateTime()}:'暂无更新记录'"
+                           class="easyui-textbox theme-textbox-radius" data-options="required:true">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="text-title">任务状态：</td>
+                <td class="text-content">
+                    <select name="status" class="easyui-combobox theme-textbox-radius">
+                        <option th:value="${taskinfo.getStatus()}" th:text="${taskinfo.getStatus()}"></option>
+                        <option value="未启动">未启动</option>
+                        <option value="推迟" >推迟</option>
+                        <option value="进行中">进行中</option>
+                        <option value="已完成">已完成</option>
+                        <option value="关闭的">关闭的</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">描述信息：</td>
+                <td class="text-content">
+                    <textarea class="theme-textbox-radius" rows="5"  cols="20" th:text="${taskinfo.getDescription()}?${taskinfo.getDescription()}:'暂无描述'"></textarea></td>
+            </tr>
+            <!-- 因为用户关联信息不需要修改，但是如果没有把这些信息传递给服务器端，hibernate对数据进行更新时就会把对应条目设置为null值 -->
+            <tr>
+                <td colspan="2" style="text-align: center;margin-top: 10px;">
+                    <a href="javascript:void(0);" id="saveBtn" class="easyui-linkbutton button-primary">保存</a>
+                    <a href="javascript:void(0);" id="resetBtn" class="easyui-linkbutton button-danger">重置</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</section>
+</body>
+<script type="text/javascript">
+    $(function(){
+        $("#resetBtn").on("click",function(){
+            $("#form").form("reset")
+        });
+        $("#saveBtn").on("click" , function(){
+
+            $("#form").form("submit",{
+                url : "manage/task/TaskAction_saveOrUpdate.action",
+                onSubmit : function(){
+                    return $("#form").form("validate");
+                },
+
+                success:function(data){
+                    var obj=eval("("+ data +")")
+                    if(obj.success){
+                        $.messager.alert("提示",obj.message)
+                        parent.closeTopWindow();
+                    }
+                }
+            });
+        })
+
+    })
+</script>
+</html>

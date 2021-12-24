@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.li.jtcrm.dao.TaskMapper">
 <select id="TaskFindAll" resultType="task">
-    SELECT t.subject,t.owner_user_id,t.about_users,t.status,t.priority,t.creator_user_id,t.due_date FROM tb_crm_task t left join tb_system_user u on
+    SELECT t.id,t.subject,t.owner_user_id,t.about_users,t.status,t.priority,t.creator_user_id,t.due_date FROM tb_crm_task t left join tb_system_user u on
     <choose>
     <when test="zhuang=='t.creator_user_id'">
         t.creator_user_id=u.id
@@ -16,6 +16,7 @@
     </otherwise>
     </choose>
 <where>
+    and state=0
    <if test="zhuang=='t.creator_user_id'">
         and u.username=#{subject}
    </if>
@@ -45,8 +46,13 @@
        and t.updta_date=#{subject}
    </if>
 </where>
+
 </select>
     <select id="TaskId" resultType="user">
         select username from tb_system_user where id=#{id}
+    </select>
+
+    <select id="taskinfo" resultType="task">
+        SELECT id,owner_user_id,creator_user_id,about_users,subject,priority,send_email,due_date,update_date,status,description  FROM tb_crm_task WHERE id=#{id}
     </select>
 </mapper>

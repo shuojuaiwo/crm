@@ -1,9 +1,6 @@
 package com.li.jtcrm.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,18 +32,21 @@ public class Task{
     private Date duedate;
     private String status;
     private String priority;
-    private String send_email;
+    @TableField(value ="send_email")
+    private String sendEmail;
     private String description;
     @TableField(value = "creator_user_id")
     private int creatorUserId;
     @TableField(value = "create_date")
     private LocalDateTime createdate;
     @TableField(value = "update_date")
-    private LocalDateTime updatedate;
+    private LocalDateTime updateTime;
     private Integer isclose;
     private Integer delete_status;
     private Integer delete_user_id;
     @TableField(value = "delete_time")
     private LocalDateTime deletetime;
 
+    @TableLogic
+    private int state;
 }

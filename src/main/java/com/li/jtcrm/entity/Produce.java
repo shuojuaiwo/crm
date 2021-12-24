@@ -2,6 +2,7 @@ package com.li.jtcrm.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.*;
+import org.apache.ibatis.type.Alias;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -23,9 +24,9 @@ public class Produce implements Serializable {
     private String development_team;
     private LocalDateTime development_time;
     @TableField(value = "create_time",fill = FieldFill.INSERT)
-    private LocalDateTime createtime;
+    private LocalDateTime createTime;
     @TableField(value = "update_time",fill = FieldFill.UPDATE)
-    private LocalDateTime updatetime;
+    private LocalDateTime updateTime;
 
     @TableField(value = "cost_price")
     private float costprice;

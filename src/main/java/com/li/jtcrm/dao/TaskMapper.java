@@ -12,4 +12,5 @@ import java.util.List;
 public interface TaskMapper extends BaseMapper<Task> {
     List<Task> TaskFindAll(@Param("page") Integer page,@Param("rows") Integer rows,@Param("zhuang") String zhuang,@Param("subject") String subject);
     User TaskId(@Param("id") int id);
+    Task taskinfo(@Param("id")int id);
 }

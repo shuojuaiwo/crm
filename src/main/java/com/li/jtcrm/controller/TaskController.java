@@ -3,10 +3,14 @@ package com.li.jtcrm.controller;
 import com.li.jtcrm.entity.Task;
 import com.li.jtcrm.service.impl.TaskServiceImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,15 +29,16 @@ public class TaskController {
     }
 
 
+
+
+
+
     //分页
     @RequestMapping("/TaskAll")
     @ResponseBody
     public Map tasklist(Integer page,Integer rows,String taskVo,String subject){
-        System.out.println(taskVo);
-        System.out.println(subject);
-        Map map=new HashMap();
+
         Map tasks = taskService.TaskFindPageAll(page, rows,taskVo,subject);
-        map.put("rows",tasks);
         return tasks;
     }
 
@@ -52,5 +57,27 @@ public class TaskController {
             map.put("message","添加失败");
         }
         return map;
+    }
+
+    //任务删除
+    @RequestMapping("/taskdelete")
+    public Map TaskDelete(int[] ids){
+        Map map = taskService.TaskDelete(ids);
+        return map;
+    }
+
+    //详情
+    @RequestMapping("/totaskshow")
+    public String totaskshow(int id, Model model){
+        Task task = taskService.TaskInfoById(id);
+        model.addAttribute("taskinfo",task);
+        return "views/manage/task/show_task";
+    }
+
+    @RequestMapping("/totaskupdate")
+    public String totaskupdate(int id, Model model){
+        Task task = taskService.TaskInfoById(id);
+        model.addAttribute("taskinfo",task);
+        return "views/manage/task/modify_task";
     }
 }

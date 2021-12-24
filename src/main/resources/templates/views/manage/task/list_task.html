@@ -43,7 +43,7 @@
 
 <div id="toolbar">
     <a href="javascript:void(0);" onclick="return add('toTaskAdd')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新建</a>
-    <a href="javascript:void(0);" onclick="return del('manage/task/TaskAction_del.action')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+    <a href="javascript:void(0);" onclick="return del('taskdelete')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
     <a href="javascript:void(0);" onclick="return edit('manage/task/TaskAction_edit.action');" id="editBtn" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
 
 </div>
@@ -81,7 +81,7 @@
             if(b){
                 var ids=new Array();
                 $.each(rows,function(index,obj){
-                    ids.push(obj.taskid)
+                    ids.push(obj.id)
                 })
                 ids=ids.join(",")
                 $.post(url,
@@ -124,11 +124,11 @@
             pagination:true,
             toolbar:"#toolbar",
             fitColumns:true,
-            idField:"taskid",
+            idField:"id",
             rownumbers:true,
             columns :[
                 [
-                {field:"taskid",title:"选择",width: 10,checkbox:true},
+                {field:"id",title:"选择",width: 10,checkbox:true},
                 {field:"subject" ,title:"主题",width:7},
                 {field:"aboutusers",title:"相关信息",width:10},
                 {field:"name",title:"负责人",width:0},
@@ -137,8 +137,8 @@
                 {field:"username",title:"创建者",width:10},
                 {field:"duedate" ,title:"截止日期",width:10},
                 {field:"operation",title:"操作",formatter:function(value,rowData,index){
-                        return "<a href='javascript:void(0);' onclick='see("+index+")'>查看</a>"+
-                            "<a href='javascript:void(0);' onclick='modify("+index+")'>修改</a>"
+                        return "<a href='javascript:void(0);' onclick='see("+rowData.id+")'>查看</a>"+" "
+                            +"<a href='javascript:void(0);' onclick='modify("+rowData.id+")'>修改</a>"
                     }},
 
 
@@ -148,31 +148,30 @@
         })
     })
 
-    function see(index){
-        $("#taskList").datagrid("selectRow",index);
+    function see(id){
+        $("#taskList").datagrid("selectRow");
         var row=$("#taskList").datagrid("getSelected");
-        var id=row.taskid;
+        // var id=row.taskid;
         parent.openTopWindow({
             width:500 ,
             height:700 ,
             title:"查看" ,
-            url: "manage/task/TaskAction_see.action?taskVo.taskid="+id ,
+            url: "totaskshow"+"?id="+id ,
             close:function(){
                 $("#taskList").datagrid("reload")
             }
         })
 
     }
-    function modify(index){
-        $("#taskList").datagrid("selectRow",index)
+    function modify(id){
+        $("#taskList").datagrid("selectRow")
         var row=$("#taskList").datagrid("getSelected")
-        var id=row.taskid;
         parent.openTopWindow(
             {
                 width:500,
                 height:700,
                 title:"修改任务",
-                url:"manage/task/TaskAction_modify.action"+"?taskVo.taskid="+id,
+                url:"totaskupdate"+"?id="+id,
                 close:function(){
                     $("#taskList").datagrid("reload")
                 }
