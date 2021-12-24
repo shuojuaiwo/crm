@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加线索</title>
+
+    <meta name="pragma" content="no-cache">
+    <meta name="cache-control" content="no-cache">
+    <meta name="content-type" content="text/html;charset=UTF-8">
+    <meta name="expires" content="0">
+    <link th:insert="~{script :: #copy}">
+    <link th:href="@{http://www.easyui-extlib.com/Content/Site.css}" rel="stylesheet" />
+    <script th:src="@{http://www.easyui-extlib.com/Scripts/jquery-extensions/jquery.jdirk.js}"></script>
+    <link th:href="@{http://www.easyui-extlib.com/Scripts/jquery-easyui-extensions/validatebox/jeasyui.extensions.validatebox.css}" rel="stylesheet" />
+    <script th:src="@{http://www.easyui-extlib.com/Scripts/jquery-easyui-extensions/validatebox/jeasyui.extensions.validatebox.rules.js}"></script>
+    <style>
+        *{
+            margin-left: 10px;
+            padding: 3px;
+        }
+        .tip{
+            height:30px;
+            text-align: right;
+            background-color: #F5F5F5;
+        }
+    </style>
+</head>
+<body>
+<form id="newLead" method="post">
+    <input type="hidden" name="id" th:value="${lead?.id}">
+    <input type="hidden" name="deleteStatus" th:value="0">
+    <input type="hidden" name="isTransformed" th:value="0">
+    <input type="hidden" name="creatorUserId" th:value="${lead?.creatorUserId}">
+    <table>
+        <tr>
+            <td colspan="4">主要信息</td>
+        </tr>
+        <tr>
+            <td class="tip">线索负责人：</td>
+            <td><select id="owner" name="ownerUserId" style="width:146px;height:32px" data-options="required:true">
+                <option>--请选择--</option>
+                <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}" th:selected="${session.user1.id==user.id}" ></option>
+            </select>&nbsp;<a href="javascript:void(0);" class="easyui-linkbutton button-white">放入线索池</a></span></td>
+            <td class="tip">公司名：</td>
+            <td><input name="name" th:value="${lead?.name}"class="easyui-textbox easyui-validatebox" data-options="validType:['chinese'],required:true"/></td>
+        </tr>
+        <tr>
+            <td class="tip">来源：</td>
+            <td><select class="easyui-combobox" name="source" style= "width:146px">
+                <option value="-1">-请选择-</option>
+                <option th:selected="${lead?.source=='合作伙伴'}" >合作伙伴</option>
+                <option th:selected="${lead?.source=='3000万-6000万'}" >3000万-6000万</option>
+                <option th:selected="${lead?.source=='6000万-9000万'}" >6000万-9000万</option>
+            </select></td>
+            <td class="tip">联系人姓名：</td>
+            <td><input name="contactName" th:value="${lead?.contactName}" class="easyui-textbox easyui-validatebox" data-options="required:true"/></td>
+        </tr>
+        <tr>
+            <td class="tip">职位：</td>
+            <td><input name="position" th:value="${lead?.position}" class="easyui-textbox easyui-validatebox"/></td>
+            <td class="tip">尊称：</td>
+            <td><select class="easyui-combobox" name="saltname" style= "width:146px">
+                <option value="-1">-请选择-</option>
+                <option th:selected="${lead?.saltname=='先生'}" >先生</option>
+                <option th:selected="${lead?.saltname=='女士'}" >女士</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td class="tip">手机：</td>
+            <td><input name="mobile" th:value="${lead?.mobile}" class="easyui-textbox easyui-validatebox" data-options="required:true,validType:['mobile']"/></td>
+            <td class="tip">邮箱：</td>
+            <td><input name="email" th:value="${lead?.email}" class="easyui-textbox easyui-validatebox" data-options="validType:'email'"></td>
+        </tr>
+        <tr>
+            <td class="tip">地址：</td>
+            <td colspan="3">
+                <input id="addr1"class="easyui-textbox easyui-validatebox" style="width:100px" data-options="prompt:'省'">
+                <input id="addr2" class="easyui-textbox easyui-validatebox" style="width:100px" data-options="prompt:'市'">
+                <input id="addr3" class="easyui-textbox easyui-validatebox" style="width:100px" data-options="prompt:'区'">
+                <input id="addr4" class="easyui-textbox easyui-validatebox" data-options="prompt:'具体街道信息'">
+                <input id="address" name="address" th:value="${lead?.address}" type="hidden">
+            </td>
+        </tr>
+        <tr>
+            <td class="tip">下次联系时间：</td>
+            <td><input type="date" name="nextstepTime" th:value="${#dates.format(lead?.nextstepTime,'yyyy-MM-dd')}" class="easyui-textbox easyui-validatebox"></td>
+            <td class="tip">下次联系内容：</td>
+            <td><input name="nextstep" th:value="${lead?.nextstep}" class="easyui-textbox easyui-validatebox"/></td>
+        </tr>
+        <tr>
+            <td colspan="4">附加信息</td>
+        </tr>
+        <tr>
+            <td class="tip">备注：</td>
+            <td colspan="3">
+                <textarea class="easyui-textbox" name="leadnote" th:text="${lead?.leadnote}" data-options="multiline:true" style="width:579px;height:60px;"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: center;">
+                <a id="save" href="javascript:void(0);" class="easyui-linkbutton button-purple" >保存</a>
+                <a id="submit" href="javascript:void(0);" class="easyui-linkbutton button-pink" >保存并新建</a>
+                <input class="easyui-checkbox" type="checkbox" name="" value="">同时创建商机
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+<script th:inline="javascript">
+    $(function(){
+        /*$.post("system/user/UserAction_findAll.action",function(data){
+            if(data&&data.success){
+                var ownerId = "${customer.ownerId}";
+                $.each(data.data,function(index,obj){
+
+                    var option = $("<option value='"+obj.id+"' >"+obj.username+"</option>")
+                    if(ownerId == obj.id){
+                        option.prop("selected",true);
+                    }
+                    $("#owner").append(option);
+                })
+            }
+        },"json")*/
+        //修改回显地址
+        var address = [[${lead?.address}]];
+        if (address!==null){
+            address = address.split("-");
+            $("#addr1").textbox({"value":address[0]});
+            $("#addr2").textbox({"value":address[1]});
+            $("#addr3").textbox({"value":address[2]});
+            $("#addr4").textbox({"value":address[3]});
+        }
+
+        $("#submit").on("click",function(e){
+            var addr1 = $("#addr1").val();
+            var addr2 = $("#addr2").val();
+            var addr3 = $("#addr3").val();
+            var addr4 = $("#addr4").val();
+            var addr = addr1+"-"+addr2+"-"+addr3+"-"+addr4;
+            $("#address").val(addr);
+            $("#newLead").form("submit",{
+                url:"addAndUpdateLead",
+                onSubmit:function(){
+                    return $(this).form("validate");
+                },
+
+                success:function(data){
+                    var tdata=eval("("+data+")");
+                    if(tdata&&tdata.success){
+                        $("#topWindow").window("close");
+                    }
+                }
+
+            })
+
+        })
+    })
+</script>
+</html>

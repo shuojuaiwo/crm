@@ -3,7 +3,7 @@
 <mapper namespace="com.li.jtcrm.dao.CustomerMapper">
 
     <select id="selectByPage" resultType="customerVO">
-        select owner_user_id,creator_user_id,customer_name,address,industry,rating,create_time,update_time,delete_status from tb_crm_customer
+        select id,owner_user_id,creator_user_id,customer_name,address,industry,rating,create_time,update_time,delete_status from tb_crm_customer
         <where>
             <if test="filterSearch == 'customer_name'">
                 <bind name="s" value="'%'+_parameter.search+'%'"/>
