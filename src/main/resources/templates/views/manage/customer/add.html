@@ -43,7 +43,7 @@
             <td class="tip">负责人：</td>
             <td><select id="owner" name="customerOwnerUserId" style="width:146px;height:32px" data-options="required:true">
                 <option>--请选择--</option>
-                <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}" th:selected="${session.user1.id==user.id}" ></option>
+                <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}" th:selected="${customer?.ownerUserId==null}?${session.user1.id==user.id}:${customer.ownerUserId==user.id}" ></option>
             </select>&nbsp;<a href="javascript:void(0);" class="easyui-linkbutton button-white">放入客户池</a></span></td>
             <td class="tip">客户名称：</td>
             <td><input name="customerName" th:value="${customer?.customerName}"class="easyui-textbox easyui-validatebox" data-options="validType:['chinese'],required:true"/></td>
@@ -179,9 +179,7 @@
                         $("#topWindow").window("close");
                     }
                 }
-
             })
-
         })
     })
 </script>

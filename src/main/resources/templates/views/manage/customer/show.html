@@ -107,7 +107,7 @@
         <td class="tip">创建人：</td>
         <td><input class="easyui-textbox validatebox-readonly" th:value="${createUser.username}" data-options="readonly:true"></td>
         <td class="tip">创建时间：</td>
-        <td><input class="easyui-textbox validatebox-readonly" th:value="${createUser.createTime}" data-options="readonly:true"></td>
+        <td><input class="easyui-textbox validatebox-readonly" th:value="${#dates.format(createUser.createTime,'yyyy-MM-dd HH:mm:ss')}" data-options="readonly:true"></td>
     </tr>
 </table>
 </body>

@@ -15,4 +15,6 @@ public interface UserMapper extends BaseMapper<User> {
     List<Object> Muendz(@Param("id") int id);
 
     List<User> selectFindAll();
+
+    String selectname(Integer id);
 }

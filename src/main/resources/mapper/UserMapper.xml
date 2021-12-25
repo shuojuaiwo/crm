@@ -26,4 +26,8 @@
     <select id="selectFindAll" resultType="user">
         select id,username from tb_system_user
     </select>
+
+    <select id="selectname" resultType="string">
+        select username from tb_system_user where id=#{id}
+    </select>
 </mapper>

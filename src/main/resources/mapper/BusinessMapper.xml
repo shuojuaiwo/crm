@@ -3,6 +3,9 @@
 <mapper namespace="com.li.jtcrm.dao.BusinessMapper">
 
     <select id="selectByPage" resultType="businessVO">
-        select * from tb_crm_business
+        select id,name,origin,customer_id,creator_user_id,owner_user_id,create_time,update_time,nextstep,nextstep_time,delete_status from tb_crm_business
+    <where>
+        delete_status=0
+    </where>
     </select>
 </mapper>

@@ -24,4 +24,7 @@
             and delete_status=0
         </where>
     </select>
+    <select id="selectname" resultType="string">
+        select customer_name from tb_crm_customer where id=#{id}
+    </select>
 </mapper>

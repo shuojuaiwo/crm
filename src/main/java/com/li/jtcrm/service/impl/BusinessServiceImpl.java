@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.li.jtcrm.dao.BusinessMapper;
-import com.li.jtcrm.dao.ContactMapper;
 import com.li.jtcrm.dao.CustomerMapper;
 import com.li.jtcrm.dao.UserMapper;
 import com.li.jtcrm.entity.Business;
@@ -28,19 +27,16 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
     @Resource
     private CustomerMapper customerMapper;
 
-    @Resource
-    private ContactMapper contactMapper;
-
     @Override
     public Map listBusiness(Integer pagenum, Integer size) {
         Map map=new HashMap();
         Page<Object> page = new Page<>(pagenum, size);
         List<BusinessVO> vos = baseMapper.selectByPage(page);
         for (BusinessVO vo : vos) {
-            String customerName = customerMapper.selectById(vo.getCustomerId()).getCustomerName();
+            String customerName = customerMapper.selectname(vo.getCustomerId());
             vo.setCustomerName(customerName);
-            String ownerUser = userMapper.selectById(vo.getOwnerUserId()).getUsername();
-            String createUser = userMapper.selectById(vo.getCreatorUserId()).getUsername();
+            String ownerUser = userMapper.selectname(vo.getOwnerUserId());
+            String createUser = userMapper.selectname(vo.getCreatorUserId());
             vo.setOwnerUser(ownerUser);
             vo.setCreateUser(createUser);
         }

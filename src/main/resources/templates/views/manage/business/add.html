@@ -23,8 +23,7 @@
                 <td class="text-title">负责人</td>
                 <td class="text-content">
                     <input type="hidden" name="business.id" value="${business.id }">
-                    <input type="hidden" name="business.createtime" value="${business.createtime }">
-                    <input type="hidden" name="business.createById" value="${business.createById }">
+                    <input type="hidden" name="business.creatorUserId" value="${business.creatorUserId }">
                     <select class="myselect" name="business.ownerId">
                         <option value="-1">请选择负责人</option>
                         <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}" th:selected="${session.user1.id==user.id}" ></option>
@@ -52,7 +51,7 @@
             </tr>
             <tr>
                 <td class="text-title">联系人</td>
-                <td class="text-content">
+                <td class="text-content" colspan="3">
                     <select class="myselect" name="business.contactId">
                         <!--<option th:each="contact:${contacts}" th:value="${contact.id}" th:text="${contact.name}"></option>-->
                     </select>
@@ -104,7 +103,7 @@
             </tr>
             <tr>
                 <td class="text-title">下次联系内容</td>
-                <td class="text-content">
+                <td class="text-content" colspan="3">
                     <input type="text" name="business.nextstep" value="${business.nextstep }"
                            class="easyui-textbox theme-textbox-radius" data-options="required:false">
                 </td>

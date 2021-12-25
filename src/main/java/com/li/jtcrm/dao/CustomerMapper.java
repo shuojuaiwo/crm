@@ -12,4 +12,6 @@ public interface CustomerMapper extends BaseMapper<Customer> {
 
     List<CustomerVO> selectByPage(Page<?> page,@Param("filterSearch") String filterSearch,@Param("search") String search);
 
+    String selectname(Integer id);
+
 }

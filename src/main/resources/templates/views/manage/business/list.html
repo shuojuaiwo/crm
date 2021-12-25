@@ -31,9 +31,7 @@
     <table>
         <tr>
             <td>
-                <i class="iconfont"></i>
-            </td>
-            <td>
+                <span onclick="return del('deleteBusiness')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</span>
                 <select id="searchBy" style="width:150px;height:25px;">
                     <option value="-1">--请选择筛选条件--</option>
                     <option value="cust.name">按客户名查询</option>
@@ -111,6 +109,7 @@
                 {field:"updateTime",title:"更新时间",width:10},
                 {field:"operation",title:"操作",width:20,formatter:function(value,row,index){
                         return "<a href='javascript:void(0)' onclick='return see("+index+")'>查看</a>"+
+                            " <a href='javascript:void(0)' onclick='return modify("+index+")'>推进</a>"+
                             " <a href='javascript:void(0)' onclick='return modify("+index+")'>修改</a>";
                     }}
             ]

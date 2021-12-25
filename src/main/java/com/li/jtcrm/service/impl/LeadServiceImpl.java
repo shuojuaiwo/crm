@@ -29,8 +29,8 @@ public class LeadServiceImpl extends ServiceImpl<LeadMapper, Lead> implements IL
         Page<Object> page1 = new Page<>(page, rows);
         List<LeadVO> vos = baseMapper.selectByPage(page1,filterSearch,search);
         for (LeadVO vo : vos) {
-            String ownerUser = userMapper.selectById(vo.getOwnerUserId()).getUsername();
-            String createUser = userMapper.selectById(vo.getCreatorUserId()).getUsername();
+            String ownerUser = userMapper.selectname(vo.getOwnerUserId());
+            String createUser = userMapper.selectname(vo.getCreatorUserId());
             vo.setOwnerUser(ownerUser);
             vo.setCreateUser(createUser);
         }
