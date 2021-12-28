@@ -8,4 +8,5 @@
         delete_status=0
     </where>
     </select>
+    <select id="selectorigin"
 </mapper>

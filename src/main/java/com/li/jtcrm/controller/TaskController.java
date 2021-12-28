@@ -61,6 +61,7 @@ public class TaskController {
 
     //任务删除
     @RequestMapping("/taskdelete")
+    @ResponseBody
     public Map TaskDelete(int[] ids){
         Map map = taskService.TaskDelete(ids);
         return map;
@@ -73,11 +74,26 @@ public class TaskController {
         model.addAttribute("taskinfo",task);
         return "views/manage/task/show_task";
     }
-
+    //去更新
     @RequestMapping("/totaskupdate")
     public String totaskupdate(int id, Model model){
         Task task = taskService.TaskInfoById(id);
         model.addAttribute("taskinfo",task);
         return "views/manage/task/modify_task";
+    }
+    //更新
+    @RequestMapping("/TaskUpdate")
+    @ResponseBody
+    public Map TaskUpdate(Task task){
+        Map map = new HashMap();
+        boolean save = taskService.updateById(task);
+        if (save){
+            map.put("success",1);
+            map.put("message","更新成功");
+        }else {
+            map.put("success",0);
+            map.put("message","更新失败");
+        }
+        return map;
     }
 }

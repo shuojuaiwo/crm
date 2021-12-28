@@ -39,14 +39,13 @@ public class Task{
     private int creatorUserId;
     @TableField(value = "create_date")
     private LocalDateTime createdate;
-    @TableField(value = "update_date")
-    private LocalDateTime updateTime;
+    @TableField(value = "update_date",fill = FieldFill.UPDATE)
+    private LocalDate updateTime;
     private Integer isclose;
     private Integer delete_status;
     private Integer delete_user_id;
     @TableField(value = "delete_time")
     private LocalDateTime deletetime;
-
     @TableLogic
     private int state;
 }

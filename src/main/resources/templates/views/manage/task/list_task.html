@@ -166,17 +166,16 @@
     function modify(id){
         $("#taskList").datagrid("selectRow")
         var row=$("#taskList").datagrid("getSelected")
-        parent.openTopWindow(
-            {
+        parent.openTopWindow({
                 width:500,
                 height:700,
                 title:"修改任务",
-                url:"totaskupdate"+"?id="+id,
+                url:"totaskupdate"+"?id="+id ,
                 close:function(){
                     $("#taskList").datagrid("reload")
-                }
-            }
-        )
+             }
+        })
+
     }
 
 </script>

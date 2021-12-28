@@ -2,10 +2,7 @@ package com.li.jtcrm;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.li.jtcrm.dao.AnnouncementMapper;
-import com.li.jtcrm.dao.CustomerMapper;
-import com.li.jtcrm.dao.TaskMapper;
-import com.li.jtcrm.dao.UserMapper;
+import com.li.jtcrm.dao.*;
 import com.li.jtcrm.entity.Customer;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +19,8 @@ class CrmApplicationTests {
     private TaskMapper taskMapper;
     @Resource
     private CustomerMapper customerMapper;
-
+    @Resource
+    private ContractMapper contractMapper;
     @Test
     void contextLoads() {
     }
@@ -47,5 +45,8 @@ class CrmApplicationTests {
     @Test
     public void text3(){
         System.out.println(taskMapper.TaskFindAll(1, 10, "t.subject", "大扫除"));
+    }
+    @Test
+    public void text4(){
     }
 }

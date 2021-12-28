@@ -14,16 +14,20 @@
 
 <body style="width:100%;max-width:600px;padding:30px 60px;">
 <section class="info-section">
-    <form id="form" method="post">
+    <form id="form" method="post" action="TaskUpdate">
         <table>
             <tr>
                 <td class="text-title">创建者名：</td>
                 <td class="text-content">
                     <input type="hidden" name="id" th:value="${taskinfo.getId()}">
-                    <input type="text" th:value="${taskinfo.getName()}"
-                           class="easyui-textbox theme-textbox-radius">
+                    <input type="hidden" name="updateTime">
+                    <select name="creatorUserId"  class="easyui-combobox theme-textbox-radius">
+                        <option th:value="${taskinfo.getCreatorUserId()}" th:text="${taskinfo.getName()}"></option>
+                        <option th:each="a : ${session.users}" th:value="${a.id}" th:text="${a.username}"></option>
+                    </select>
                 </td>
             </tr>
+
 
             <tr>
                 <td class="text-title">负责人：</td>
@@ -31,7 +35,8 @@
 <!--                    <input type="text"  th:value="${taskinfo.getUsername()}"-->
 <!--                           class="easyui-textbox theme-textbox-radius">-->
                     <select name="ownerUserId"  class="easyui-combobox theme-textbox-radius">
-                        <option th:each="a : ${session.users}" th:value="${a.id}" th:text="${taskinfo.getUsername()==a.username}?${a.username}:${a.username}"></option>
+                        <option th:value="${taskinfo.getOwnerUserId()}" th:text="${taskinfo.getUsername()}"></option>
+                        <option th:each="a : ${session.users}" th:value="${a.id}" th:text="${a.username}"></option>
                     </select>
                 </td>
             </tr>
@@ -47,14 +52,14 @@
             <tr>
                 <td class="text-title">相关人：</td>
                 <td class="text-content">
-                    <input type="text"  th:value="${taskinfo.getAboutusers()}"
+                    <input type="text" name="aboutusers"  th:value="${taskinfo.getAboutusers()}"
                            class="easyui-textbox theme-textbox-radius" data-options="required:true">
                 </td>
             </tr>
             <tr>
                 <td class="text-title">主题：</td>
                 <td class="text-content">
-                    <input type="text"  th:value="${taskinfo.getSubject()}"
+                    <input type="text" name="subject"  th:value="${taskinfo.getSubject()}"
                            class="easyui-textbox theme-textbox-radius" data-options="required:true"></td>
             </tr>
 
@@ -72,22 +77,22 @@
             <tr>
                 <td class="text-title">邮件通知：</td>
                 <td class="text-content">
-                    <input type="text"  th:value="${taskinfo.getSendEmail()}?${taskinfo.getSendEmail()}:'暂无邮件'"
+                    <input type="text" name="sendEmail"  th:value="${taskinfo.getSendEmail()}?${taskinfo.getSendEmail()}:'暂无邮件'"
                            class="easyui-textbox theme-textbox-radius"></td>
             </tr>
 
             <tr>
                 <td class="text-title">截止日期：</td>
                 <td class="text-content">
-                    <input type="text"  th:value="${taskinfo.getDuedate()}"
+                    <input type="date" name="duedate"  th:value="${taskinfo.getDuedate()}"
                            class="easyui-textbox theme-textbox-radius" data-options="required:true">
                 </td>
             </tr>
             <tr>
                 <td class="text-title">更新日期：</td>
                 <td class="text-content">
-                    <input type="text"  th:value="${taskinfo.getUpdateTime()}?${taskinfo.getUpdateTime()}:'暂无更新记录'"
-                           class="easyui-textbox theme-textbox-radius" data-options="required:true">
+                    <input type="text" th:value="${taskinfo.getUpdateTime()}?${taskinfo.getUpdateTime()}:'暂无更新记录'"
+                           class="easyui-textbox theme-textbox-radius" readOnly="true" data-options="required:true">
                 </td>
             </tr>
 
@@ -113,6 +118,7 @@
             <tr>
                 <td colspan="2" style="text-align: center;margin-top: 10px;">
                     <a href="javascript:void(0);" id="saveBtn" class="easyui-linkbutton button-primary">保存</a>
+                    <input type="submit" th:value="保存">
                     <a href="javascript:void(0);" id="resetBtn" class="easyui-linkbutton button-danger">重置</a>
                 </td>
             </tr>
@@ -122,13 +128,9 @@
 </body>
 <script type="text/javascript">
     $(function(){
-        $("#resetBtn").on("click",function(){
-            $("#form").form("reset")
-        });
         $("#saveBtn").on("click" , function(){
-
             $("#form").form("submit",{
-                url : "manage/task/TaskAction_saveOrUpdate.action",
+                url : "TaskUpdate",
                 onSubmit : function(){
                     return $("#form").form("validate");
                 },
@@ -136,13 +138,18 @@
                 success:function(data){
                     var obj=eval("("+ data +")")
                     if(obj.success){
-                        $.messager.alert("提示",obj.message)
+                       alert(obj.message)
                         parent.closeTopWindow();
                     }
                 }
             });
         })
 
+
+
+        $("#resetBtn").on("click",function(){
+            $("#form").form("reset")
+        });
     })
 </script>
 </html>
