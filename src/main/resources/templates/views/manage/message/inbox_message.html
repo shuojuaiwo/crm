@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>收件箱</title>
+</head>
+
+<body>
+
+</body>
+<script type="text/javascript">
+    function writes(url){
+        parent.openTopWindow({
+            width:500,
+            height:500,
+            "url":url,
+            close:function(){
+                $("#messageList").datagrid("reload")
+            }
+        })
+    }
+    $(function(){
+        $("#messageList").datagrid({
+            url:"#",
+            pagination:true,
+            toolbar:"#toolbar",
+            fitColumns:true,
+            idField:"messageid",
+            rownumbers:true,
+            columns:[
+                [
+                    {field:"messageid",title:"内容",checkbox:true},
+                    {field:"userByTousername",title:"发件人",width:15},
+                    {field:"readtime",title:"阅读时间",width:15},
+                    {field:"sendtime",title:"发送时间",width:15},
+                    {field:"status",title:"状态",width:10}
+                ]
+            ],
+            loadFilter:function(data){
+                return {"total":data.data.totalRows,"rows":data.data.result}
+            }
+        })
+    })
+</script>
+</html>

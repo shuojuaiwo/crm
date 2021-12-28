@@ -32,6 +32,14 @@ public class MarketingController {
         return "views/manage/marketing/sendmsg_marketing";
     }
 
+    //去短信发件箱
+    @RequestMapping("/tooutbox")
+    public String tooutbox(){
+        return "views/manage/marketing/outbox_marketing";
+
+    }
+
+
 
     //发邮件功能
     @RequestMapping("/email")
