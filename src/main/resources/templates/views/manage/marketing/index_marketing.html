@@ -13,12 +13,17 @@
 
 <body>
 <div id="tt" class="easyui-tabs" style="width:1500px">
+    <div title="短信收件箱" data-options="iconCls:'icon-man',plain:true" style="overflow:auto;padding:20px;display:none;">
+        <iframe src="tooutbox" width="1000px" height="500px" frameBorder="0"></iframe>
+    </div>
+
     <div title="发送邮件" style="padding:20px;display:none;" data-options="iconCls:'icon-man',plain:true">
         <iframe src="tosendemail" width="100%" height="500px" frameBorder="0"></iframe>
     </div>
     <div title="发送短信" data-options="iconCls:'icon-man',plain:true" style="overflow:auto;padding:20px;display:none;">
         <iframe src="tosendmsg" width="100%" height="500px" frameBorder="0"></iframe>
     </div>
+
     <!-- 	    <div title="联系人" data-options="iconCls:'icon-man',plain:true" style="padding:20px;display:none;"> -->
 
     <!-- 	    </div> -->

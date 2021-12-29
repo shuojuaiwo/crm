@@ -50,7 +50,7 @@
         //在提交之前调用编辑器的同步方法，这样才能获取到textarea中的内容
         //editor.sync();
         $("#form").form("submit",{
-            url : "manage/marketing/MarketingAction_sendMsg.do",
+            url : "tosendm",
             onSubmit : function(){
                 return $("#form").form("validate");
             },

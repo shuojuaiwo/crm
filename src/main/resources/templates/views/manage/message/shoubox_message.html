@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>收件箱</title>
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <link th:insert="~{script :: #copy}">
+    <style>
+        .box1{
+            position: absolute;
+            right:10px;
+            top:5px;
+
+        }
+    </style>
+</head>
+
+<body>
+<div id="tool1" style="margin-bottom: 20px">
+    <table>
+        <tr>
+            <td>
+                <i class="iconfont"></i>
+            </td>
+            <td>
+                <select name="contain" style="width:75px;height:25px;">
+                    <option value="-1">批量操作</option>
+                    <option value="-1">批量删除</option>
+                </select>
+                <select id="searchBy" style="width:150px;height:25px;">
+                    <option value="-1">--请选择筛选条件--</option>
+                    <option value="send.name">按发件人筛选</option>
+                    <option value="sendtime">按发件时间筛选</option>
+                    <option value="readtime">按阅读时间筛选</option>
+                </select>
+                <select name="contain" style="width:60px;height:25px;">
+                    <option value="-1">包含</option>
+                    <option value="-1">精确查找</option>
+                </select>
+            </td>
+            <td  class="text-content">
+                <input id="searchText" type="text"style="border:1px solid black;height:25px;">
+                <span id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</span>
+            </td>
+            <div class="box1">
+            <dir id="toolbar">
+                <a href="javascript:void(0)" onclick="return writes('system/message/MessageAction_write.action')" class="easyui-linkbutton" data-options="iconCls:'icon-add'" >写信</a>
+            </dir>
+            </div>
+        </tr>
+
+    </table>
+</div>
+<div id="businessList"></div>
+</body>
+<script type="text/javascript">
+    $("#search").on("click",function(event){
+        var searchBy=$("#searchBy").val();
+        var searchText=$("#searchText").val();
+        $("#businessList").datagrid("load",{
+            "searchBy":$("#searchBy").val(),
+            "searchText":$("#searchText").val()
+        })
+    })
+    $("#reset").on("click",function(event){
+        $("#searchBy").val("-1");
+        $("#searchText").val("");
+    })
+
+    function add(url){
+        /*parent.parent.openTopWindow({
+            width:900,
+            height:600,
+            title:"添加商机",
+            "url": url,
+            close:function(){
+                $("#businessList").datagrid("reload");
+            }
+        });*/
+        var win=window.parent.open(url,"添加商机" , "width=900 , height=600,location=no,menuban=no ,toolban=no")
+    }
+
+    $(function(){
+        //分页展示客户列表
+        $("#businessList").datagrid({
+            url:"listBusiness",
+            fitColumns:true,
+            checkOnSelect:false,
+            idField:"name",
+            pagination:true,
+            sortName:"name",
+            columns:[
+                [
+                {field:"选择",checkbox:true},
+                {field:"id",hidden:true},
+                {field:"content",title:"内容",width:12},
+                {field:"name",title:"发件人",width:12},
+                {field:"readTime",title:"阅读时间",width:10},
+                {field:"sendTime",title:"发送时间",width:10},
+            ]
+            ],
+            /*loadFilter:function(data){
+                return {total : data.data.totalRows,rows:data.data.result}
+            }*/
+        })
+    })
+    function see(index){
+        $("#businessList").datagrid("selectRow",index);
+        var row=$("#businessList").datagrid("getSelected");
+        parent.parent.openTopWindow({
+            width:900,
+            height:600,
+            title:"查看商机",
+            "url": "manage/business/BusinessAction_see.action?busi.businessid="+row.id,
+            close:function(){
+                $("#businessList").datagrid("reload");
+            }
+        });
+    }
+    function modify(index){
+        $("#businessList").datagrid("selectRow",index);
+        var row=$("#businessList").datagrid("getSelected");
+        parent.parent.openTopWindow({
+            width:900,
+            height:600,
+            title:"修改商机",
+            "url": "manage/business/BusinessAction_edit.action?busi.businessid="+row.id,
+            close:function(){
+                $("#businessList").datagrid("reload");
+            }
+        });
+    }
+</script>
+</html>
