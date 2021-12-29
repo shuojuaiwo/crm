@@ -4,4 +4,7 @@
     <select id="selectContact" resultType="contact">
         select * from tb_crm_contact where customer_id=#{id}
     </select>
+    <select id="selectName" resultType="contact">
+        select id,name from tb_crm_contact;
+    </select>
 </mapper>

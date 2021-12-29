@@ -17,16 +17,26 @@ import java.time.LocalDateTime;
 @TableName("tb_crm_contract")
 public class Contract implements Serializable {
     @TableId(value = "id")
-    private Integer id;
+    private int id;
     private String number;
     private String name;
     @TableField(value = "customer_name")
     private String customerName;
     private String username;
     @TableField(value = "due_time")
-    private LocalDateTime dueTime;
+    private String dueTime;
     private BigDecimal price;
     private String status;
     @TableLogic
     private int state;
+    @TableField(value = "business_id")
+    private int businessId;
+    @TableField(value = "owner_user_id")
+    private int ownerUserId;
+    @TableField(value = "start_date")
+    private String startDate;
+    @TableField(value = "end_date")
+    private String endDate;
+    private String content;
+    private String description;
 }

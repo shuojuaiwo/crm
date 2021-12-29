@@ -14,4 +14,6 @@ public interface CustomerMapper extends BaseMapper<Customer> {
 
     String selectname(Integer id);
 
+    List<CustomerVO> selectbyName();
+
 }

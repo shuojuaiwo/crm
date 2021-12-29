@@ -2,24 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.li.jtcrm.dao.ContractMapper">
     <select id="selectContract" resultType="contract">
-        SELECT cr.id,cr.number,cm.customer_name,cb.`name`,u.username,cr.due_time,cr.price,cr.`status` from tb_crm_contract cr LEFT JOIN tb_crm_customer cm on cm.id=cr.business_id LEFT JOIN tb_crm_business cb on cr.fuzeren_id=cb.id LEFT JOIN tb_system_user u on cr.owner_user_id=u.id
+        SELECT cr.id,cr.number,cm.customer_name,ct.`name`,u.username,cr.due_time,cr.price,cr.`status` FROM tb_crm_contract cr LEFT JOIN tb_crm_r_business_contract crb on cr.id=crb.contract_id LEFT JOIN tb_crm_business cb on cb.id=crb.business_id LEFT JOIN tb_crm_contact ct on cb.contact_id=ct.id LEFT JOIN tb_crm_r_business_customer crm on cb.id=crm.business_id LEFT JOIN tb_crm_customer cm on
+        cm.id=crm.customer_id LEFT JOIN tb_system_user u on cr.owner_user_id=u.id
         <where>
          cr.state = 0
         <if test="contractName=='b.name'&amp;&amp;cha.length()>0&amp;&amp;contractTwo==1">
             <bind name="kehu" value="'%'+cha+'%'"/>
-            and cb.name like #{kehu}
+            and cm.customer_name like #{kehu}
         </if>
             <if test="contractName=='b.name'&amp;&amp;cha.length()>0&amp;&amp;contractTwo==2">
-              and cb.name=#{cha}
+              and cm.customer_name=#{cha}
             </if>
 
             <if test="contractName=='customername'&amp;&amp;cha.length()>0&amp;&amp;contractTwo==1">
                 <bind name="fuzeren" value="'%'+cha+'%'"/>
-                and cm.customer_name like #{fuzeren}
+                and ct.`name` like #{fuzeren}
             </if>
 
             <if test="contractName=='customername'&amp;&amp;cha.length()>0&amp;&amp;contractTwo==2">
-                and cm.customer_name=#{cha}
+                and ct.`name`=#{cha}
             </if>
 
             <if test="contractName=='fuzeren'&amp;&amp;cha.length()>0&amp;&amp;contractTwo==1">
@@ -32,5 +33,8 @@
         </where>
 
         limit #{page},#{rows}
+    </select>
+    <select id="contractbyName" resultType="contract">
+        select id from tb_crm_contract where number=#{number}
     </select>
 </mapper>

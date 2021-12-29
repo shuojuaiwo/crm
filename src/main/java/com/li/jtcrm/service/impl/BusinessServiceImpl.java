@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,4 +86,9 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
         User createUser = userMapper.selectById(customer.getCreatorUserId());
         model.addAttribute("createUser",createUser);
     }*/
+    public List<BusinessVO> selectoriginl(Model model){
+        List<BusinessVO> selectorigin = baseMapper.selectorigin();
+        model.addAttribute("laiy",selectorigin);
+        return selectorigin;
+    }
 }

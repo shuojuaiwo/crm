@@ -27,4 +27,7 @@
     <select id="selectname" resultType="string">
         select customer_name from tb_crm_customer where id=#{id}
     </select>
+    <select id="selectbyName" resultType="customerVO">
+        select id,customer_name from tb_crm_customer
+    </select>
 </mapper>

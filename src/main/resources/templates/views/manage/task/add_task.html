@@ -106,7 +106,7 @@
                 success:function(data){
                     var obj=eval("("+ data +")")
                     if(obj.success){
-                        $.messager.alert("提示",obj.message)
+                       alert(obj.message)
                         parent.closeTopWindow();
                     }
                 }

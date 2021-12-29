@@ -11,6 +11,7 @@ import com.li.jtcrm.entity.Contact;
 import com.li.jtcrm.entity.Contract;
 import com.li.jtcrm.entity.Customer;
 import com.li.jtcrm.entity.User;
+import com.li.jtcrm.entity.vo.ContractVO;
 import com.li.jtcrm.entity.vo.CustomerContactVO;
 import com.li.jtcrm.entity.vo.CustomerVO;
 import com.li.jtcrm.service.IContractService;
@@ -39,5 +40,23 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
         map.put("success",1);
         map.put("message","删除成功");
         return map;
+    }
+
+    public Map contractAdd(Contract contract){
+        Map map = new HashMap();
+        int insert = baseMapper.insert(contract);
+        if (insert==1){
+            map.put("success",true);
+            map.put("message","添加成功");
+        }else {
+            map.put("success",false);
+            map.put("message","添加失败");
+        }
+        return map;
+    }
+
+    public Contract contractbyname(String number){
+        Contract contract = baseMapper.contractbyName(number);
+        return contract;
     }
 }

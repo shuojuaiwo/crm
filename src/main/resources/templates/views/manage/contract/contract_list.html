@@ -128,13 +128,18 @@
             columns : [
                 [
                 {field:"id",title:"选择合同",checkbox:true},
-                {field:"number",title:"合同编号"},
-                {field:"name",title:"客户"},
-                {field:"username",title:"负责人"},//ownerUserName
-                {field:"customerName",title:"联系人"},
-                {field:"dueTime",title:"签约日期"},
+                {field:"number",title:"合同编号",width:"120px"},
+                {field:"customerName",title:"客户",width:"70px"},
+                {field:"username",title:"负责人",width: "80px"},//ownerUserName
+                {field:"name",title:"联系人",width: "80px"},
+                {field:"dueTime",title:"签约日期",width: "100px"},
                 {field:"price",title:"合同金额"},
-                {field:"status",title:"状态"},
+                {field:"status",title:"状态", styler:function (value) {
+                    if (value=='未签约'){
+                        return 'color:red;font-weight: bold;';
+                    }
+
+                    }},
                 {field:"endTime",title:"距离到期时间"},
                 {field:"operation",title:"操作",formatter:function(value,row,index){
                         return "<a href='manage/position/ContractAction_edit.action?ids='"+row.index+">查看</a>"+

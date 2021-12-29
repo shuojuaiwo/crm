@@ -1,5 +1,6 @@
 package com.li.jtcrm.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.li.jtcrm.dao.ProduceMapper;
 import com.li.jtcrm.entity.Produce;
@@ -39,6 +40,5 @@ public class ProduceServiceImpl extends ServiceImpl<ProduceMapper, Produce> impl
     public List<Produce> mohu(String name, float suggested_price){
         return baseMapper.mohucha(name,suggested_price);
     }
-
 }
 

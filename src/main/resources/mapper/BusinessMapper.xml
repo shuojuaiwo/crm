@@ -8,5 +8,7 @@
         delete_status=0
     </where>
     </select>
-    <select id="selectorigin"
+    <select id="selectorigin" resultType="businessVO">
+        select id,name from tb_crm_business where delete_status=0;
+    </select>
 </mapper>

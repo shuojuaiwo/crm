@@ -137,4 +137,8 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
             map.put("success",0);
         }
     }
+    public List<CustomerVO> selectbyName(){
+        List<CustomerVO> customerVOS = baseMapper.selectbyName();
+        return customerVOS;
+    }
 }

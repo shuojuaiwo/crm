@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface BusinessMapper extends BaseMapper<Business> {
     List<BusinessVO> selectByPage(Page<?> page);
+    List<BusinessVO> selectorigin();
 }
