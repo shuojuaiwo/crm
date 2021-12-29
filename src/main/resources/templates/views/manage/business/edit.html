@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>编辑权限</title>
@@ -22,87 +22,94 @@
             <tr>
                 <td class="text-title">负责人</td>
                 <td class="text-content">
-                    <input type="hidden" name="busiVO.id" value="${busiVO.id }">
-                    <input type="hidden" name="busiVO.createtime" value="${busiVO.createtime }">
-                    <input type="hidden" name="busiVO.createById" value="${busiVO.createById }">
-                    <select class="myselect" name="busiVO.ownerId">
+                    <input type="hidden" name="id" th:value="${business?.id }">
+                    <input type="hidden" name="creatorUserId" th:value="${business?.creatorUserId==null}?${session.user1.id}:${business?.creatorUserId}">
+                    <select class="myselect" name="ownerUserId">
                         <option value="-1">请选择负责人</option>
+                        <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}" th:selected="${business?.ownerUserId==null}?${session.user1.id==user.id}:${business.ownerUserId==user.id}" ></option>
                     </select>
                 </td>
                 <td class="text-title">客户</td>
                 <td class="text-content">
-                    <select class="myselect" name="busiVO.customerId">
+                    <select class="myselect" name="customerId">
                         <option value="-1">请选择客户</option>
+                        <option th:each="customer:${customers}" th:value="${customer.id}" th:text="${customer.customerName}" th:selected="${business?.customerId==customer.id}"></option>
                     </select>
+                    <a href="javascript:void(0)" class="text-title" style="color:blue;">新建客户</a>
                 </td>
             </tr>
             <tr>
                 <td class="text-title">商机金额</td>
                 <td class="text-content">
-                    <input type="text" name="busiVO.salesprice" value="${busiVO.salesprice }"
+                    <input type="text" name="salesPrice" th:value="${business?.salesPrice}"
                            class="easyui-textbox theme-textbox-radius" data-options="required:false">
                 </td>
                 <td class="text-title">商机名</td>
                 <td class="text-content">
-                    <input type="text" name="busiVO.name" value="${busiVO.name }"
-                           class="easyui-textbox theme-textbox-radius" data-options="required:false">
+                    <input type="text" name="name" th:value="${business?.name}"
+                           class="easyui-textbox theme-textbox-radius" data-options="required:true">
+                    <span href="javascript:void(0)" class="text-title" style="color:red;"> *必填项</span>
                 </td>
             </tr>
             <tr>
                 <td class="text-title">联系人</td>
-                <td class="text-content">
-                    <select class="myselect" name="busiVO.contactsId">
+                <td class="text-content" colspan="3">
+                    <select class="myselect" name="contactId">
+                        <option th:value="${business?.contactId}" th:text="${contactName}" th:selected="${business?.id!=null}"></option>
                     </select>
-                    <a href="javascript:void(0)" class="text-title" style="color:blue;">新建</a>
+                    <a href="javascript:void(0)" class="text-title" style="color:blue;">新建联系人</a>
                 </td>
             </tr>
             <tr>
                 <td class="text-title" >合同签订地址</td>
                 <td class="text-content" colspan="3">
-                    <input type="text" style="width:550px;" name="busiVO.contractaddress" value="${busiVO.contractaddress }"
+                    <input type="text" style="width:550px;" name="contractAddress" th:value="${business?.contractAddress}"
                            class="easyui-textbox theme-textbox-radius" data-options="required:false">
                 </td>
             </tr>
             <tr>
                 <td class="text-title">商机类型</td>
                 <td class="text-content">
-                    <select class="myselect" name="busiVO.type">
-                    </select>
+                    <input type="text" name="type" th:value="${business?.type}"
+                           class="easyui-textbox theme-textbox-radius" data-options="required:false">
                 </td>
                 <td class="text-title">状态</td>
                 <td class="text-content">
-                    <select class="myselect" name="busiVO.businessStatusId">
+                    <select class="myselect" name="statusId">
                     </select>
                 </td>
             </tr>
             <tr>
                 <td class="text-title">商机来源</td>
                 <td class="text-content">
-                    <select class="myselect" name="busiVO.origin">
+                    <select class="myselect" name="origin">
                     </select>
                 </td>
                 <td class="text-title">赢单率</td>
                 <td class="text-content">
-                    <input type="text" name="busiVO.gainrate" value="${busiVO.gainrate }"
+                    <input type="text" name="gainRate" th:value="${business?.gainRate}"
                            class="easyui-textbox theme-textbox-radius" data-options="required:false">
+                    <span href="javascript:void(0)" class="text-title" style="color:darkblue;">(注:%)</span>
                 </td>
             </tr>
             <tr>
                 <td class="text-title">预定成交价</td>
                 <td class="text-content">
-                    <input type="text" name="busiVO.estimateprice" value="${busiVO.estimateprice }"
+                    <input type="text" name="estimatePrice" th:value="${business?.estimatePrice}"
                            class="easyui-textbox theme-textbox-radius" data-options="required:true">
+                    <span href="javascript:void(0)" class="text-title" style="color:red;"> *必填项</span>
+                    <span href="javascript:void(0)" class="text-title" style="color:darkblue;">(注:单位:元)</span>
                 </td>
                 <td class="text-title">下次联系时间</td>
                 <td class="text-content">
-                    <input class="easyui-datetimebox" name="busiVO.nextsteptime" value="${busiVO.nextsteptime }"
-                           data-options="required:false,showSeconds:false" style="width:150px">
+                    <input class="easyui-datetimebox" name="nextstepTime" th:value="${business?.nextstepTime}"
+                           data-options="required:false,showSeconds:true" style="width:150px">
                 </td>
             </tr>
             <tr>
                 <td class="text-title">下次联系内容</td>
-                <td class="text-content">
-                    <input type="text" name="busiVO.nextstep" value="${busiVO.nextstep }"
+                <td class="text-content" colspan="3">
+                    <input type="text" name="nextstep" th:value="${business?.nextstep}"
                            class="easyui-textbox theme-textbox-radius" data-options="required:false">
                 </td>
 
@@ -115,7 +122,7 @@
             <tr>
                 <td class="text-title">备注</td>
                 <td class="text-content">
-                    <textarea name="busiVO.description" rows="5" style="width:80%;">${busiVO.description }</textarea>
+                    <textarea name="description" rows="5" style="width:80%;" th:text="${business?.description}"></textarea>
                 </td>
             </tr>
             <tr>
@@ -131,7 +138,7 @@
 <script type="text/javascript">
     $(function(){
         //给负责人下拉框填充选项
-        $.post(
+        /*$.post(
             "system/user/UserAction_findAll.action",
             function(data){
                 if(data&&data.data){
@@ -147,9 +154,9 @@
                     })
                 }
             },"json"
-        )
+        )*/
         //给客户下拉框填充选项
-        $.post(
+        /*$.post(
             "manage/customer/CustomerAction_findAll.action",
             function(data){
                 if(data&&data.data){
@@ -164,13 +171,13 @@
                     })
                 }
             },"json"
-        )
-        if("${busiVO.customerId}"){
-            fillContacts("${busiVO.customerId}");
-        }
+        )*/
+        /*if("${business.customerId}"){
+            fillContacts("${business.customerId}");
+        }*/
         //给商机类型下拉框填充选项
-        $.post(
-            "system/dict/DictAction_findByTypecode.action",
+        /*$.post(
+            "getBusinessType",
             {
                 "typecode":"businessType"
             },
@@ -178,19 +185,19 @@
                 if(data&&data.data){
                     $.each(data.data,function(index,obj){
                         var option;
-                        if(obj.dictname=="${busiVO.type}"){
+                        if(obj.dictname=="${type}"){
                             option=$("<option value='"+obj.dictname+"' selected>"+obj.dictname+"</option>");
                         }else{
                             option=$("<option value='"+obj.dictname+"'>"+obj.dictname+"</option>");
                         }
-                        $("select[name='busiVO.type']").append(option);
+                        $("select[name='type']").append(option);
                     })
                 }
             },"json"
-        )
+        )*/
         //给商机状态下拉框填充选项
         $.post(
-            "system/dict/DictAction_findByTypecode.action",
+            "getBusinessStatus",
             {
                 "typecode":"businessStatus"
             },
@@ -198,19 +205,19 @@
                 if(data&&data.data){
                     $.each(data.data,function(index,obj){
                         var option;
-                        if(obj.id=="${busiVO.businessStatusId}"){
-                            option=$("<option value='"+obj.id+"' selected>"+obj.dictname+"</option>");
+                        if(obj.id=="${statusId}"){
+                            option=$("<option value='"+obj.id+"' selected>"+obj.name+"</option>");
                         }else{
-                            option=$("<option value='"+obj.id+"'>"+obj.dictname+"</option>");
+                            option=$("<option value='"+obj.id+"'>"+obj.name+"</option>");
                         }
-                        $("select[name='busiVO.businessStatusId']").append(option);
+                        $("select[name='statusId']").append(option);
                     })
                 }
             },"json"
         )
         //给商机来源下拉框填充选项
         $.post(
-            "system/dict/DictAction_findByTypecode.action",
+            "getBusinessOrigin",
             {
                 "typecode":"businessOrigin"
             },
@@ -218,19 +225,19 @@
                 if(data&&data.data){
                     $.each(data.data,function(index,obj){
                         var option;
-                        if(obj.dictname=="${busiVO.origin}"){
-                            option=$("<option value='"+obj.dictname+"' selected>"+obj.dictname+"</option>");
+                        if(obj=="${origin}"){
+                            option=$("<option value='"+obj+"' selected>"+obj+"</option>");
                         }else{
-                            option=$("<option value='"+obj.dictname+"'>"+obj.dictname+"</option>");
+                            option=$("<option value='"+obj+"'>"+obj+"</option>");
                         }
-                        $("select[name='busiVO.origin']").append(option);
+                        $("select[name='origin']").append(option);
                     })
                 }
             },"json"
         )
     })
     //监听客户下拉框的事件，若更改客户则重新给联系人下拉框填充选项
-    $("select[name='busiVO.customerId']").on("change",function(event){
+    $("select[name='customerId']").on("change",function(event){
         var custId=$(this).val();
         fillContacts(custId);
     })
@@ -238,27 +245,27 @@
     //给联系人下拉框填充选项的方法
     function fillContacts(id){
         $.post(
-            "manage/contacts/ContactsAction_findByCustomer.action",
+            "getBusinessContact",
             {
-                "customer.customerid":id
+                "id":id
             },
             function(data){
                 if(data&&data.data){
-                    $("select[name='busiVO.contactsId']").empty();
+                    $("select[name='contactId']").empty();
                     if(data.data.length){
                         $.each(data.data,function(index,obj){
                             var option;
-                            if(obj.id=="${busiVO.contactsId}"){
+                            if(obj.id=="${contactId}"){
                                 option=$("<option value='"+obj.id+"' selected>"+obj.name+"</option>");
                             }else if(obj.isFirst){
                                 option=$("<option value='"+obj.id+"' selected>"+obj.name+"(首要)</option>");
                             }else{
                                 option=$("<option value='"+obj.id+"'>"+obj.name+"</option>");
                             }
-                            $("select[name='busiVO.contactsId']").append(option);
+                            $("select[name='contactId']").append(option);
                         })
                     }else{
-                        $("select[name='busiVO.contactsId']").append("<option value='-1'>暂无数据</option>");
+                        $("select[name='contactId']").append("<option value='-1'>暂无数据</option>");
                     }
                 }
             },"json"
@@ -287,7 +294,7 @@
         //保存按钮
         $("#saveBtn").on("click", function(event) {
             $("#form").form("submit", {
-                url : "manage/business/BusinessAction_saveOrUpdate.action",
+                url : "addAndUpdateBusiness",
                 onSubmit : function() {
                     //对表单进行数据校验,如果未通过校验，返回false，阻止表单提交
                     return $(this).form("validate");

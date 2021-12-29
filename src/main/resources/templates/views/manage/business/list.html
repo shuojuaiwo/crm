@@ -50,7 +50,7 @@
                 <span id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</span>
             </td>
             <td>
-                <span id="addBtn" onclick="return add('toAddBusiness')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加商机</span>
+                <span id="addBtn" onclick="return add('toAddAndUpdateBusiness')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">添加商机</span>
                 <span id="tool" class="easyui-linkbutton" data-options="iconCls:'icon-cog',plain:true">商机工具</span>
             </td>
         </tr>
@@ -126,7 +126,7 @@
             width:900,
             height:600,
             title:"查看商机",
-            "url": "manage/business/BusinessAction_see.action?busi.businessid="+row.id,
+            "url": "getBusinessInfo?id="+row.id,
             close:function(){
                 $("#businessList").datagrid("reload");
             }
@@ -139,7 +139,7 @@
             width:900,
             height:600,
             title:"修改商机",
-            "url": "manage/business/BusinessAction_edit.action?busi.businessid="+row.id,
+            "url": "toAddAndUpdateBusiness?id="+row.id,
             close:function(){
                 $("#businessList").datagrid("reload");
             }

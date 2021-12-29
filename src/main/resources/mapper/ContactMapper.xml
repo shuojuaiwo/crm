@@ -2,7 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.li.jtcrm.dao.ContactMapper">
     <select id="selectContact" resultType="contact">
-        select * from tb_crm_contact where customer_id=#{id}
+        select id,name,post,saltname,telephone,email,qq_no,description from tb_crm_contact where customer_id=#{id}
+    </select>
+    <select id="selectc" resultType="contact">
+        select id,name from tb_crm_contact where customer_id=#{id}
+    </select>
+    <select id="selectname" resultType="java.lang.String">
+        select name from tb_crm_contact where id=#{id}
     </select>
     <select id="selectName" resultType="contact">
         select id,name from tb_crm_contact;

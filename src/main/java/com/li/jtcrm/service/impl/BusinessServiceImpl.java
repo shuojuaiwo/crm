@@ -4,11 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.li.jtcrm.dao.BusinessMapper;
+import com.li.jtcrm.dao.ContactMapper;
 import com.li.jtcrm.dao.CustomerMapper;
 import com.li.jtcrm.dao.UserMapper;
-import com.li.jtcrm.entity.Business;
-import com.li.jtcrm.entity.Customer;
-import com.li.jtcrm.entity.User;
+import com.li.jtcrm.entity.*;
 import com.li.jtcrm.entity.vo.BusinessVO;
 import com.li.jtcrm.service.IBusinessService;
 import org.springframework.stereotype.Service;
@@ -27,6 +26,9 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
 
     @Resource
     private CustomerMapper customerMapper;
+
+    @Resource
+    private ContactMapper contactMapper;
 
     @Override
     public Map listBusiness(Integer pagenum, Integer size) {
@@ -47,23 +49,25 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
     }
 
     @Override
-    public void toAddBusiness(Model model) {
+    public void toAddAndUpdateBusiness(Integer id,Model model) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         List<User> users = userMapper.selectList(queryWrapper);
         model.addAttribute("users",users);
         QueryWrapper<Customer> queryWrapper1 = new QueryWrapper<Customer>();
         List<Customer> customers = customerMapper.selectList(queryWrapper1);
         model.addAttribute("customers",customers);
-
-        /*QueryWrapper<Contact> queryWrapper2 = new QueryWrapper<>().eq("customerId",);
-        List<Contact> contacts = contactMapper.selectList(queryWrapper2);
-        model.addAttribute("contacts",contacts);*/
+        if (id!=null){
+            Business business = baseMapper.selectById(id);
+            model.addAttribute("business",business);
+            String contactName = contactMapper.selectname(business.getContactId());
+            model.addAttribute("contactName",contactName);
+        }
     }
 
-    /*@Override
-    public Map addCustomer(Customer customer) {
+    @Override
+    public Map addAndUpdateBusiness(Business business) {
         Map map=new HashMap();
-        boolean b = save(customer);
+        boolean b = saveOrUpdate(business);
         if (b){
             map.put("msg","添加成功！");
             map.put("success",1);
@@ -72,20 +76,46 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
             map.put("success",0);
         }
         return map;
-    }*/
+    }
 
-    /*@Override
-    public void getCustomerInfo(Integer id, Model model) {
-        Customer customer = baseMapper.selectById(id);
-        System.out.println(customer);
-        model.addAttribute("customer",customer);
-        String owner = userMapper.selectById(customer.getOwnerUserId()).getUsername();
+    @Override
+    public void getBusinessInfo(Integer id, Model model) {
+        Business business = baseMapper.selectById(id);
+        System.out.println(business);
+        model.addAttribute("business",business);
+        String owner = userMapper.selectname(business.getOwnerUserId());
         model.addAttribute("owner",owner);
-        Contact contact = contactMapper.selectContact(customer.getId());
-        model.addAttribute("contact",contact);
-        User createUser = userMapper.selectById(customer.getCreatorUserId());
-        model.addAttribute("createUser",createUser);
-    }*/
+        String customerName = customerMapper.selectname(business.getCustomerId());
+        model.addAttribute("customerName",customerName);
+        String contactName = contactMapper.selectname(business.getContactId());
+        model.addAttribute("contactName",contactName);
+        String statusName = baseMapper.selectStatusName(business.getStatusId());
+        model.addAttribute("statusName",statusName);
+    }
+
+    @Override
+    public Map getBusinessStatus() {
+        Map map=new HashMap();
+        List<BusinessStatus> statuses = baseMapper.selectStatus();
+        map.put("data",statuses);
+        return map;
+    }
+
+    @Override
+    public Map getBusinessOrigin() {
+        Map map=new HashMap();
+        List<String> strings = baseMapper.selectOrigin();
+        map.put("data",strings);
+        return map;
+    }
+
+    @Override
+    public Map getBusinessContact(Integer id) {
+        Map map=new HashMap();
+        List<Contact> contacts = contactMapper.selectc(id);
+        map.put("data",contacts);
+        return map;
+    }
     public List<BusinessVO> selectoriginl(Model model){
         List<BusinessVO> selectorigin = baseMapper.selectorigin();
         model.addAttribute("laiy",selectorigin);

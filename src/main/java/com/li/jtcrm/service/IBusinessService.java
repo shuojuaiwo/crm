@@ -10,5 +10,15 @@ public interface IBusinessService extends IService<Business> {
 
     Map listBusiness(Integer pagenum, Integer size);
 
-    void toAddBusiness(Model model);
+    void toAddAndUpdateBusiness(Integer id,Model model);
+
+    Map getBusinessStatus();
+
+    Map getBusinessOrigin();
+
+    Map getBusinessContact(Integer id);
+
+    Map addAndUpdateBusiness(Business business);
+
+    void getBusinessInfo(Integer id, Model model);
 }

@@ -21,4 +21,12 @@ public class BusinessVO {
     private String createUser;
     private LocalDate createTime;
     private LocalDate updateTime;
+    private Float salesPrice;
+    private Integer contactId;
+    private String contractAddress;
+    private String type;
+    private Integer statusId;
+    private Integer gainRate;
+    private Integer estimatePrice;
+    private String description;
 }

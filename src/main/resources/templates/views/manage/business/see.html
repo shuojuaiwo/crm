@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>编辑权限</title>
+    <title>基本信息</title>
 
     <meta name="pragma" content="no-cache">
     <meta name="cache-control" content="no-cache">
@@ -23,69 +23,79 @@
             <tr>
                 <td class="text-title">负责人</td>
                 <td class="text-content">
-                    <span>${busiVO.ownerName }</span>
+                    <span th:text="${owner}"></span>
+                </td>
+                <td class="text-title">创建时间</td>
+                <td class="text-content">
+                    <span th:text="${business.createTime}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">上次推进时间</td>
+                <td class="text-content">
+                    <span th:text="${business.updateTime}"></span>
                 </td>
                 <td class="text-title">客户</td>
                 <td class="text-content">
-                    <span>${busiVO.customerName }</span>
+                    <span th:text="${customerName}"></span>
                 </td>
             </tr>
             <tr>
                 <td class="text-title">商机金额</td>
                 <td class="text-content">
-                    <span>${busiVO.salesprice }</span>
+                    <span th:text="${business.salesPrice}"></span>
                 </td>
                 <td class="text-title">商机名</td>
                 <td class="text-content">
-                    <span>${busiVO.name }</span>
+                    <span th:text="${business.name}"></span>
                 </td>
             </tr>
             <tr>
                 <td class="text-title">联系人</td>
                 <td class="text-content">
-                    <span>${busiVO.contactsName }</span>
+                    <span th:text="${contactName}"></span>
                 </td>
             </tr>
             <tr>
                 <td class="text-title" >合同签订地址</td>
                 <td class="text-content">
-                    <span>${busiVO.contractaddress }</span>
+                    <span th:text="${business.contractAddress}"></span>
                 </td>
             </tr>
             <tr>
                 <td class="text-title">商机类型</td>
                 <td class="text-content">
-                    <span>${busiVO.type }</span>
+                    <span th:text="${business.type}"></span>
                 </td>
                 <td class="text-title">状态</td>
                 <td class="text-content">
-                    <span>${busiVO.businessStatusName }</span>
+                    <span th:text="${statusName}"></span>
                 </td>
             </tr>
             <tr>
                 <td class="text-title">商机来源</td>
                 <td class="text-content">
-                    <span>${busiVO.origin }</span>
+                    <span th:text="${business.origin}"></span>
                 </td>
                 <td class="text-title">赢单率</td>
                 <td class="text-content">
-                    <span>${busiVO.gainrate }</span>
+                    <span th:text="${business.gainRate}"></span>
                 </td>
             </tr>
             <tr>
                 <td class="text-title">预定成交价</td>
                 <td class="text-content">
-                    <span>${busiVO.estimateprice }</span>
+                    <span th:text="${business.estimatePrice}"></span>
                 </td>
                 <td class="text-title">下次联系时间</td>
                 <td class="text-content">
-                    <span>${busiVO.nextsteptime }</span>
+                    <span th:text="${business.nextstepTime}"></span>
                 </td>
             </tr>
             <tr>
                 <td class="text-title">下次联系内容</td>
                 <td class="text-content">
-                    <span>${busiVO.nextstep }</span>
+                    <span th:text="${business.nextstep}"></span>
                 </td>
             </tr>
         </table>
@@ -97,7 +107,7 @@
             <tr>
                 <td class="text-title">备注</td>
                 <td class="text-content">
-                    <textarea name="busiVO.description" disabled="disabled" rows="5" style="width:80%;">${busiVO.description }</textarea>
+                    <textarea name="business.description" disabled="disabled" rows="5" style="width:80%;" th:text="${business.description }"></textarea>
                 </td>
             </tr>
             <tr>
