@@ -8,4 +8,8 @@ import java.util.List;
 public interface ContactMapper extends BaseMapper<Contact> {
     Contact selectContact(Integer id);
     List<Contact> selectName();
+
+    String selectname(Integer id);
+
+    List<Contact> selectc(Integer id);
 }
