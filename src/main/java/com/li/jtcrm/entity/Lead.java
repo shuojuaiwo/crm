@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -38,8 +39,8 @@ public class Lead implements Serializable {
     private Integer customerId;
     private Integer businessId;
     private String nextstep;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date nextstepTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDate nextstepTime;
     private Date haveTime;
     private String address;
     private String source;

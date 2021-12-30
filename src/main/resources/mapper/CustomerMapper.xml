@@ -30,4 +30,8 @@
     <select id="selectbyName" resultType="customerVO">
         select id,customer_name from tb_crm_customer
     </select>
+    <select id="selectid" resultType="int">
+        <bind name="s" value="'%'+_parameter.searchText+'%'"/>
+        select id from tb_crm_customer where customer_name like #{s}
+    </select>
 </mapper>

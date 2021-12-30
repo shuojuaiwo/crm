@@ -15,7 +15,7 @@ public interface ILeadService extends IService<Lead> {
 
     Map addAndUpdateLead(Lead lead, HttpSession session);
 
-    //void getLeadInfo(Integer id, Model model);
+    void getLeadInfo(Integer id, Model model);
 
-    //void deleteLead(int[] ids);
+    void deleteLead(int[] ids);
 }

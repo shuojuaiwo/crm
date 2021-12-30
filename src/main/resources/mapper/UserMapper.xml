@@ -30,4 +30,8 @@
     <select id="selectname" resultType="string">
         select username from tb_system_user where id=#{id}
     </select>
+    <select id="selectid" resultType="java.lang.Integer">
+        <bind name="s" value="'%'+_parameter.search+'%'"/>
+        select id from tb_system_user where username like #{s}
+    </select>
 </mapper>

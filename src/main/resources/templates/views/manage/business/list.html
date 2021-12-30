@@ -34,7 +34,7 @@
                 <span onclick="return del('deleteBusiness')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</span>
                 <select id="searchBy" style="width:150px;height:25px;">
                     <option value="-1">--请选择筛选条件--</option>
-                    <option value="cust.name">按客户名查询</option>
+                    <option value="customer_name">按客户名查询</option>
                     <option value="name">按商机名查询</option>
                     <option value="origin">按商机来源查询</option>
                     <option value="nextstep">按下一次联系内容查询</option>
@@ -144,6 +144,35 @@
                 $("#businessList").datagrid("reload");
             }
         });
+    }
+    function del(url){
+        var rows=$("#businessList").datagrid("getChecked");
+        if(!rows.length){
+            $.messager.alert("警告","请选择要删出的任务");
+            return false;
+        }
+        $.messager.confirm("警告","数据删除无法恢复",function(b){
+            if(b){
+                var ids=new Array();
+                $.each(rows,function(index,obj){
+                    ids.push(obj.id)
+                })
+                ids=ids.join(",")
+                $.post(url,
+                    {
+                        "ids":ids
+                    },
+                    function(data){
+                        if(data.success && data){
+                            $.messager.alert("提示",data.msg)
+                            $("#businessList").datagrid("reload");
+                            return
+                        }
+                        $.messager.alert("提示",data.msg)
+                    },"json"
+                )
+            }
+        })
     }
 </script>
 </html>

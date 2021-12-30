@@ -8,9 +8,9 @@ import java.util.Map;
 
 public interface IBusinessService extends IService<Business> {
 
-    Map listBusiness(Integer pagenum, Integer size);
-
     void toAddAndUpdateBusiness(Integer id,Model model);
+
+    void deleteBusiness(int[] ids);
 
     Map getBusinessStatus();
 
@@ -21,4 +21,6 @@ public interface IBusinessService extends IService<Business> {
     Map addAndUpdateBusiness(Business business);
 
     void getBusinessInfo(Integer id, Model model);
+
+    Map listBusiness(Integer page, Integer rows, String searchBy, String searchText);
 }

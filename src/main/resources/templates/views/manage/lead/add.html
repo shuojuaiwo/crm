@@ -74,16 +74,16 @@
         <tr>
             <td class="tip">地址：</td>
             <td colspan="3">
-                <input id="addr1"class="easyui-textbox easyui-validatebox" style="width:100px" data-options="prompt:'省'">
-                <input id="addr2" class="easyui-textbox easyui-validatebox" style="width:100px" data-options="prompt:'市'">
-                <input id="addr3" class="easyui-textbox easyui-validatebox" style="width:100px" data-options="prompt:'区'">
-                <input id="addr4" class="easyui-textbox easyui-validatebox" data-options="prompt:'具体街道信息'">
+                <input id="addr1"class="easyui-textbox easyui-validatebox" style="width:100px" data-options="prompt:'省',required:true">
+                <input id="addr2" class="easyui-textbox easyui-validatebox" style="width:100px" data-options="prompt:'市',required:true">
+                <input id="addr3" class="easyui-textbox easyui-validatebox" style="width:100px" data-options="prompt:'区',required:true">
+                <input id="addr4" class="easyui-textbox easyui-validatebox" data-options="prompt:'具体街道信息',required:true">
                 <input id="address" name="address" th:value="${lead?.address}" type="hidden">
             </td>
         </tr>
         <tr>
             <td class="tip">下次联系时间：</td>
-            <td><input type="date" name="nextstepTime" th:value="${#dates.format(lead?.nextstepTime,'yyyy-MM-dd')}" class="easyui-textbox easyui-validatebox"></td>
+            <td><input name="nextstepTime" th:value="${lead?.nextstepTime}" class="easyui-datetimebox easyui-validatebox" data-options="required:false,showSeconds:true"></td>
             <td class="tip">下次联系内容：</td>
             <td><input name="nextstep" th:value="${lead?.nextstep}" class="easyui-textbox easyui-validatebox"/></td>
         </tr>

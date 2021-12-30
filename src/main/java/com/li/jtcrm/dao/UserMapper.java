@@ -17,4 +17,6 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> selectFindAll();
 
     String selectname(Integer id);
+
+    int selectid(@Param("search") String search);
 }

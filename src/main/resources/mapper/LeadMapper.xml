@@ -5,6 +5,21 @@
         select id,owner_user_id,creator_user_id,name,contact_name,saltname,mobile,nextstep_time,nextstep,create_time from tb_crm_lead
         <where>
             delete_status=0
+            <if test="filterSearch == 'owner'">
+                and owner_user_id = #{search}
+            </if>
+            <if test="filterSearch=='name'">
+                <bind name="s" value="'%'+_parameter.search+'%'"/>
+                and name like #{s}
+            </if>
+            <if test="filterSearch=='contactName'">
+                <bind name="s" value="'%'+_parameter.search+'%'"/>
+                and contact_name like #{s}
+            </if>
+            <if test="filterSearch=='mobile'">
+                <bind name="s" value="'%'+_parameter.search+'%'"/>
+                and mobile like #{s}
+            </if>
         </where>
     </select>
 </mapper>

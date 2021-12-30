@@ -48,5 +48,7 @@ class CrmApplicationTests {
     }
     @Test
     public void text4(){
+        Integer integer = customerMapper.selectid("刺南");
+        System.out.println(integer);
     }
 }

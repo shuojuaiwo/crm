@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,10 +30,16 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
     private ContactMapper contactMapper;
 
     @Override
-    public Map listBusiness(Integer pagenum, Integer size) {
+    public Map listBusiness(Integer page,Integer rows,String searchBy,String searchText) {
         Map map=new HashMap();
-        Page<Object> page = new Page<>(pagenum, size);
-        List<BusinessVO> vos = baseMapper.selectByPage(page);
+        Page<Object> page1 = new Page<>(page, rows);
+        if (searchBy!=null){
+            if (searchBy.equals("customer_name")){
+                int cid = customerMapper.selectid(searchText);
+                searchText=String.valueOf(cid);
+            }
+        }
+        List<BusinessVO> vos = baseMapper.selectByPage(page1,searchBy,searchText);
         for (BusinessVO vo : vos) {
             String customerName = customerMapper.selectname(vo.getCustomerId());
             vo.setCustomerName(customerName);
@@ -43,7 +48,7 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
             vo.setOwnerUser(ownerUser);
             vo.setCreateUser(createUser);
         }
-        map.put("total", page.getTotal());
+        map.put("total", page1.getTotal());
         map.put("rows", vos);
         return map;
     }
@@ -94,6 +99,25 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
     }
 
     @Override
+    public void deleteBusiness(int[] ids) {
+        Map map=new HashMap();
+        int c=0;
+        for (int id : ids) {
+            int i = baseMapper.deleteById(id);
+            if (i==0){
+                c++;
+            }
+        }
+        if (c==0){
+            map.put("msg","添加成功！");
+            map.put("success",1);
+        }else{
+            map.put("msg","添加失败！");
+            map.put("success",0);
+        }
+    }
+
+    @Override
     public Map getBusinessStatus() {
         Map map=new HashMap();
         List<BusinessStatus> statuses = baseMapper.selectStatus();
@@ -116,6 +140,7 @@ public class BusinessServiceImpl extends ServiceImpl<BusinessMapper, Business> i
         map.put("data",contacts);
         return map;
     }
+
     public List<BusinessVO> selectoriginl(Model model){
         List<BusinessVO> selectorigin = baseMapper.selectorigin();
         model.addAttribute("laiy",selectorigin);

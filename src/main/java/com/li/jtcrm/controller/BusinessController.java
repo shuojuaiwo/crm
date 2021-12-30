@@ -5,7 +5,6 @@ import com.li.jtcrm.service.impl.BusinessServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -28,8 +27,8 @@ public class BusinessController {
 
     @RequestMapping("/listBusiness")
     @ResponseBody
-    public Map listBusiness(@RequestParam(defaultValue = "1") Integer pagenum, @RequestParam(defaultValue = "10") Integer size){
-        Map map=businessService.listBusiness(pagenum,size);
+    public Map listBusiness(Integer page,Integer rows,String searchBy,String searchText){
+        Map map=businessService.listBusiness(page,rows,searchBy,searchText);
         return map;
     }
 
@@ -51,6 +50,12 @@ public class BusinessController {
     public String getBusinessInfo(Integer id,Model model){
         businessService.getBusinessInfo(id,model);
         return "views/manage/business/see";
+    }
+
+    @RequestMapping(value = "/deleteBusiness")
+    public String deleteBusiness(int[] ids) {
+        businessService.deleteBusiness(ids);
+        return "views/manage/business/list";
     }
 
     @RequestMapping("/getBusinessStatus")

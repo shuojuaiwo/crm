@@ -2,113 +2,108 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>My JSP 'show.jsp' starting page</title>
+    <title>基本信息</title>
 
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta http-equiv="expires" content="0">
-    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="This is my page">
+    <meta name="pragma" content="no-cache">
+    <meta name="cache-control" content="no-cache">
+    <meta name="expires" content="0">
     <link th:insert="~{script :: #copy}">
 </head>
-<style>
-    *{
-        margin-left: 10px;
-        padding: 3px;
-    }
-    .tip{
-
+<style type="text/css">
+    .myselect{
         height:30px;
-        text-align: right;
-        background-color: #F5F5F5;
     }
 </style>
-<body>
-<table>
-    <tr>
-        <td colspan="4">客户基本信息</td>
-    </tr>
-    <tr>
-        <td class="tip">客户名：</td>
-        <td><input class="easyui-textbox" th:value="${customer.customerName}" data-options="readonly:true"></td>
-        <td class="tip">客户来源：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${customer.getOrigin()}" data-options="readonly:true"></td>
-    </tr>
-    <tr>
-        <td class="tip">地址：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${customer.address }" data-options="readonly:true"></td>
-        <td class="tip">邮编：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${customer.zipCode }" data-options="readonly:true"></td>
-    </tr>
-    <tr>
-        <td class="tip">行业：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${customer.industry }" data-options="readonly:true"></td>
-        <td class="tip">盈利额：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${customer.annualRevenue }" data-options="readonly:true"></td>
-    </tr>
-    <tr>
-        <td class="tip">公司性质：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${customer.ownership }" data-options="readonly:true"></td>
-        <td class="tip">评分：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${customer.rating }" data-options="readonly:true"></td>
-    </tr>
-    <tr>
-        <td class="tip">客户负责人：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${owner}" data-options="readonly:true"></td>
-        <td></td>
-        <td></td>
-    </tr>
+<body style="width:100%;max-width:100%;padding:10px 30px;">
+<form id="form" method="post">
+    <strong>主要信息</strong>
+    <section class="info-section">
 
-    <tr>
-        <td colspan="4">主要联系人</td>
-    </tr>
-    <tr>
-        <td class="tip">姓名：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${contact.name}"  data-options="readonly:true" ></td>
-        <td class="tip">性别：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${contact.sex==1}?'男':'女'"  data-options="readonly:true"></td>
-    </tr>
-    <tr>
-        <td class="tip">部门：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${contact.department}" data-options="readonly:true"></td>
-        <td class="tip">职位：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${contact.post}" data-options="readonly:true"></td>
-    </tr>
-    <tr>
-        <td class="tip">称呼：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${contact.saltname}" data-options="readonly:true"></td>
-        <td class="tip">电话：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${contact.telephone}" data-options="readonly:true"></td>
-    </tr>
-    <tr>
-        <td class="tip">QQ：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${contact.qqNo}" data-options="readonly:true"></td>
-        <td class="tip">Email：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${contact.email}" data-options="readonly:true"></td>
-    </tr>
-    <tr>
-        <td class="tip">地址：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${contact.address}" data-options="readonly:true"></td>
-        <td class="tip">邮编：</td>
-        <td><input class="easyui-textbox validatebox-text validatebox-readonly" th:value="${contact.zipCode}" data-options="readonly:true"></td>
-    </tr>
+        <table id="tb">
+            <tr>
+                <td class="text-title">线索负责人</td>
+                <td class="text-content">
+                    <span th:text="${owner}"></span>
+                </td>
+                <td class="text-title">公司名</td>
+                <td class="text-content">
+                    <span th:text="${lead.name}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">来源</td>
+                <td class="text-content">
+                    <span th:text="${lead.source}"></span>
+                </td>
+                <td class="text-title">联系人姓名</td>
+                <td class="text-content">
+                    <span th:text="${lead.contactName}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">职位</td>
+                <td class="text-content">
+                    <span th:text="${lead.position}"></span>
+                </td>
+                <td class="text-title">尊称</td>
+                <td class="text-content">
+                    <span th:text="${lead.saltname}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">手机</td>
+                <td class="text-content">
+                    <span th:text="${lead.mobile}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title" >邮箱</td>
+                <td class="text-content">
+                    <span th:text="${lead.email}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">地址</td>
+                <td class="text-content" colspan="3">
+                    <span th:text="${lead.address}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">下次联系时间</td>
+                <td class="text-content">
+                    <span th:text="${lead.nextstepTime}"></span>
+                </td>
+                <td class="text-title">下次联系内容</td>
+                <td class="text-content">
+                    <span th:text="${lead.nextstep}"></span>
+                </td>
+            </tr>
+        </table>
 
-    <tr>
-        <td class="tip">描述：</td>
-        <td colspan="3">
-            <textarea style="width:579px;height:60px;" class="easyui-textbox" th:text="${contact.description}" data-options="readonly:true,multiline:true"></textarea>
-        </td>
-    </tr>
+    </section>
+    <strong>附加信息</strong>
+    <section class="info-section">
+        <table>
+            <tr>
+                <td class="text-title">备注</td>
+                <td class="text-content">
+                    <textarea name="business.description" disabled="disabled" rows="5" style="width:80%;" th:text="${lead.leadnote }"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;margin-top: 10px;">
+                    <a href="javascript:void(0);" id="confirmBtn" class="easyui-linkbutton button-primary" style="margin-left:-70px;">确认</a>
+                </td>
+            </tr>
+        </table>
+    </section>
+</form>
 
-    <tr>
-        <td colspan="4">系统信息</td>
-    </tr>
-    <tr>
-        <td class="tip">创建人：</td>
-        <td><input class="easyui-textbox validatebox-readonly" th:value="${createUser.username}" data-options="readonly:true"></td>
-        <td class="tip">创建时间：</td>
-        <td><input class="easyui-textbox validatebox-readonly" th:value="${createUser.createTime}" data-options="readonly:true"></td>
-    </tr>
-</table>
+<script type="text/javascript">
+    //确认并退出按钮
+    $("#confirmBtn").on("click", function(event) {
+        parent.closeTopWindow();
+    });
+</script>
 </body>
 </html>

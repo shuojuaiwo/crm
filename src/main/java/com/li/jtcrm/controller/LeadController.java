@@ -46,15 +46,15 @@ public class LeadController {
         return map;
     }
 
-    /*@RequestMapping("/getLeadInfo")
+    @RequestMapping("/getLeadInfo")
     public String getLeadInfo(Integer id, Model model){
         leadService.getLeadInfo(id,model);
         return "views/manage/lead/show";
-    }*/
+    }
 
-    /*@RequestMapping(value = "/deleteLead")
+    @RequestMapping(value = "/deleteLead")
     public String deleteLead(int[] ids) {
         leadService.deleteLead(ids);
         return "views/manage/lead/list";
-    }*/
+    }
 }

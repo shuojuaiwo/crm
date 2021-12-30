@@ -27,6 +27,12 @@ public class LeadServiceImpl extends ServiceImpl<LeadMapper, Lead> implements IL
     public Map listLead(Integer page, Integer rows,String filterSearch,String search) {
         Map map=new HashMap();
         Page<Object> page1 = new Page<>(page, rows);
+        if (filterSearch!=null){
+            if (filterSearch.equals("owner")){
+                int cid = userMapper.selectid(search);
+                search=String.valueOf(cid);
+            }
+        }
         List<LeadVO> vos = baseMapper.selectByPage(page1,filterSearch,search);
         for (LeadVO vo : vos) {
             String ownerUser = userMapper.selectname(vo.getOwnerUserId());
@@ -67,19 +73,15 @@ public class LeadServiceImpl extends ServiceImpl<LeadMapper, Lead> implements IL
         return map;
     }
 
-    /*@Override
+    @Override
     public void getLeadInfo(Integer id, Model model) {
         Lead lead = baseMapper.selectById(id);
         model.addAttribute("lead",lead);
-        String owner = userMapper.selectById(lead.getOwnerUserId()).getUsername();
+        String owner = userMapper.selectname(lead.getOwnerUserId());
         model.addAttribute("owner",owner);
-        *//*Contact contact = contactMapper.selectContact(lead.getId());
-        model.addAttribute("contact",contact);*//*
-        User createUser = userMapper.selectById(lead.getCreatorUserId());
-        model.addAttribute("createUser",createUser);
-    }*/
+    }
 
-    /*@Override
+    @Override
     public void deleteLead(int[] ids) {
         Map map=new HashMap();
         int c=0;
@@ -96,5 +98,5 @@ public class LeadServiceImpl extends ServiceImpl<LeadMapper, Lead> implements IL
             map.put("msg","添加失败！");
             map.put("success",0);
         }
-    }*/
+    }
 }

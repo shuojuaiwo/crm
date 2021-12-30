@@ -6,6 +6,21 @@
         select id,name,origin,customer_id,creator_user_id,owner_user_id,create_time,update_time,nextstep,nextstep_time,delete_status from tb_crm_business
     <where>
         delete_status=0
+        <if test="searchBy == 'customer_name'">
+            and customer_id = #{searchText}
+        </if>
+        <if test="searchBy=='name'">
+            <bind name="s" value="'%'+_parameter.searchText+'%'"/>
+            and name like #{s}
+        </if>
+        <if test="searchBy=='origin'">
+            <bind name="s" value="'%'+_parameter.searchText+'%'"/>
+            and origin like #{s}
+        </if>
+        <if test="searchBy=='nextstep'">
+            <bind name="s" value="'%'+_parameter.searchText+'%'"/>
+            and nextstep like #{s}
+        </if>
     </where>
     </select>
     <select id="selectorigin" resultType="businessVO">

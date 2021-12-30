@@ -16,4 +16,5 @@ public interface CustomerMapper extends BaseMapper<Customer> {
 
     List<CustomerVO> selectbyName();
 
+    int selectid(@Param("searchText") String searchText);
 }
