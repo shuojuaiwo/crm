@@ -106,6 +106,60 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         return map;
     }
 
+
+
+    @Override
+    public Map addAndUpdatePoolCustomer(CustomerContactVO customerContactVO) {
+        Map map=new HashMap();
+        Customer customer=new Customer();
+        customer.setId(customerContactVO.getCustomerId());
+        customer.setDeleteStatus(customerContactVO.getDeleteStatus());
+        customer.setIsLocked(customerContactVO.getIsLocked());
+        if (customer.getId()==null){
+            customer.setCreatorUserId(customerContactVO.getCustomerOwnerUserId());
+        }else {
+            customer.setCreatorUserId(customerContactVO.getCustomerCreatorUserId());
+        }
+        customer.setOwnerUserId(customerContactVO.getCustomerOwnerUserId());
+        customer.setCustomerName(customerContactVO.getCustomerName());
+        customer.setIndustry(customerContactVO.getIndustry());
+        customer.setOrigin(customerContactVO.getOrigin());
+        customer.setOwnership(customerContactVO.getOwnership());
+        customer.setZipCode(customerContactVO.getZipCode());
+        customer.setAnnualRevenue(customerContactVO.getAnnualRevenue());
+        customer.setRating(customerContactVO.getRating());
+        customer.setAddress(customerContactVO.getAddress());
+
+        Contact contact=new Contact();
+        contact.setId(customerContactVO.getContactId());
+        contact.setCreatorUserId(customerContactVO.getContactCreatorUserId());
+        contact.setName(customerContactVO.getContactName());
+        contact.setSaltname(customerContactVO.getSaltname());
+        contact.setEmail(customerContactVO.getEmail());
+        contact.setPost(customerContactVO.getPost());
+        contact.setQqNo(customerContactVO.getQqNo());
+        contact.setTelephone(customerContactVO.getTelephone());
+        contact.setDescription(customerContactVO.getDescription());
+
+        boolean b = this.saveOrUpdate(customer);
+        if (contact.getId()==null){
+            contact.setCustomerId(customer.getId());
+            contact.setCreatorUserId(customerContactVO.getCustomerOwnerUserId());
+            contactMapper.insert(contact);
+        }
+        if (b){
+            map.put("msg","添加成功！");
+            map.put("success",1);
+        }else{
+            map.put("msg","添加失败！");
+            map.put("success",0);
+        }
+        return map;
+    }
+
+
+
+
     @Override
     public void getCustomerInfo(Integer id, Model model) {
         Customer customer = baseMapper.selectById(id);
@@ -130,15 +184,56 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
             }
         }
         if (c==0){
-            map.put("msg","添加成功！");
+            map.put("msg","删除成功！");
             map.put("success",1);
         }else{
-            map.put("msg","添加失败！");
+            map.put("msg","删除失败！");
             map.put("success",0);
         }
     }
     public List<CustomerVO> selectbyName(){
         List<CustomerVO> customerVOS = baseMapper.selectbyName();
         return customerVOS;
+    }
+
+    @Override
+    public Map listCustomerPool(Integer page, Integer rows,String filterSearch,String search) {
+        Map map=new HashMap();
+        Page<Object> page1 = new Page<>(page, rows);
+        List<CustomerVO> vos = baseMapper.selectByPagePool(page1,filterSearch,search);
+        for (CustomerVO vo : vos) {
+            String createUser = userMapper.selectname(vo.getCreatorUserId());
+            vo.setCreateUser(createUser);
+        }
+        map.put("total", page1.getTotal());
+        map.put("rows", vos);
+        return map;
+    }
+
+
+    @Override
+    public Map selectByPageRecycle(Integer page, Integer rows,String filterSearch,String search) {
+        Map map=new HashMap();
+        Page<Object> page1 = new Page<>(page, rows);
+        List<CustomerVO> vos = baseMapper.selectByPageRecycle(page1,filterSearch,search);
+        for (CustomerVO vo : vos) {
+            String ownerUser = userMapper.selectname(vo.getOwnerUserId());
+            String createUser = userMapper.selectname(vo.getCreatorUserId());
+            vo.setOwnerUser(ownerUser);
+            vo.setCreateUser(createUser);
+        }
+        map.put("total", page1.getTotal());
+        map.put("rows", vos);
+        return map;
+    }
+
+    public Map Recycleupdate(int[] ids){
+        Map map = new HashMap();
+        for (Integer i :ids){
+            baseMapper.Recycleupdate(i);
+        }
+        map.put("success",1);
+        map.put("msg","还原成功");
+        return map;
     }
 }

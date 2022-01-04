@@ -25,12 +25,53 @@ public class CustomerController {
         return "views/manage/customer/list";
     }
 
+    @RequestMapping("/toCustomerPoolRecycle")
+    public String toCustomerPoolRecycle(){
+        return "views/manage/customer/CustomerPoolRecycle";
+    }
+
+
+
+    @RequestMapping("/toCustomerPool")
+    public String toCustomerPool(){
+        return "views/manage/customer/CustomerPool";
+    }
+
     @RequestMapping("/listCustomer")
     @ResponseBody
     public Map listCustomer(Integer page,Integer rows,String filterSearch,String search){
         Map map=customerService.listCustomer(page,rows,filterSearch,search);
         return map;
     }
+
+    @RequestMapping("/listCustomerPool")
+    @ResponseBody
+    public Map listCustomerPoll(Integer page,Integer rows,String filterSearch,String search){
+        Map map=customerService.listCustomerPool(page, rows, filterSearch, search);
+        return map;
+    }
+
+    @RequestMapping("/Recycleupdate")
+    public Map Recycleupdate(int[] ids){
+        Map recycleupdate = customerService.Recycleupdate(ids);
+        return recycleupdate;
+    }
+
+
+    @RequestMapping("/listCustomerRecycle")
+    @ResponseBody
+    public Map listCustomerRecycle(Integer page,Integer rows,String filterSearch,String search){
+        Map map=customerService.selectByPageRecycle(page, rows, filterSearch, search);
+        return map;
+    }
+
+    @RequestMapping("/addAndUpdatePoolCustomer")
+    @ResponseBody
+    public Map addAndUpdatePoolCustomer(CustomerContactVO customerContactVO){
+        Map map=customerService.addAndUpdateCustomer(customerContactVO);
+        return map;
+    }
+
 
     @RequestMapping("/toAddAndUpdateCustomer")
     public String toAddAndUpdateCustomer(Integer id,Model model){

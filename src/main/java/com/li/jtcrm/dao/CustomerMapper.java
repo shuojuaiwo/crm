@@ -7,6 +7,7 @@ import com.li.jtcrm.entity.vo.CustomerVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CustomerMapper extends BaseMapper<Customer> {
 
@@ -17,4 +18,10 @@ public interface CustomerMapper extends BaseMapper<Customer> {
     List<CustomerVO> selectbyName();
 
     int selectid(@Param("searchText") String searchText);
+
+    List<CustomerVO> selectByPagePool(Page<?> page,@Param("filterSearch") String filterSearch,@Param("search") String search);
+
+    List<CustomerVO> selectByPageRecycle(Page<?> page,@Param("filterSearch") String filterSearch,@Param("search") String search);
+
+    Map Recycleupdate(@Param("id") Integer id);
 }

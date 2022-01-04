@@ -10,23 +10,6 @@
     <link th:insert="~{script :: #copy}">
 </head>
 <body>
-<div>
-    <span>客户视图：</span><span onclick="return whole('manage/customer/CustomerAction_pagination.action')" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">全部</span>|
-    <span onclick="return myCustomer('manage/customer/CustomerAction_myCustomer.action')" class="easyui-linkbutton" data-options="plain:true">我的客户</span>|
-    <span onclick="return subCustomer('manage/customer/CustomerAction_subCustomer.action')" class="easyui-linkbutton" data-options="plain:true">下属客户</span>
-    &nbsp;&nbsp;&nbsp;
-    <span onclick="return todayCreate('manage/customer/CustomerAction_todayCreate.action')" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">今日新建</span>|
-    <span onclick="return weekCreate('manage/customer/CustomerAction_weekCreate.action')" class="easyui-linkbutton" data-options="plain:true">本周新建</span>|
-    <span onclick="return monthCreate('manage/customer/CustomerAction_monthCreate.action')" class="easyui-linkbutton" data-options="plain:true">本月新建</span>|
-    <span onclick="return followed('manage/customer/CustomerAction_followed.action')" class="easyui-linkbutton" data-options="plain:true">我关注的</span>|
-    <span onclick="shared" class="easyui-linkbutton" data-options="plain:true">我共享的</span>|
-    <span id="sharedTome" class="easyui-linkbutton" data-options="plain:true">共享给我的</span>
-    &nbsp;&nbsp;&nbsp;
-    <span id="recycleBin" class="easyui-linkbutton" onclick="huishou('toCustomerPoolRecycle')" data-options="iconCls:'icon-recover_deleted',plain:true">回收站</span>
-    &nbsp;
-    <span id="advancedSearch" class="easyui-linkbutton" data-optins="iconCls:'icon-search',plain:true">高级搜索</span>
-</div>
-
 <div id="tool" style="margin-bottom: 20px">
     <table>
         <tr>
@@ -71,13 +54,15 @@
         </tr>
     </table>
 </div>
-<div id="customerLs" style="width: 1800px;"></div>
+<div id="customerLs" style="width: 1800px"></div>
 </body>
+<script>
+</script>
 <script type="text/javascript">
     $(function(){
         //分页展示客户列表
         $("#customerLs").datagrid({
-            url:"listCustomer",
+            url:"listCustomerPool",
             checkOnSelect:false,
             idField:"customerId",
             pagination:true,
@@ -116,7 +101,6 @@
                 {field:"address",title:"客户联系地址",formatter:function(value){
             return "<span title='"+value+"'>"+value+"</span>"
         }},
-                {field:"ownerUser",title:"负责人"},
                 {field:"createUser",title:"创建人"},
                 {field:"createTime",title:"创建时间",width:100/*,formatter:function(value){
                         return "<span title='"+value+"'>"+value+"</span>"
@@ -226,13 +210,6 @@
         })*/
         var win=window.parent.open(url,"新建客户" , "width=800 , height=700,location=no,menuban=no ,toolban=no")
     }
-
-    //回收站
-    function huishou(url) {
-        var win=window.parent.open(url,"回收站","width=1200 , height=700")
-    }
-
-
     //修改客户
     function modify(url,id){
         /*parent.parent.openTopWindow({

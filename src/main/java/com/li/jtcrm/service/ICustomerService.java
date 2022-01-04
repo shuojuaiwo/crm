@@ -18,4 +18,11 @@ public interface ICustomerService extends IService<Customer> {
     void getCustomerInfo(Integer id, Model model);
 
     void deleteCustomer(int[] ids);
+
+    Map listCustomerPool(Integer page, Integer rows,String filterSearch,String search);
+
+    Map addAndUpdatePoolCustomer(CustomerContactVO customerContactVO);
+
+    Map selectByPageRecycle(Integer page, Integer rows,String filterSearch,String search);
+    Map Recycleupdate(int[] id);
 }

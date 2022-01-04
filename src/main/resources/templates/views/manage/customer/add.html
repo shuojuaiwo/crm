@@ -42,9 +42,9 @@
         <tr>
             <td class="tip">负责人：</td>
             <td><select id="owner" name="customerOwnerUserId" style="width:146px;height:32px" data-options="required:true">
-                <option>--请选择--</option>
+                <option value="">--请选择--</option>
                 <option th:each="user:${users}" th:value="${user.id}" th:text="${user.username}" th:selected="${customer?.ownerUserId==null}?${session.user1.id==user.id}:${customer.ownerUserId==user.id}" ></option>
-            </select>&nbsp;<a href="javascript:void(0);" class="easyui-linkbutton button-white">放入客户池</a></span></td>
+            </select>&nbsp;<a href="javascript:void(0);" id="pool" class="easyui-linkbutton button-white">放入客户池</a></span></td>
             <td class="tip">客户名称：</td>
             <td><input name="customerName" th:value="${customer?.customerName}"class="easyui-textbox easyui-validatebox" data-options="validType:['chinese'],required:true"/></td>
         </tr>
@@ -169,6 +169,29 @@
             $("#address").val(addr);
             $("#newCustomer").form("submit",{
                 url:"addAndUpdateCustomer",
+                onSubmit:function(){
+                    return $(this).form("validate");
+                },
+
+                success:function(data){
+                    var tdata=eval("("+data+")");
+                    if(tdata&&tdata.success){
+                        $("#topWindow").window("close");
+                    }
+                }
+            })
+        })
+
+
+        $("#pool").on("click",function(e){
+            var addr1 = $("#addr1").val();
+            var addr2 = $("#addr2").val();
+            var addr3 = $("#addr3").val();
+            var addr4 = $("#addr4").val();
+            var addr = addr1+"-"+addr2+"-"+addr3+"-"+addr4;
+            $("#address").val(addr);
+            $("#newCustomer").form("submit",{
+                url:"addAndUpdatePoolCustomer",
                 onSubmit:function(){
                     return $(this).form("validate");
                 },
