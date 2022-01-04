@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,9 +59,20 @@ public class ContractController {
     //分页和模糊查询
     @RequestMapping("/ConntractAll")
     @ResponseBody
-    public Map contractpdage(int page,int rows,String contractName,String cha,String contractTwo,Model model){
+    public Map contractpdage(int page,int rows,String contractName,String cha,String contractTwo,Model model) throws ParseException {
+        DateFormat dft = new SimpleDateFormat("yyyy-MM-dd");
+
         Map map=new HashMap();
         List<Contract> contracts = contractService.contractAll((page-1)*rows, rows,contractName,cha,contractTwo);
+        for (Contract list: contracts){
+                Date a = dft.parse(list.getDueTime());
+                Date b = dft.parse(list.getEndDate());
+                Long star = a.getTime();
+                Long end=b.getTime();
+                Long bum=end-star;
+               Long v= bum/24/60/60/1000;
+                list.setEndd(String.valueOf("距离"+v+"天到期"));
+        }
         model.addAttribute("lianxi",contracts);
         map.put("rows",contracts);
         return map;
@@ -70,6 +85,8 @@ public class ContractController {
         Map contraectdelete = contractService.contraectdelete(ids);
         return contraectdelete;
     }
+
+    //添加
     @RequestMapping("/contractadd")
     @ResponseBody
     public Map contractadd(Contract contract,String number,int businessId){
@@ -78,5 +95,21 @@ public class ContractController {
         int id = contractbyname.getId();
         contractbuiesService.contractinsert(businessId,id);
         return map;
+    }
+
+    //查看
+    @RequestMapping("/contractshow")
+    public String contractShow(int id,Model model){
+        Contract contract = contractService.contractShow(id);
+        model.addAttribute("contractshow",contract);
+        return "views/manage/contract/contract_show";
+    }
+
+    //去修改
+    @RequestMapping("/tocontractupdate")
+    public String ToContractUodate(int id,Model model){
+        Contract contract = contractService.contractShow(id);
+        model.addAttribute("contractshoww",contract);
+        return "views/manage/contract/contract_update";
     }
 }

@@ -11,24 +11,31 @@
 </head>
 <body>
 <!--<div id="tool1" style="margin-bottom: 20px">-->
-    <table id="productList" class="easyui-datagrid">
-        <div id="toolbar">
-        <tr>
-            <td >
-                <select id="searchBy" style="width:100px;height:25px;">
-                    <option value="-1">--请选择筛选条件--</option>
-                </select>
-                <select name="contain" style="width:60px;height:25px;">
-                    <option value="-1">包含</option>
-                </select>
 
-                <input id="searchText" type="text"  style="border:1px solid black;height:25px;">
-                <span id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</span>
-                <span><a href="javascript:void(0);" onclick="return del('ProduceDelete')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a></span>
-            </td>
-        </tr>
-        </div>
+<div id="toolbar">
+    <tr>
+        <td >
+            <select id="searchBy" style="width:100px;height:25px;">
+                <option value="-1">--请选择筛选条件--</option>
+                <option value="username">发件人</option>
+                <option value="telephone">接收号码</option>
+            </select>
+            <select id="contain" style="width:60px;height:25px;">
+                <option value="-1">包含</option>
+                <option value="1">精确查找</option>
+                <option value="2">模糊查找</option>
+            </select>
+
+            <input id="searchText" type="text" name="text"  style="border:1px solid black;height:25px;">
+            <span id="search" class="easyui-linkbutton" onclick="mysearch()" data-options="iconCls:'icon-search',plain:true">搜索</span>
+            <span><a href="javascript:void(0);" onclick="return del('MretingDel')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a></span>
+        </td>
+    </tr>
+</div>
+    <table id="productList" class="easyui-datagrid">
     </table>
+
+
 
 
 
@@ -38,9 +45,55 @@
 <!--        <a href="javascript:void(0);" onclick="return del('ProduceDelete')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>-->
 <!--    </div>-->
 <script type="text/javascript">
+    function del(url){
+        var rows=$("#productList").datagrid("getChecked");
+        if(!rows.length){
+            $.messager.alert("警告","请选择要删出的任务");
+            return ;
+        }
+        $.messager.confirm("警告","数据删除无法恢复",function(b){
+            if(b){
+                var ids=new Array();
+                $.each(rows,function(index,obj){
+                    ids.push(obj.id)
+                })
+                ids=ids.join(",")
+                $.post(url,
+                    {"ids":ids},
+                    function(data){
+                        if(data.success && data){
+                            $.messager.alert("提示",data.message)
+                            $("#taskList").datagrid("reload");
+                            return
+                        }
+                        $.messager.alert("提示",data.message)
+
+                    },
+                    "json"
+                )
+            }
+        })
+
+    }
+
+
+
+
+
+    function mysearch(){
+
+        $("#productList").datagrid("load",{
+            "searchBy":$("#searchBy").val(),
+            "contain":$("#contain").val(),
+            "text":$("#searchText").val()
+        });
+
+    }
+
+
     $(function(){
         $("#productList").datagrid({
-            url : "#",
+            url : "MaretingAll",
             pagination : true,
             toolbar : "#toolbar",
             fitColumns : true,
@@ -50,10 +103,10 @@
             columns : [
                 [
                     {field:"id",title:"选择",checkbox:true},
-                    {field:"name",title:"发件人",sortable:true,width:10},
-                    {field:"link",title:"接收号码",width:10},
-                    {field:"username",title:"发送内容",width:10},
-                    {field:"createTime",title:"发送时间",width:10},
+                    {field:"username",title:"发件人",sortable:true,width:10},
+                    {field:"telephone",title:"接收号码",width:10},
+                    {field:"content",title:"发送内容",width:10},
+                    {field:"sendtime",title:"发送时间",width:10},
                 ]
             ],
 

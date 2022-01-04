@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.li.jtcrm.dao.ContractMapper">
     <select id="selectContract" resultType="contract">
-        SELECT cr.id,cr.number,cm.customer_name,ct.`name`,u.username,cr.due_time,cr.price,cr.`status` FROM tb_crm_contract cr LEFT JOIN tb_crm_r_business_contract crb on cr.id=crb.contract_id LEFT JOIN tb_crm_business cb on cb.id=crb.business_id LEFT JOIN tb_crm_contact ct on cb.contact_id=ct.id LEFT JOIN tb_crm_r_business_customer crm on cb.id=crm.business_id LEFT JOIN tb_crm_customer cm on
+        SELECT cr.id,cr.number,cm.customer_name,ct.`name`,u.username,cr.due_time,cr.price,cr.end_date,cr.`status` FROM tb_crm_contract cr LEFT JOIN tb_crm_r_business_contract crb on cr.id=crb.contract_id LEFT JOIN tb_crm_business cb on cb.id=crb.business_id LEFT JOIN tb_crm_contact ct on cb.contact_id=ct.id LEFT JOIN tb_crm_r_business_customer crm on cb.id=crm.business_id LEFT JOIN tb_crm_customer cm on
         cm.id=crm.customer_id LEFT JOIN tb_system_user u on cr.owner_user_id=u.id
         <where>
          cr.state = 0
@@ -36,5 +36,10 @@
     </select>
     <select id="contractbyName" resultType="contract">
         select id from tb_crm_contract where number=#{number}
+    </select>
+
+    <select id="contractShow" resultType="contract">
+        SELECT cr.id,cr.number,cm.customer_name,ct.`name`,u.username,cr.due_time,cr.price,cr.end_date,cr.`status`,cr.content,cr.description,cb.name name1,cr.start_date FROM tb_crm_contract cr LEFT JOIN tb_crm_r_business_contract crb on cr.id=crb.contract_id LEFT JOIN tb_crm_business cb on cb.id=crb.business_id LEFT JOIN tb_crm_contact ct on cb.contact_id=ct.id LEFT JOIN tb_crm_r_business_customer crm on cb.id=crm.business_id LEFT JOIN tb_crm_customer cm on
+            cm.id=crm.customer_id LEFT JOIN tb_system_user u on cr.owner_user_id=u.id where cr.id=#{id}
     </select>
 </mapper>

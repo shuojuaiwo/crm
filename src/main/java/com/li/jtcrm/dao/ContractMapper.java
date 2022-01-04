@@ -10,4 +10,5 @@ import java.util.List;
 public interface ContractMapper extends BaseMapper<Contract> {
     List<Contract> selectContract(@Param("page") int page,@Param("rows") int rows,@Param("contractName") String contractName ,@Param("cha") String cha,@Param("contractTwo") String contractTwo);
     Contract contractbyName(@Param("number") String number);
+    Contract contractShow(@Param("id") int id);
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.li.jtcrm.dao.MarketingMapper">
+    <select id="maretingall" resultType="record">
+        SELECT cs.id,u.username,cs.telephone,cs.content,cs.sendtime FROM tb_crm_sms_record cs LEFT JOIN tb_system_user u on cs.user_id=u.id
+        <where>
+           and cs.state=0
+            <if test="searchBy=='username'&amp;&amp;text.length()>0&amp;&amp;contain==1">
+                and u.username=#{text}
+            </if>
+            <if test="searchBy=='username'&amp;&amp;text.length()>0&amp;&amp;contain==2">
+                <bind name="username" value="'%'+text+'%'"/>
+                and u.username like #{username}
+            </if>
+
+            <if test="searchBy=='telephone'&amp;&amp;text.length()>0&amp;&amp;contain==1">
+                and cs.telephone=#{text}
+            </if>
+
+            <if test="searchBy=='telephone'&amp;&amp;text.length()>0&amp;&amp;contain==2">
+                <bind name="telephone" value="'%'+text+'%'"/>
+                and cs.telephone like #{telephone}
+            </if>
+        </where>
+    </select>
+</mapper>

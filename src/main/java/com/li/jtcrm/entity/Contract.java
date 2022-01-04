@@ -20,6 +20,7 @@ public class Contract implements Serializable {
     private int id;
     private String number;
     private String name;
+    private String name1;
     @TableField(value = "customer_name")
     private String customerName;
     private String username;
@@ -37,6 +38,7 @@ public class Contract implements Serializable {
     private String startDate;
     @TableField(value = "end_date")
     private String endDate;
+    private String endd;
     private String content;
     private String description;
 }

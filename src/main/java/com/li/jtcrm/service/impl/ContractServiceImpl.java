@@ -29,6 +29,7 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
 
     public List<Contract> contractAll(int page,int rows,String contractName,String cha,String contractTwo){
         List<Contract> contracts = baseMapper.selectContract(page, rows,contractName,cha,contractTwo);
+
         return contracts;
     }
 
@@ -57,6 +58,12 @@ public class ContractServiceImpl extends ServiceImpl<ContractMapper, Contract> i
 
     public Contract contractbyname(String number){
         Contract contract = baseMapper.contractbyName(number);
+        return contract;
+    }
+
+    public Contract contractShow(int id){
+        Contract contract = baseMapper.contractShow(id);
+
         return contract;
     }
 }

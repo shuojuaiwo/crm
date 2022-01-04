@@ -12,7 +12,7 @@
 
 </head>
 
-<body >
+<body>
 <div>
     <select class="easyui-combobox theme-textbox-radius" style="width:120px" id="contractOne">
         <option value="b.name">客户</option>
@@ -27,7 +27,7 @@
     <input id="contract" style="line-height:26px;border:1px solid #ccc">
     <a href="javascript:void(0);" class="easyui-linkbutton" plain="true" onclick="doSearch()" data-options="iconCls:'icon-search',plain:true">搜索</a>
 </div>
-<table id="contractList" class="easyui-datagrid"></table>
+<table id="contractList"></table>
 <div id="toolbar">
     <a href="javascript:void(0);" onclick="return add('tocontractadd')" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新建</a>
     <a href="javascript:void(0);" onclick="return del('contraectdelete')" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
@@ -132,7 +132,7 @@
                 {field:"customerName",title:"客户",width:"70px"},
                 {field:"username",title:"负责人",width: "80px"},//ownerUserName
                 {field:"name",title:"联系人",width: "80px"},
-                {field:"dueTime",title:"签约日期",width: "100px"},
+                {field:"dueTime",title:"签约日期",width: "125px"},
                 {field:"price",title:"合同金额"},
                 {field:"status",title:"状态", styler:function (value) {
                     if (value=='未签约'){
@@ -140,10 +140,10 @@
                     }
 
                     }},
-                {field:"endTime",title:"距离到期时间"},
-                {field:"operation",title:"操作",formatter:function(value,row,index){
-                        return "<a href='manage/position/ContractAction_edit.action?ids='"+row.index+">查看</a>"+
-                            "&nbsp;&nbsp<a href='javascript:void(0)' onclick='return modify("+index+")'>编辑</a>";
+                {field:"endd",title:"距离到期时间",width: "100px"},
+                {field:"operation",title:"操作",formatter:function(value,rowData,index){
+                        return "<a href='javascript:void(0)' onclick='see("+rowData.id+")'>查看</a>"+
+                            "&nbsp;&nbsp<a href='javascript:void(0)' onclick='modify("+rowData.id+")'>编辑</a>";
                     }}
 
 
@@ -156,6 +156,14 @@
 
         });
     });
+    function see(id) {
+        var win=null;
+        win=window.parent.open("contractshow"+"?id="+id,"详情页面","width=700,height=600");
+    }
+
+    function modify(id) {
+        var win=window.parent.open("tocontractupdate"+"?id="+id,"更新页面","width=700,height=600");
+    }
 </script>
 </body>
 </html>

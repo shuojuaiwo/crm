@@ -1,5 +1,7 @@
 package com.li.jtcrm.controller;
 
+import com.li.jtcrm.entity.Record;
+import com.li.jtcrm.service.impl.MarketingServiceImpl;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
@@ -8,12 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class MessageController {
+    @Resource
+    private MarketingServiceImpl marketingService;
 
     @RequestMapping("/toindex2")
     public String toindex1(){
@@ -37,7 +42,8 @@ public class MessageController {
     @RequestMapping("/tosendm")
     @ResponseBody
     //
-    public Map sendmessage(String phone) throws IOException {
+    public Map sendmessage(String phone, String content, Record record) throws IOException {
+
         Map map = new HashMap();
         HttpClient client = new HttpClient();
         PostMethod post = new PostMethod("http://gbk.sms.webchinese.cn");
@@ -46,7 +52,7 @@ public class MessageController {
                 new NameValuePair("Uid", "甜甜甜圈"),
                 new NameValuePair("Key", "d41d8cd98f00b204e980"),
                 new NameValuePair("smsMob",phone),
-                new NameValuePair("smsText","您的验证码是：457893，切勿转告他人，一分钟后失效")
+                new NameValuePair("smsText",content)
 
         };
         post.setRequestBody(data);
@@ -65,8 +71,33 @@ public class MessageController {
         post.releaseConnection();
 //        把前端html值拿过来
         map.put("success",1);
+//        marketingService.save(record);
+        marketingService.save(record);
         return map;
 
+
+    }
+
+    //短信收件箱
+    @RequestMapping("/MaretingAll")
+    @ResponseBody
+    public Map Mareting(String searchBy,String contain,String text){
+        System.out.println(searchBy);
+        System.out.println(contain);
+        System.out.println(text);
+//        System.out.println(searchBy);
+//        System.out.println(contain);
+        Map map = marketingService.maretingAll(searchBy,contain,text);
+        return map;
+    }
+
+    //删除
+    @RequestMapping("/MretingDel")
+    @ResponseBody
+    public Map Maretingdel(int[] ids){
+        System.out.println(ids);
+        Map maretingdel = marketingService.Maretingdel(ids);
+        return maretingdel;
     }
 
 }

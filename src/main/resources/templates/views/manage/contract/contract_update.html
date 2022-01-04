@@ -45,70 +45,57 @@
             <tr>
                 <td>合同编号：</td>
                 <td>
-                    <input type="text" name="number" id="contractNumber" >
+                    <input type="text" name="number" th:value="${contractshoww.number}"  id="contractNumber" >
                 </td>
                 <td></td>
                 <td>签约时间：</td>
                 <td>
-                    <input class="easyui-datetimebox" name="dueTime">
+                    <input class="easyui-datetimebox" th:value="${contractshoww.dueTime}"  name="dueTime">
                 </td>
-            </tr>
-            <tr>
-                <td>来源商机：(单击选择)</td>
-                <td>
-                    <select class="select" name="businessId">
-                        <option>--请选择来源商机--</option>
-                        <option th:each="a :${laiy}" th:value="${a.id}" th:text="${a.name}"></option>
-                    </select>
-                </td>
-                <td><a href="manage/business/BusinessAction_edit.action" style="color:blue;">新建商机</a></td>
-
             </tr>
 
             <tr>
-                <td>负责人：(单击选择)</td>
+                <td>来源商机</td>
                 <td>
-                    <select class="select" name="ownerUserId">
-                        <option th:each="s : ${session.users}" th:value="${s.id}" th:text="${s.username}"></option>
-                    </select>
+                    <input name="endDate" th:value="${contractshoww.name1}"  type="text">
+                </td>
+            </tr>
+
+            <tr>
+                <td>负责人</td>
+                <td>
+                    <input name="endDate" th:value="${contractshoww.username}"  type="text">
                 </td>
                 <td></td>
                 <td>合同金额：</td>
                 <td>
-                    <input name="price"  type="text">
+                    <input name="price" th:value="${contractshoww.price}"  type="text">
                 </td>
             </tr>
             <tr>
                 <td class="text-title">合同生效日期：</td>
                 <td class="text-content">
-                    <input name="startDate"class="easyui-datetimebox">
+                    <input name="startDate" th:value="${contractshoww.startDate}"  class="easyui-datetimebox">
                 </td>
                 <td></td>
                 <td>合同到期时间：</td>
                 <td>
-                    <input name="endDate" class="easyui-datetimebox">
+                    <input name="endDate" th:value="${contractshoww.endDate}"  class="easyui-datetimebox">
                 </td>
             </tr>
             <tr>
-                <td>状态：(单击选择)</td>
+                <td>状态</td>
                 <td>
-                    <select class="select" name="status">
-                        <option value="未选状态">--请选择--</option>
-                        <option value="已签约">已签约</option>
-                        <option value="未签约">未签约</option>
-                    </select>
+                    <input name="endDate" type="text" th:value="${contractshoww.status}">
                 </td>
             </tr>
             <tr>
                 <td>条件和条款：</td>
-                <td colspan="4">
-                    <textarea rows="8" cols="100%" name="content" id="wysiwyg">
-                    </textarea>
-                <input type="hidden" th:value="${}"></td>
+                <td colspan="4"><textarea rows="8" cols="100%" th:text="${contractshoww.content}"  name="content" id="wysiwyg"></textarea></td>
             </tr>
             <tr>
                 <td>合同描述：</td>
-                <td colspan="4"><textarea rows="4" cols="100%" name="description"></textarea></td>
+                <td colspan="4"><textarea rows="4" cols="100%" th:text="${contractshoww.description}"  name="description"></textarea></td>
             </tr>
             <tr>
                 <td colspan="5">
@@ -125,11 +112,11 @@
         // document.getElementById("businessCustomerName").style.backgroundColor = "#FFF8DC";
         // document.getElementById("ownerUser").style.backgroundColor = "#FFF8DC";
         // document.getElementById("connectionName").style.backgroundColor = "#FFF8DC";
-        document.getElementById("contractNumber").style.backgroundColor = "#FFF8DC";
-        var alerNumber=document.getElementById('contractNumber').value;
-        if(!alerNumber){
-            document.getElementById('contractNumber').value=new Date().getTime();
-        }
+        // document.getElementById("contractNumber").style.backgroundColor = "#FFF8DC";
+        // var alerNumber=document.getElementById('contractNumber').value;
+        // if(!alerNumber){
+        //     document.getElementById('contractNumber').value=new Date().getTime();
+        // }
         //导入编辑器
         KindEditor.ready(function(K) {
             //在编辑器初始化成功之后赋值editor变量

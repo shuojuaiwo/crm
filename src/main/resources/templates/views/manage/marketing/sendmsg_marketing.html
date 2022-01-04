@@ -17,6 +17,7 @@
             <tr>
                 <td class="text-title">接收人姓名：</td>
                 <td class="text-content">
+                    <input type="hidden" name="userId" th:value="${session.user.id}">
                     <input type="text" name="sendtoname"
                            class="easyui-textbox theme-textbox-radius" data-options="required:true,validType:'length[2,50]'">
                 </td>
@@ -27,13 +28,12 @@
                     <input type="text" name="phone" data-options="required:true" class="easyui-textbox theme-textbox-radius">
                 </td>
             </tr>
-            <!--  <tr>
+            <tr>
                 <td class="text-title">信息正文：</td>
                 <td class="text-content">
-                    <textarea id="content" name="msgVO.content" rows="5"  cols="20"></textarea></td>
+                    <textarea id="content" name="content" rows="5"  cols="20"></textarea></td>
             </tr>
-            -->
-            <tr>
+            --            <tr>
                 <td colspan="2" style="text-align: center;margin-top: 10px;">
                     <a href="javascript:void(0);" id="sendBtn" class="easyui-linkbutton button-primary">发送</a>
                     <a href="javascript:void(0);" id="resetBtn" class="easyui-linkbutton button-danger">重置</a>

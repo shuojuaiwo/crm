@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="<%=basePath%>">
+
+    <title>合同编辑</title>
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="This is my page">
+    <link th:insert="~{script :: #copy}">
+    <style type="text/css">
+        td:nth-child(1){
+            text-align:right;
+        }
+        td:nth-child(4){
+            text-align:right;
+        }
+        table{
+            margin:auto;
+        }
+        input[type="text"]{
+            width:72.5%;
+            height:30px;
+            border:0.5px solid gray;
+        }
+        .select{
+            width:72.5%;
+            height:30px;
+            border:0.5px solid gray;
+        }
+        td:only-child{
+            text-align:center;
+
+        }
+    </style>
+</head>
+
+<body>
+<div id="div1">
+    <form  method="post" id="form">
+        <table>
+            <tr>
+                <td>合同编号：</td>
+                <td>
+                    <input type="text" name="number" th:value="${contractshow.number}" readOnly="true" id="contractNumber" >
+                </td>
+                <td></td>
+                <td>签约时间：</td>
+                <td>
+                    <input class="easyui-datetimebox" th:value="${contractshow.dueTime}" readOnly="true" name="dueTime">
+                </td>
+            </tr>
+
+            <tr>
+                <td>来源商机</td>
+                <td>
+                    <input name="endDate" th:value="${contractshow.name1}" readOnly="true" type="text">
+                </td>
+            </tr>
+
+            <tr>
+                <td>负责人</td>
+                <td>
+                    <input name="endDate" th:value="${contractshow.username}" readOnly="true" type="text">
+                </td>
+                <td></td>
+                <td>合同金额：</td>
+                <td>
+                    <input name="price" th:value="${contractshow.price}" readOnly="true" type="text">
+                </td>
+            </tr>
+            <tr>
+                <td class="text-title">合同生效日期：</td>
+                <td class="text-content">
+                    <input name="startDate" th:value="${contractshow.startDate}" readOnly="true" class="easyui-datetimebox">
+                </td>
+                <td></td>
+                <td>合同到期时间：</td>
+                <td>
+                    <input name="endDate" th:value="${contractshow.endDate}" readOnly="true" class="easyui-datetimebox">
+                </td>
+            </tr>
+            <tr>
+                <td>状态</td>
+                <td>
+                    <input type="text" name="endDate" th:value="${contractshow.status}" readOnly="true">
+                </td>
+            </tr>
+            <tr>
+                <td>条件和条款：</td>
+                <td colspan="4"><textarea rows="8" cols="100%" th:text="${contractshow.content}" readOnly="true" name="content" id="wysiwyg"></textarea></td>
+            </tr>
+            <tr>
+                <td>合同描述：</td>
+                <td colspan="4"><textarea rows="4" cols="100%" th:text="${contractshow.description}" readOnly="true" name="description"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <a href="javascript:void(0);" id="saveBtn" class="easyui-linkbutton button-primary">保存</a>
+                    <a href="javascript:void(0);" id="resetBtn" class="easyui-linkbutton button-return">重置</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
