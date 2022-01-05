@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface MarketingMapper extends BaseMapper<Record> {
     List<Record> maretingall(@Param("searchBy") String searchBy,@Param("contain") String contain,@Param("text") String text);
-
+    int count();
 }

@@ -1,5 +1,6 @@
 package com.li.jtcrm.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.li.jtcrm.dao.MarketingMapper;
 import com.li.jtcrm.entity.Record;
@@ -17,6 +18,8 @@ public class MarketingServiceImpl extends ServiceImpl<MarketingMapper, Record> i
 public Map maretingAll(String searchBy,String contain,String text){
     Map map= new HashMap();
     List<Record> maretingall = baseMapper.maretingall(searchBy, contain, text);
+    int count = baseMapper.count();
+    map.put("total",count);
     map.put("rows",maretingall);
     return map;
 }

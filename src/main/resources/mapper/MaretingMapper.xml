@@ -23,4 +23,9 @@
             </if>
         </where>
     </select>
+    
+    <select id="count" resultType="int">
+        select count(*) from tb_crm_sms_record where state =0
+    </select>
+    
 </mapper>
