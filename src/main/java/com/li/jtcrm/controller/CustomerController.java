@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
@@ -67,8 +68,8 @@ public class CustomerController {
 
     @RequestMapping("/addAndUpdatePoolCustomer")
     @ResponseBody
-    public Map addAndUpdatePoolCustomer(CustomerContactVO customerContactVO){
-        Map map=customerService.addAndUpdateCustomer(customerContactVO);
+    public Map addAndUpdatePoolCustomer(CustomerContactVO customerContactVO,HttpSession session){
+        Map map=customerService.addAndUpdateCustomer(customerContactVO,session);
         return map;
     }
 
@@ -81,8 +82,8 @@ public class CustomerController {
 
     @RequestMapping("/addAndUpdateCustomer")
     @ResponseBody
-    public Map addAndUpdateCustomer(CustomerContactVO customerContactVO){
-        Map map=customerService.addAndUpdateCustomer(customerContactVO);
+    public Map addAndUpdateCustomer(CustomerContactVO customerContactVO, HttpSession session){
+        Map map=customerService.addAndUpdateCustomer(customerContactVO,session);
         return map;
     }
 

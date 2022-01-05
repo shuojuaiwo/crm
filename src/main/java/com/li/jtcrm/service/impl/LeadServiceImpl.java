@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,11 +83,13 @@ public class LeadServiceImpl extends ServiceImpl<LeadMapper, Lead> implements IL
     }
 
     @Override
-    public void deleteLead(int[] ids) {
+    public void deleteLead(int[] ids,HttpSession session) {
         Map map=new HashMap();
         int c=0;
         for (int id : ids) {
-            int i = baseMapper.deleteById(id);
+            Date deleteTime = new Date();
+            Integer deleteUserId = ((User) session.getAttribute("user1")).getId();
+            int i = baseMapper.deleteId(id,deleteUserId,deleteTime);
             if (i==0){
                 c++;
             }
@@ -98,5 +101,43 @@ public class LeadServiceImpl extends ServiceImpl<LeadMapper, Lead> implements IL
             map.put("msg","添加失败！");
             map.put("success",0);
         }
+    }
+
+    @Override
+    public Map listLeadPool(Integer page, Integer rows, String filterSearch, String search) {
+        Map map=new HashMap();
+        Page<Object> page1 = new Page<>(page, rows);
+        List<LeadVO> vos = baseMapper.selectByPage1(page1,filterSearch,search);
+        for (LeadVO vo : vos) {
+            String createUser = userMapper.selectname(vo.getCreatorUserId());
+            vo.setCreateUser(createUser);
+        }
+        map.put("total", page1.getTotal());
+        map.put("rows", vos);
+        return map;
+    }
+
+    @Override
+    public Map selectByPageRecycle(Integer page, Integer rows, String filterSearch, String search) {
+        Map map=new HashMap();
+        Page<Object> page1 = new Page<>(page, rows);
+        List<LeadVO> vos = baseMapper.selectByPageRecycle(page1,filterSearch,search);
+        for (LeadVO vo : vos) {
+            String createUser = userMapper.selectname(vo.getCreatorUserId());
+            vo.setCreateUser(createUser);
+        }
+        map.put("total", page1.getTotal());
+        map.put("rows", vos);
+        return map;
+    }
+
+    public Map RecycleUpdate(int[] ids){
+        Map map = new HashMap();
+        for (Integer i :ids){
+            baseMapper.RecycleUpdate(i);
+        }
+        map.put("success",1);
+        map.put("msg","还原成功");
+        return map;
     }
 }

@@ -15,7 +15,7 @@ class CrmApplicationTests {
     private UserMapper userService;
     @Resource
     private AnnouncementMapper announcementMapper;
-@Resource
+    @Resource
     private TaskMapper taskMapper;
     @Resource
     private CustomerMapper customerMapper;
@@ -48,7 +48,8 @@ class CrmApplicationTests {
     }
     @Test
     public void text4(){
-        Integer integer = customerMapper.selectid("刺南");
-        System.out.println(integer);
+        /*Integer integer = customerMapper.selectid("刺南");
+        System.out.println(integer);*/
+
     }
 }

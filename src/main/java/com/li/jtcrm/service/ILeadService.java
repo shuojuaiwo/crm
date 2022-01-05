@@ -17,5 +17,11 @@ public interface ILeadService extends IService<Lead> {
 
     void getLeadInfo(Integer id, Model model);
 
-    void deleteLead(int[] ids);
+    void deleteLead(int[] ids,HttpSession session);
+
+    Map listLeadPool(Integer page, Integer rows, String filterSearch, String search);
+
+    Map selectByPageRecycle(Integer page, Integer rows, String filterSearch, String search);
+
+    Map RecycleUpdate(int[] ids);
 }

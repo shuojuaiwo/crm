@@ -10,32 +10,13 @@
     <link th:insert="~{script :: #copy}">
 </head>
 <body>
-<div>
-    <span>视图:</span><span onclick="return whole('manage/customer/CustomerAction_pagination.action')" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">全部</span>|
-    <span onclick="return myCustomer('manage/customer/CustomerAction_myCustomer.action')" class="easyui-linkbutton" data-options="plain:true">我负责的</span>|
-    <span onclick="return subCustomer('manage/customer/CustomerAction_subCustomer.action')" class="easyui-linkbutton" data-options="plain:true">下属负责的</span>|
-    <span onclick="return subCreate('system/customer/CustomerAction_subCustomer.action')" class="easyui-linkbutton" data-options="plain:true">下属创建</span>|
-    <span onclick="return subCreate('system/customer/CustomerAction_subCustomer.action')" class="easyui-linkbutton" data-options="plain:true">已转换线索</span>
-    <span onclick="return todayCreate('system/customer/CustomerAction_todayCreate.action')" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">今日需联系</span>|
-    <span onclick="return weekCreate('system/customer/CustomerAction_weekCreate.action')" class="easyui-linkbutton" data-options="plain:true">本周需联系</span>|
-    <span onclick="return monthCreate('system/customer/CustomerAction_monthCreate.action')" class="easyui-linkbutton" data-options="plain:true">本月需联系</span>|
-    <span onclick="return monthCreate('system/customer/CustomerAction_monthCreate.action')" class="easyui-linkbutton" data-options="plain:true">7日未联系</span>|
-    <span onclick="return monthCreate('system/customer/CustomerAction_monthCreate.action')" class="easyui-linkbutton" data-options="plain:true">15日未联系</span>|
-    <span onclick="return monthCreate('system/customer/CustomerAction_monthCreate.action')" class="easyui-linkbutton" data-options="plain:true">30日未联系</span>|
-    <span onclick="return monthCreate('system/customer/CustomerAction_monthCreate.action')" class="easyui-linkbutton" data-options="plain:true">最近创建</span>|
-    <span onclick="return monthCreate('system/customer/CustomerAction_monthCreate.action')" class="easyui-linkbutton" data-options="plain:true">最近更新</span>
-    <span onclick="huishou('toLeadRecycle')" id="recycleBin" class="easyui-linkbutton" data-options="iconCls:'icon-recover_deleted',plain:true">回收站</span>
-</div>
-
 <div id="tool" style="margin-bottom: 20px">
     <table>
         <tr>
             <td>
-                <i class="iconfont"></i>
                 <select name="batchOperate" style="width:100px;height:25px;">
                     <option value="-1">批量操作</option>
                     <option value="0">批量删除</option>
-                    <option value="1">批量放入线索池</option>
                 </select>
             </td>
             <td>
@@ -44,7 +25,6 @@
                     <option value="name">按公司名查询</option>
                     <option value="contactName">按联系人姓名查询</option>
                     <option value="mobile">按手机查询</option>
-                    <option value="owner">按负责人查询</option>
                 </select>
                 <select name="contain" style="width:60px;height:25px;">
                     <option value="-1">--包含--</option>
@@ -73,7 +53,7 @@
     $(function(){
         //分页展示客户列表
         $("#leadLs").datagrid({
-            url:"listLead",
+            url:"listLeadPool",
             checkOnSelect:false,
             idField:"leadId",
             pagination:true,
@@ -88,14 +68,13 @@
                 {field:"mobile",title:"手机"},
                 {field:"nextstepTime",title:"下次联系时间",width:100},
                 {field:"nextstep",title:"下次联系内容"},
-                {field:"ownerUser",title:"负责人"},
                 {field:"createUser",title:"创建人"},
                 {field:"createTime",title:"创建时间",width:100},
                 {field:"days",title:"距离到期天数"},
                 {field:"operation",title:"操作",formatter:function(value,rowData,index){
                         return "<a href='javascript:void(0);' onclick=\"return see(\'getLeadInfo\',\'"+rowData.id+"\')\">查看</a>"+
                             " <a href='javascript:void(0);' onclick=\"return see(\'\',\'"+rowData.id+"\')\"> 转换</a>"+
-                            " <a href='javascript:void(0);' onclick=\"return modify(\'toAddAndUpdateLead\',\'"+rowData.id+"\')\">编辑</a>"
+                            " <a href='javascript:void(0);' onclick=\"return modify(\'toAddAndUpdateLead\',\'"+rowData.id+"\')\">修改</a>"
                     }}
             ]
             ],
@@ -105,66 +84,18 @@
         })
     })
 
-    //查询全部客户
-    function whole(url){
-        $("#leadLs").datagrid({
-            "url":url
-        })
-    }
-    //查询我的客户
-    function myCustomer(url){
-        $("#leadLs").datagrid({
-            "url":url
-        })
-    }
-    //查询当前员工下属创建的客户
-    function subCustomer(url){
-        $("#leadLs").datagrid({
-            "url":url
-        })
-    }
-    //查询今天创建的客户
-    function todayCreate(url){
-        $("#leadLs").datagrid({
-            "url":url+"?type=day"
-        })
-    }
-    //查询周创建的客户
-    function weekCreate(url){
-        $("#leadLs").datagrid({
-            "url":url+"?type=week"
-        })
-    }
-    //查询月创建的客户
-    function monthCreate(url){
-        $("#leadLs").datagrid({
-            "url":url
-        })
-    }
-    //查询当前用户关注的客户
-    function followed(url){
-        $("#leadLs").datagrid({
-            "url":url
-        })
-    }
-
-    //页面添加客户
+    //页面添加线索
     function add(url){
-        var win=window.parent.open(url,"新建线索" , "width=800 , height=700,location=no,menuban=no ,toolban=no")
+        var win=window.parent.open(url,"新建客户" , "width=800 , height=700,location=no,menuban=no ,toolban=no")
     }
-    //修改客户
+    //修改线索
     function modify(url,id){
-        var win=window.parent.open(url+"?id="+id,"修改线索" , "width=800 , height=700,location=no,menuban=no ,toolban=no")
+        var win=window.parent.open(url+"?id="+id,"修改客户" , "width=800 , height=700,location=no,menuban=no ,toolban=no")
     }
 
-    //回收站
-    function huishou(url) {
-        var win=window.parent.open(url,"回收站","width=1200 , height=700")
-    }
-
-    //查看客户
+    //查看线索
     function see(url,id){
-        window.parent.open(url+"?id="+id,"线索信息" , "width=800 , height=700,location=no,menuban=no ,toolban=no")
+        window.parent.open(url+"?id="+id,"客户信息" , "width=800 , height=700,location=no,menuban=no ,toolban=no")
     }
 
     function searchs(){

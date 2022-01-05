@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,14 +59,14 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
     }                                                    
 
     @Override
-    public Map addAndUpdateCustomer(CustomerContactVO customerContactVO) {
+    public Map addAndUpdateCustomer(CustomerContactVO customerContactVO, HttpSession session) {
         Map map=new HashMap();
         Customer customer=new Customer();
         customer.setId(customerContactVO.getCustomerId());
         customer.setDeleteStatus(customerContactVO.getDeleteStatus());
         customer.setIsLocked(customerContactVO.getIsLocked());
         if (customer.getId()==null){
-            customer.setCreatorUserId(customerContactVO.getCustomerOwnerUserId());
+            customer.setCreatorUserId(((User) session.getAttribute("user1")).getId());
         }else {
             customer.setCreatorUserId(customerContactVO.getCustomerCreatorUserId());
         }
@@ -109,18 +110,17 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
 
 
     @Override
-    public Map addAndUpdatePoolCustomer(CustomerContactVO customerContactVO) {
+    public Map addAndUpdatePoolCustomer(CustomerContactVO customerContactVO,HttpSession session) {
         Map map=new HashMap();
         Customer customer=new Customer();
         customer.setId(customerContactVO.getCustomerId());
         customer.setDeleteStatus(customerContactVO.getDeleteStatus());
         customer.setIsLocked(customerContactVO.getIsLocked());
         if (customer.getId()==null){
-            customer.setCreatorUserId(customerContactVO.getCustomerOwnerUserId());
+            customer.setCreatorUserId(((User) session.getAttribute("user1")).getId());
         }else {
             customer.setCreatorUserId(customerContactVO.getCustomerCreatorUserId());
         }
-        customer.setOwnerUserId(customerContactVO.getCustomerOwnerUserId());
         customer.setCustomerName(customerContactVO.getCustomerName());
         customer.setIndustry(customerContactVO.getIndustry());
         customer.setOrigin(customerContactVO.getOrigin());

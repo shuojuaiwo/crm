@@ -53,8 +53,39 @@ public class LeadController {
     }
 
     @RequestMapping(value = "/deleteLead")
-    public String deleteLead(int[] ids) {
-        leadService.deleteLead(ids);
+    public String deleteLead(int[] ids,HttpSession session) {
+        leadService.deleteLead(ids,session);
         return "views/manage/lead/list";
+    }
+
+    @RequestMapping("/toListLeadPool")
+    public String toListLeadPool(){
+        return "views/manage/lead/pool";
+    }
+
+    @RequestMapping("/listLeadPool")
+    @ResponseBody
+    public Map listLeadPool(Integer page,Integer rows,String filterSearch,String search){
+        Map map=leadService.listLeadPool(page,rows,filterSearch,search);
+        return map;
+    }
+
+    @RequestMapping("/toLeadRecycle")
+    public String toLeadRecycle(){
+        return "views/manage/lead/recycle";
+    }
+
+    @RequestMapping("/RecycleUpdate")
+    public Map RecycleUpdate(int[] ids){
+        Map recycleUpdate = leadService.RecycleUpdate(ids);
+        return recycleUpdate;
+    }
+
+
+    @RequestMapping("/listLeadRecycle")
+    @ResponseBody
+    public Map listLeadRecycle(Integer page,Integer rows,String filterSearch,String search){
+        Map map=leadService.selectByPageRecycle(page, rows, filterSearch, search);
+        return map;
     }
 }
